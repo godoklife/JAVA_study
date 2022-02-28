@@ -23,7 +23,7 @@ public class Day01_test2 {	// c s
 		scan.close();
 		
 		
-		/*	간편하게 테스트 할때 주석 풀고 사용
+		/*	간편하게 테스트 할때 주석 풀고 사용(11번줄부터 23번줄 주석처리하기)
 		String name = "강호동";
 		String data = "안녕하세요";
 		String date = "09:21";
