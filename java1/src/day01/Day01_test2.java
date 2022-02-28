@@ -31,8 +31,8 @@ public class Day01_test2 {	// c s
 		
 		
 		System.out.println("* -----------방명록-----------");
-		System.out.printf("%6s%-5s%-10s%-8s\n", "* |순번|","작성자|","내용", "|날짜|");
-		System.out.printf("%-6s|%-3s|%-11s|%5s|\n", "* |1", name, data, date);
+		System.out.printf("%-6s%-5s%-10s%-8s\n", "* |순번|","작성자|","내용", "|날짜  |");
+		System.out.printf("%-6s|%-3s|%-10s|%-5s|\n", "* |1", name, data, date);
 		System.out.println("* --------------------------");
 		
 		
