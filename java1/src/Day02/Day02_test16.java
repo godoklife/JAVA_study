@@ -16,14 +16,17 @@ public class Day02_test16 {
 		
 		System.out.println("정수를 입력하세요.(3) :");
 		int num3 = scanner.nextInt();
-		
-		int a = num1;
-		
-		a = a > num2 ? a : num2;
+						
+		int a = num1 > num2 ? num1 : num2;
 		a = a > num3 ? a : num3;
 		a = a > num1 ? a : num1;
 		
-		num1 = a;
+		
+		
+//		int b = num1 > num2 ? num1 : num2;
+//		b = b > num3 ? b : num3;
+//		b = b > num1 ? b : num1;
+		
 		
 
 		System.out.println(a);
