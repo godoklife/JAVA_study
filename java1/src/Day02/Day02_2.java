@@ -76,5 +76,13 @@ public class Day02_2 {
 			// (변경할 자료형)변수명
 	short 쇼트 = (short)인트;
 	
+	
+	// 자료형 연산시 자료형 변환
+		// 1. byte + byte	= int 
+		// 2. int + byte 	= int
+		// 3. int + float	= int 
+		// 4. int + double 	= int
+	
+	
 	}
 }
