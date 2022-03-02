@@ -2,7 +2,7 @@ package Day02;
 
 import java.util.Scanner;
 
-public class Day02_16 {
+public class Day02_test16 {
 	public static void main(String[] args) {
 		System.out.println("3개의 정수를 입력받아 오름차순으로 정렬");
 		
