@@ -17,10 +17,12 @@ public class Day02_test16 {
 		System.out.println("정수를 입력하세요.(3) :");
 		int num3 = scanner.nextInt();
 						
-		int a = num1 > num2 ? num1 : num2;
-		a = a > num3 ? a : num3;
-		a = a > num1 ? a : num1;
+		int tmp = (num1 > num2) ? num1 : num2;
+		int max = (tmp > num3) ? tmp : num3;
 		
+		tmp = (num1 < num2) ? num1 : num2;
+		int min = (tmp < num3) ? tmp : num3;
+		int mid = (num1 > num2) ? ((num1 > num3) ? ((num2 > num3) ? num2 : num3) : num1) : ((num2 > num3) ? ((num1 > num3) ? num1 : num3) : num2);
 		
 		
 //		int b = num1 > num2 ? num1 : num2;
@@ -29,7 +31,9 @@ public class Day02_test16 {
 		
 		
 
-		System.out.println(a);
+		System.out.println("최대값 : " + max);
+		System.out.println("중간값 : "+ mid);
+		System.out.println("최소값 : "+ min);
 		
 		scanner.close();
 	}
