@@ -9,6 +9,15 @@ public class Day02_test14 {
 			int y = x-- + 5 + --x;
 			printf(" x의 값 : %d , y의값 :  %d ", x, y) 
 			
+			int y의 실행 순서
+			1. x-- + 5	-> 10 + 5 = 15 (후위감소)
+			2. x--		-> x 감소 [ x = 9 ]
+			3. 15 + --x	-> x 감소 먼저 연산 [ x = 8 ]
+			4. 15 + 8	-> 23
+			5. int y = 23
+			
+			
+			
 			int x = 10
 			int y = 23
 			System.out.printf("x의 값 : 

@@ -14,7 +14,8 @@ public class Day02_test12 {
 		
 		System.out.println("입력한 값을 cm으로 변환한 값은 " + (inch * 2.54) + " cm 입니다.");
 		System.out.printf("입력한 값을 cm으로 변환한 값은 %.3f cm 입니다.",cm);
-
+		
+		scanner.close();
 	}
 
 }
