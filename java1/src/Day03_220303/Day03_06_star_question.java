@@ -2,7 +2,7 @@ package Day03_220303;
 
 import java.util.Scanner;
 
-public class Day03_06 {	// c s
+public class Day03_06_star_question {	// c s
 	public static void main(String[] args) {	// m s
 		Scanner scanner = new Scanner(System.in);
 		
@@ -153,14 +153,22 @@ public class Day03_06 {	// c s
 		int s9 = scanner.nextInt();
 		
 		for(int i=1; i<=s9; i++) {
+			for(int k=1; k<=i-1; k++)
+				System.out.print(" ");				// 줄 개수만큼 공백찍기
+			for(int j=1; j<= s9*2 - i*2 + 1; j++)	// 줄 (개수*2)-1개 만큼 별찍기
+				System.out.print("*");
+			System.out.println("");
+		}
+		System.out.println("\n문제9 출력 끝.\n");
+		
+		
+		// 문제 10
+		System.out.println("문제10 줄 갯수 : ");
+		int s10 = scanner.nextInt();
+		
+		for(int i=1; i<=s10; i++) {
 			
 		}
-
-		
-		
-		
-		
-		//for (int i = 1; i)
 		
 		
 		
