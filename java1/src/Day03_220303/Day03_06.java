@@ -119,6 +119,7 @@ public class Day03_06 {	// c s
 			System.out.println("");
 			// 3. 줄 바꿈
 		}
+		System.out.println("\n문제7 출력 끝.\n");
 		// 해설
 		// i = 현재 줄 수	j = 공백	k = 별
 		// i=1	j=1 2 3 4	k=1						(i*2)-1=1
@@ -131,25 +132,35 @@ public class Day03_06 {	// c s
 		// k는 1부터 13579~ 
 		
 		
+		// 문제 8
+		System.out.println("문제8 줄 갯수 : ");
+		int s8 = scanner.nextInt();
+		
+		for(int i=1; i<=s8; i++) {			// 줄바꿈 for문
+			for(int j=1; j<=s8-i; j++) {	// 공백 추가 for문
+				System.out.print(" ");
+			}
+			for(int k=1; k<=i*2-1; k++) {	// 숫자 표시 for문
+				System.out.print(i);
+			}
+			System.out.print("\n");			
+		}
+		System.out.println("\n문제8 출력 끝.\n");
+		
+		
+		// 문제 9
+		System.out.println("문제 9 줄 개수 : ");
+		int s9 = scanner.nextInt();
+		
+		for(int i=1; i<=s9; i++) {
+			
+		}
+
 		
 		
 		
 		
-		// 문제 7
-//		System.out.println("문제7_ 별 개수 : ");
-//		int s7 = scanner.nextInt();
-//		
-//		for(int i=1; i<=s7; i++) {
-//			for(int j=(s7*2)-1;)
-//		}
-//		
-		
-		
-		
-		
-		
-		
-		
+		//for (int i = 1; i)
 		
 		
 		
