@@ -1,3 +1,7 @@
+/*
+ * 강사님이 내주신 문제 보고 10분만에 이렇게 코드 짜면 어느정도 쓸만한 실력
+ * 연습합시다...ㅠㅠ
+*/
 package Day04_220304;
 
 import java.util.Scanner;
@@ -57,13 +61,37 @@ public class Day04_02 {	// c s
 				if(사이다구매수!=0)
 					System.out.println("사이다\t"+사이다구매수+"\t"+사이다구매수*100);
 				
-				System.out.println("체품 총 결제액 : "+((콜라구매수*300)+(환타구매수*200)+(사이다구매수*100)));
+				int 총금액 = (콜라구매수*300)+(환타구매수*200)+(사이다구매수*100);
+				System.out.println("체품 총 결제액 : "+총금액);
 				System.out.println("---------------------------");
-				System.out.println("1. 결제 | 2. 취소"); int 선택2 = scanner.nextInt();
+				System.out.println("1. 결제 | 2. 취소"); 
+				int 선택2 = scanner.nextInt();
 				
-				if(선택2==1) {			// 1. 결제
-					
-				}
+				if(선택2==1) {	// 1. 결제
+					while(true) {	// 돈 맞게 넣을때까지 무한반복. 취소는 없다!
+						System.out.println("돈을 넣어주세요 : ");
+						int 돈 = scanner.nextInt();
+						
+						if(돈<총금액) {
+							System.out.println("돈이 "+(총금액-돈)+"원 만큼 모차랍니다. \n처음부터 다시 넣어주세요.");
+						}
+						else if(돈==총금액) {
+							System.out.println("결제 완료. 감사합니다.");
+							콜라구매수 = 0;		// 장바구니 초기화
+							환타구매수 = 0;		// 장바구니 초기화
+							사이다구매수 = 0;	// 장바구니 초기화
+							break;
+						}
+						else {
+							System.out.println("결제 완료. 감사합니다.");
+							System.out.println("잔돈은 "+(돈-총금액)+"원 입니다.");
+							콜라구매수 = 0;		// 장바구니 초기화
+							환타구매수 = 0;		// 장바구니 초기화
+							사이다구매수 = 0;	// 장바구니 초기화
+							break;
+						}
+					}	// w e
+				}	// 결제 끝
 				else if(선택2==2) {	// 2. 취소
 					System.out.println("알림) 구매 목록 지우기");
 					콜라재고 += 콜라구매수;	// 콜라 재고 원상복구
