@@ -68,13 +68,13 @@ public class Day04_05 {	//c s
 		
 		// 조건3 내가 맞춘 로또번호 갯수
 		
-//		for(int i=0; i<lotto.length; i++) {
-//			for(int j=0; j<lotto_cpu.length; j++) {
-//				if(lotto[i]==lotto_cpu[j])
-//					same_number++;
-//			}
-//		}
-		
+		for(int i=0; i<lotto.length; i++) {
+			for(int j=0; j<lotto_cpu.length; j++) {
+				if(lotto[i]==lotto_cpu[j])
+					same_number++;
+			}
+		}
+		// 위 for 중첩문과 아래 for 중첩문은 완벽히 결과가 같다.
 		for(int tmp:lotto) {
 			for(int tmp2:lotto_cpu) {
 				if(tmp==tmp2)
