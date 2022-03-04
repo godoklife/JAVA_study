@@ -34,11 +34,13 @@ public class Day04_03 {	// c s
 				System.out.printf("게임을 종료합니다.\n총 게임 횟수 : %d, 인간이 이긴 횟수 : %d, 기계가 이긴 횟수 : %d\n", (games-1), userwin, cpuwin);
 					// 프로그램 켜자마자 게임 횟수부터 올리고 시작하기때문에 총 게임횟수 출력할때 1회 차감하고 출력.
 				if(userwin>cpuwin)
-					System.out.println("인간의 승리입니다.");
+					System.out.println("인간이 승리입니다.");
 				else if(userwin<cpuwin)
 					System.out.println("기계의 승리다.");
 				else
 					System.out.println("무승부");
+				
+				scanner.close();
 				break;
 			}
 			else if(user>=4) {
@@ -53,7 +55,7 @@ public class Day04_03 {	// c s
 				System.out.println("비겼습니다");
 			}
 			else {	// 컴퓨터가 이기는 경우의 수
-				System.out.println("기계가 이겼습니다.");
+				System.out.println("기계의 승리다.");
 				cpuwin++;
 			}
 			
