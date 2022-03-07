@@ -10,11 +10,11 @@ public class Day05_book_rent_management_program {	// c s
 		String[][] booklist = new String[10][3];
 		
 		
-//		for(int i=0; i<booklist.length; i++) {	// 도서명 초기화(테스트용)
-//			booklist[i][0] = "책";
-//			booklist[i][1] = "대여가능";
-//			booklist[i][2] = "ID";
-//		}
+		for(int i=0; i<booklist.length; i++) {	// 도서명 초기화(테스트용)
+			booklist[i][0] = "책";
+			booklist[i][1] = "대여가능";
+			booklist[i][2] = "ID";
+		}
 		
 		
 		while(true) {
@@ -73,9 +73,9 @@ public class Day05_book_rent_management_program {	// c s
 						login=true;
 						break;
 					}
-					else
-						System.out.println("아이디나 비밀번호를 확인하세요.");
-					break;
+//					else
+//						System.out.println("아이디나 비밀번호를 확인하세요.");
+//					break;
 				}
 				if(id.equals("admin")) {
 					while(true) {
@@ -101,19 +101,7 @@ public class Day05_book_rent_management_program {	// c s
 																	
 							}
 						}
-//						else if(adch==3) {
-//							System.out.println("도서명을 입력하세요 : "); String book2 = scanner.next();
-//							for(int adi = 0 ; adi < booklist.length ; adi++) {
-//								if(booklist[adi][0].equals(book2)) {
-//									booklist[adi][0] = null;
-//									System.out.println("도서 삭제 완료");
-//								}else {
-//									System.out.println("존재하지 않는 도서 입니다.");
-//									break;
-//								}
-//
-//							}
-//						}
+
 						else if(adch==4) {
 							System.out.println("로그아웃 합니다.");
 							break;
@@ -159,9 +147,31 @@ public class Day05_book_rent_management_program {	// c s
 						else if(input2==3) {	// 3. 도서 대여 진입 if문
 							System.out.println("------도서 대여 매뉴입니다.------");
 							System.out.print("대여할 도서 제목을 입력하세요 : ");
-							//String bookname = 
+							String bookname = scanner.next();
+							for(int i=0; i<booklist.length; i++) {
+								if(booklist[i][0].equals(bookname) && booklist[i][1].equals("대여가능") && booklist[i][0]!=null) {	// 책이름이 일치하고 대여가능하고 널값이 아닌것
+									System.out.println("대여 가능합니다. 대여하시겠습니까? (Y or N)");
+									String choice = scanner.next();
+									if (choice.equals("Y")) {
+										System.out.printf("%s 대여 완료.",booklist[i][0]);
+										booklist[i][1]="대여불가";
+										break;
+									}
+									else if (choice.equals("N")){
+										System.out.println("대여 취소");
+										break;
+									}
+								}
+								else if(booklist[i][0].equals(bookname) && booklist[i][0].equals("대여불가") && booklist!=null) {
+									System.err.println("이미 대여중인 책 입니다.");
+									break;
+								}
+								
+								System.out.println("일치하는 책이 없습니다.");
+								break;
+							}
 							
-						}
+						}	// 3. 도서 대여 진입 if end
 						else if(input2==4) {
 							
 						}
