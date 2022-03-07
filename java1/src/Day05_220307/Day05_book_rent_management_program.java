@@ -1,6 +1,5 @@
 package Day05_220307;
 
-import java.lang.reflect.Member;
 import java.util.Scanner;
 
 public class Day05_book_rent_management_program {	// c s
@@ -11,11 +10,11 @@ public class Day05_book_rent_management_program {	// c s
 		String[][] booklist = new String[10][3];
 		
 		
-		for(int i=0; i<booklist.length; i++) {	// 도서명 초기화(테스트용)
-			booklist[i][0] = "책";
-			booklist[i][1] = "대여가능";
-			booklist[i][2] = "ID";
-		}
+//		for(int i=0; i<booklist.length; i++) {	// 도서명 초기화(테스트용)
+//			booklist[i][0] = "책";
+//			booklist[i][1] = "대여가능";
+//			booklist[i][2] = "ID";
+//		}
 		
 		
 		while(true) {
@@ -76,10 +75,57 @@ public class Day05_book_rent_management_program {	// c s
 					}
 					else
 						System.out.println("아이디나 비밀번호를 확인하세요.");
+					break;
+				}
+				if(id.equals("admin")) {
+					while(true) {
+						System.out.println("---------관리자 전용 메뉴---------");
+						System.out.println("1.도서등록 2.도서목록 3.도서삭제 4.로그아웃"); 
+						int adch = scanner.nextInt();
+						if(adch==1) {
+							System.out.println("도서명을 입력하세요 : "); String book = scanner.next();
+							for(int adi = 0 ; adi < booklist.length ; adi++) {
+								if(booklist[adi][0] == null) {
+									booklist[adi][0] = book;
+									System.out.println("도서 등록 완료");
+									break;
+								}
+							}
+						}
+						else if(adch==2) {
+							System.out.println("-----도서목록 출력-----");
+							System.out.println("도서명\t대여여부");
+							for(int adi = 0 ; adi < booklist.length ; adi++) {
+									if(booklist[adi][0] != null)
+									System.out.printf("%s\n",booklist[adi][0]);
+																	
+							}
+						}
+//						else if(adch==3) {
+//							System.out.println("도서명을 입력하세요 : "); String book2 = scanner.next();
+//							for(int adi = 0 ; adi < booklist.length ; adi++) {
+//								if(booklist[adi][0].equals(book2)) {
+//									booklist[adi][0] = null;
+//									System.out.println("도서 삭제 완료");
+//								}else {
+//									System.out.println("존재하지 않는 도서 입니다.");
+//									break;
+//								}
+//
+//							}
+//						}
+						else if(adch==4) {
+							System.out.println("로그아웃 합니다.");
+							break;
+						}
+						else {
+							System.out.println("알림]] 잘못된 행동입니다.");
+							
+						}
+					}
 				}
 				
-				
-				if(login=true) {	// 로그인 스위치가 true인지 판단
+				else if(login=true) {	// 로그인 스위치가 true인지 판단
 					
 					while(true) {	// 로그인 이후 무한반복, 종료조건 : 5번 로그아웃
 						System.out.println("--------------------------");
