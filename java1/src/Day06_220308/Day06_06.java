@@ -57,7 +57,7 @@ public class Day06_06 {	// c s
 			
 			else if(ch == 2) {
 				System.out.println("==============글보기==============");
-				System.out.println("1. 목록보기 | 2. 삭제 | 3. 수정");
+				System.out.println("1. 글보기 | 2. 삭제 | 3. 수정");
 				int menu = scanner.nextInt();	// 글보기 내 매뉴 선택 저장 변수
 				
 				if (menu==1) {	
@@ -69,7 +69,7 @@ public class Day06_06 {	// c s
 					System.out.println("내용");
 					System.out.printf("%s\n", boardlist[bno].content);
 					System.out.println("==============================");
-					System.out.print("1. 목록보기(뒤로가기) | 2. 글삭제 | 3. 글수정");
+					System.out.println("1. 목록보기(뒤로가기) | 2. 글삭제 | 3. 글수정");
 					System.out.print("선택>");
 					
 					int ch2 = scanner.nextInt();
@@ -91,10 +91,11 @@ public class Day06_06 {	// c s
 							// 왜냐? 만약 해당 코드가 없을 경우 배열 내 사이사이 공백 발생
 						for(int i = bno ; i<boardlist.length; i++) {
 							// * 검색된 게시물의 인덱스부터 마지막 인덱스까지 1씩 증가
-							boardlist[bno] = boardlist[bno+1];
-							
-							if(i == boardlist.length-1)
+							if(i == boardlist.length-1) {	// 99번 인덱스에 null값 채워주는 조건문
 								boardlist[boardlist.length-1]=null;
+								break;
+							}
+							boardlist[i] = boardlist[i+1];
 						}
 							/////////////////////////////////////////////
 							
@@ -105,16 +106,19 @@ public class Day06_06 {	// c s
 					}	// ch2==2 end
 					
 					else if(ch2==3) {
-						
+						System.out.println("==============글수정==============");
+						System.out.print("비밀번호를 입력해주세요 : ");
+						String pw = scanner.next();
+						if(boardlist[bno].password.equals(pw)) {
+							System.out.print("글 내용을 입력하세요.");
+							boardlist[bno].content = scanner.next();
+							System.out.println("저장되었습니다.");
+						}
+						else
+							System.out.println("비밀번호를 확인해주세요");
 					}	// ch2==3 end
 					else 
 						System.out.println("잘못누르셨습니다.");
-					
-					
-					
-					
-					
-					
 				}	// menu==1 if end
 				
 				else if(menu==2) {
