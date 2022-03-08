@@ -120,9 +120,9 @@ public class Day05_4도서대여문제 { // c s
 											System.out.printf("도서명 : %s | 대여 여부 : %s\n", booklist[ii][0], booklist[ii][1]);
 											bookscan = true;	// 플래그 켬
 										}
+									} // 도서명 배열에서 찾는 for end
 									if(bookscan==false)	// 검색한 책이 존재하는지 여부 플래그 확인
 										System.err.println("일치하는 책이 없습니다.");
-									} // 도서명 배열에서 찾는 for end
 								}// 1. 도서 검색 if end
 								
 								else if(input2==2) {	// 2. 모든 책 출력 진입 if문
