@@ -20,9 +20,17 @@ public class Day06_02 {	// c s
 			// myCar.maxspeed : maxspeed 필드 호출
 		System.out.println("현재속도 : "+myCar.speed);
 			// myCar.speed : speed 필드 호출
+
+		// 3. 객체 내 필드 값 변경
+		myCar.speed = 60;
+			// myCar 객체 내 speed 필드를 호출해서 60이라는 데이터 대입.
+		System.out.println("수정된 속도 : "+myCar.speed);
 		
-	
+		// 새로운 자동차 객체를 생성해보시오
+		Car yourcar = new Car();
+		System.out.println(yourcar.speed);
 		
+		// * 같은 Car라는 클래스를 사용하지만 myCar와 yourcar는 speed필드를 공유하지 않는다!!!
 		
 		
 	}	// m e
