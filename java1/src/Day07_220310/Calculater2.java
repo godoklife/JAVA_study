@@ -9,7 +9,7 @@ public class Calculater2 {
 		// P. 227 예제
 	void execute() {	// 인수 X, 반환 X
 		double result = avg(7, 10);
-		println("실행결과:"+result);
+		println("실행결과:"+result+"실행결과"+result);
 	}
 	
 		// 2. 평균 메서드
