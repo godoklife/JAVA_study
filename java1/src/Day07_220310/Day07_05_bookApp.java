@@ -62,9 +62,9 @@ public class Day07_05_bookApp {	// class START
 					// 2. 관리자 메뉴 메서드 호출
 				}
 				else {
-					
 					System.out.println("알림) 안녕하세요~"+result+"님!");
-					membermenu();
+					membermenu(result);	
+						// 로그인한 사람 아이디를 book.java에 던기지 위해 인수에 엏음.
 					// 1. 일반 회원 메뉴 메서드 호출
 				}
 			}	// if(ch==2) END
@@ -87,7 +87,7 @@ public class Day07_05_bookApp {	// class START
 		}
 	}	//	void menu END
 	// 2. 일반 회원 메뉴 메서드
-	void membermenu() {
+	void membermenu(String loginID) {	// member.login();에서 받은 사용자 아이디 받음.
 		while(true) {
 			Book book = new Book();
 			System.out.println("-------------회원 메뉴-------------");
@@ -100,10 +100,10 @@ public class Day07_05_bookApp {	// class START
 				book.도서목록();
 			}	// ch==2 END
 			else if(ch==3) {
-				book.도서대여();
+				book.도서대여(loginID);	// 대여자 아이디 기록하기 위해 도서대여 메서드에 인수로 던짐.
 			}	// ch==3 END
 			else if(ch==4) {
-				book.도서반납();
+				book.도서반납(loginID);
 			}	// ch==4 END
 			else if(ch==5) {
 				return;
