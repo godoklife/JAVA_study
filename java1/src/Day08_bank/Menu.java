@@ -14,17 +14,20 @@ public class Menu {
 	}	// main END
 	
 	void menu() {
+		
 		while(true) {
+			Member member = new Member();
 			System.out.println("=================모바일 뱅킹 프로그램=================");
 			System.out.println("1. 회원가입 | 2. 로그인 | 3. 아이디 찾기 | 4. 비밀번호 찾기");
 			System.out.print("선택 >");
 			String ch = scanner.next();
 			
 			if(ch!=null && ch.equals("1")) {
-				
+				member.signup();
 			} 	// if ch==1 END
 			
 			else if(ch!=null && ch.equals("2")) {
+				member
 				
 			}	// else if ch==2 END
 			
