@@ -1,10 +1,7 @@
 package Day08_bank;
 
-import java.util.Random;
-
 public class Member { // c s
 
-	int ano ;
 	String id ;
 	String password ;
 	String name ;
@@ -17,16 +14,8 @@ public class Member { // c s
 		this.name = name;
 		this.phone = phone;
 	}
-	public Member(int ano, String id, String password, String name, String phone) {
-		this.ano = ano;
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.phone = phone;
-	}
 	
 	boolean signup(){ // 회원가입 메소드 시작
-		Random random = new Random();
 		System.out.println("---------- 회원가입 페이지 ----------");
 		System.out.print("아이디 : "); String id = Menu.scanner.next();
 		for (Member temp : Menu.members) { // id 중복검사 for문 시작
@@ -39,17 +28,19 @@ public class Member { // c s
 		System.out.print("비밀번호 : "); String password = Menu.scanner.next();
 		System.out.print("이름 : "); String name = Menu.scanner.next();
 		System.out.print("전화번호 : "); String phone = Menu.scanner.next();
-		
-		int ano = random.nextInt(10000)+10001; // 10000~20000 랜덤으로 생성
-		
-		///////////////////////////////////////////
-		//////////////////중복검사 해야함//////////////
-		///////////////////////////////////////////
-		
-		Member member = new Member(ano, id, password, name, phone);	
-		System.out.println("알림) 회원가입 완료.");
-		System.out.println("알림) 회원님의 계좌번호는 : " + ano);
-		return true;
+
+		Member member = new Member(id, password, name, phone);	
+			
+		// Members 배열에 빈공간 찾아서 넣기
+		int i = 0 ;
+		for (Member temp : Menu.members) {
+			if(temp == null) { // 빈공간이면 객체대입
+				Menu.members[i] = member; // 빈공간이면 대입
+				return true; // 회원가입 메소드 종료
+			}
+			i++ ; // 빈공간아닐시 인덱스 1증가
+		}
+		return false;
 	} // 회원가입 메소드 종료
 	
 	String login(){ // 로그인 메소드 시작

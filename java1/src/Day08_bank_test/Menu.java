@@ -1,17 +1,11 @@
-package Day08_bank;
+package Day08_bank_test;
 
 import java.util.Scanner;
 
 public class Menu {
-	static Scanner scanner = new Scanner(System.in);
-	static Member[] members  = new Member[1000];
-	static Account[] account = new Account[1000];
-	static Loan[] loans = new Loan[1000];
-	
+Scanner scanner = new Scanner(s)		
 	public static void main(String[] args) {	
 		
-		Menu application = new Menu();
-		application.menu();
 		
 	}	// main END
 	
