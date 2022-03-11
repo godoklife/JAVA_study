@@ -27,7 +27,6 @@ public class Menu {
 			} 	// if ch==1 END
 			
 			else if(ch!=null && ch.equals("2")) {
-				member
 				
 			}	// else if ch==2 END
 			
