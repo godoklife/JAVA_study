@@ -1,5 +1,5 @@
 package Day09_220314;
-
+//Day09_05
 public class Tire {	// 클래스 선언
 	
 	

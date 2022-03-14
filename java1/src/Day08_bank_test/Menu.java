@@ -22,7 +22,7 @@ static Member[] member = new Member[1000];
 			System.out.print("입력 >");
 			String ch=scanner.next();
 			if(ch.equals("1")) {
-				boolean joinResult = member.join();
+// 왜 고장???				boolean joinResult = member.join();
 			}
 			else if(ch.equals("2")) {
 				

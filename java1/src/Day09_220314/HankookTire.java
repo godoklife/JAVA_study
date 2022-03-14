@@ -1,5 +1,5 @@
 package Day09_220314;
-
+//Day09_05
 public class HankookTire extends Tire {
 			// 서브클래스 	extends	수퍼클래스
 	// 1. 필드

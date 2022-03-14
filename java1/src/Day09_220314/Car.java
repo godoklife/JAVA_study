@@ -1,10 +1,10 @@
 package Day09_220314;
-
+	// Day09_05
 public class Car {
 	
 	// 1. 필드	(변수, 객체, static변수 가능)
-	Tire frontLeftTire = new Tire("운전석 앞쪽", 6);
-	Tire frontRightTire = new Tire("조수석 앞쪽", 2);
+	Tire frontLeftTire = new Tire("앞왼쪽", 6);
+	Tire frontRightTire = new Tire("앞오른쪽", 2);
 	Tire backLeftTire = new Tire("뒤왼쪽", 3);
 	Tire backRightTire = new Tire("뒤오른쪽", 4);
 	// 2. 생성자
