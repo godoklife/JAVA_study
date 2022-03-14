@@ -71,11 +71,11 @@ public class BankController {
 		int i=0;	// 인덱스 카운트
 		for(Bank tmp : Day09_6_은행계좌프로그램.accountList) {
 			if(tmp.getAnumber().equals(계좌번호) && tmp!=null) {	// 만약 입력한 계좌번호가 존재한다면
-				Day09_6_은행계좌프로그램.accountList[i].setAmoney(tmp.getAmoney());
+				Day09_6_은행계좌프로그램.accountList[i].setAmoney(tmp.getAmoney()+입금액);
 												// 필드를 private처리 했으므로 set, get 사용해야함.
 				return true;
 			}
-		i++;
+			i++;
 		}
 		// 2. 동일한게 없으면 실패 
 		
