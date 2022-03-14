@@ -71,17 +71,17 @@ public class Loan {
 				System.out.printf("%d%10s%10d%10f",i,temp.productName, temp.productMoney, temp.percent);
 			i++;
 		}
-		System.out.println("이용하실 상품명을 입력하세요.");
-		String pname = Menu.scanner.next();
-		for(Loan temp : Menu.loans) {
-			if(temp.productName.equals(pname) && temp!=null) {
-				System.out.println("상품을 실행합니다.");
-				for(Account temp2 : Menu.account) {
-					if(temp2.ano == temp.)
-				}
-			}
-		}
-	}
+//		System.out.println("이용하실 상품명을 입력하세요.");
+//		String pname = Menu.scanner.next();
+//		for(Loan temp : Menu.loans) {
+//			if(temp.productName.equals(pname) && temp!=null) {
+//				System.out.println("상품을 실행합니다.");
+//				for(Account temp2 : Menu.account) {
+//					if(temp2.ano == temp.)
+//				}
+//			}
+//		}
+//	}
 	
 //	void loanUserList() {
 //		System.out.println("대출 사용자 목록 조회");
@@ -94,5 +94,5 @@ public class Loan {
 //	}
 	
 	
-	
+	}
 }
