@@ -3,7 +3,9 @@ package Day09_bank;
 import java.util.Random;
 
 public class BankController {
-	// 이 클래스는 은행 관련 컨르롤러
+	// 이 클래스는 은행 관련 컨트롤러
+		// 계산만 하고 입력, 줄력 기능 X
+	
 	// M : 모델 	[ 데이터 ]
 	// V : 뷰 	[ 입출력 ] 
 	// C : 모델과 뷰 연결 역할
@@ -60,14 +62,83 @@ public class BankController {
 		}	// 배열에 저장하는 for문 END
 		
 		return null;	// 계좌 생성 실피하면 null 반환.
-	}	// 계좌생성이 성공하면 계좌번호 , 실패하면 null
+		// 계좌생성이 성공하면 계좌번호 , 실패하면 null
+	}	
 		
 	// 2. 입금
-	public boolean 입금() {return false;}		// 일단 기능 구성이 안됐으므로 
+	public boolean 입금(String 계좌번호, int 입금액) {
+		// 1. 동일한 계좌가 있으면 입금 실행
+		int i=0;	// 인덱스 카운트
+		for(Bank tmp : Day09_6_은행계좌프로그램.accountList) {
+			if(tmp.getAnumber().equals(계좌번호) && tmp!=null) {	// 만약 입력한 계좌번호가 존재한다면
+				Day09_6_은행계좌프로그램.accountList[i].setAmoney(tmp.getAmoney());
+												// 필드를 private처리 했으므로 set, get 사용해야함.
+				return true;
+			}
+		i++;
+		}
+		// 2. 동일한게 없으면 실패 
+		
+		
+		
+		return false;
+	}	// 입금 END
+	
 		// 3. 출금
-	public boolean 출금() {return false;}
+	public int 출금(String 계좌번호, String 비밀번호, int 출금액) {
+		
+		// 1. 계좌번호와 비밀번호를 받아서
+		// 2. 일치 여부 확인
+		// 3. 잔고 확인 후 출금처리
+		int i=0;
+		for(Bank tmp : Day09_6_은행계좌프로그램.accountList) {
+			if(tmp!=null && tmp.getAnumber().equals(계좌번호) && tmp.getPassword().equals(비밀번호))	{
+				if(tmp.getAmoney() < 출금액) {
+					return 1;	// 1: 잔액이 부족합니다. 의미 부여.
+				}else {
+					Day09_6_은행계좌프로그램.accountList[i].setAmoney(tmp.getAmoney()-출금액);
+					return 2;	// 2: 출금 성공. 의미 부여.
+				}
+			}
+			i++;
+		}
+		
+		return 3;	// 3: 동일한 정보가 없음. 의미 부여
+	}	// 출금 END
+	
 		// 4. 이체
-	public boolean 이체() {return false;}
+	public int 이체(String 계좌번호, String 비밀번호, int 이체금액, String 이체계좌) {
+		// 1. 동일한 계좌번호, 비밀번호 검색
+		// 2. 받는 계좌 찾기
+		// 3. 잔고가 이체금액만큼 있는지 확인
+		// 4. 이체계좌에 이체금액 더하고, 계좌번호에 이체금액 빼기
+		// * 리턴값 경우의 수 1. 성공 2. 실패(본인계좌 미스, 비번, 상대방계좌, 잔고) 
+		
+		int i=0;	// 보내는 사람 계좌 인덱스
+		for(Bank tmp : Day09_6_은행계좌프로그램.accountList) {
+			if (tmp!=null && tmp.getAnumber().equals(계좌번호)) {
+				if(tmp.getPassword().equals(비밀번호)) {
+					if(tmp.getAmoney()>이체금액) {
+						int j=0;	// 받는사람 계좌 인덱스 카운트
+						for(Bank tmp2 : Day09_6_은행계좌프로그램.accountList) {
+							if(tmp2.getAnumber().equals(이체계좌)) {
+								Day09_6_은행계좌프로그램.accountList[i].setAmoney(tmp2.getAmoney()+이체금액);
+								return 1;	//정상 입금처리	
+							}
+							j++;	// 받는사람 계좌 인덱스 카운트
+						}
+						return 2;	// 받는 사람 계좌 없음
+					}
+					else return 3;	// 잔액 부족
+				} 	
+				else return 4;	// 비번 틀림
+			}	
+			else return 5;	// 계좌 없음
+		}
+	 return 6;	// 예외 발생시
+		
+		
+	}
 		// 5. 내 계좌목록
 	public Bank[] 내계좌목록(String name) {		// 동일한 계좌주의 계좌를 찾아서 배열에 담아 리턴하기.
 			// 리턴값 : Bank 형식의 배열
@@ -86,7 +157,7 @@ public class BankController {
 			}
 		}
 		
-		return null;
+		return 내계좌;
 		}
 		// 6. 대출
 	public boolean 대출() {return false;}

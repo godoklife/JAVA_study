@@ -46,13 +46,53 @@ public class Day09_6_은행계좌프로그램 {
 			
 			
 		}else if(선택==2) {
-			System.out.println("***입금 페이지***");	
+			System.out.println("***입금 페이지***");
+			System.out.print("계좌번호 : ");
+			String 계좌번호 = scanner.next();
+			System.out.print("입금액 : ");
+			int 입금액 = scanner.nextInt();
+			
+			boolean 입금성공여부 = controll.입금(계좌번호, 입금액);
 		
+			if(입금성공여부==true) {
+				System.out.println(계좌번호+"에 "+입금액+"만큼 입금했습니다.");
+			}else {
+				System.out.println("입금 실패");
+			}
+				
+			
 		}else if(선택==3) {
 			System.out.println("***출금 페이지***");	
+			System.out.print("계좌번호 : ");
+			String 계좌번호 = scanner.next();
+			System.out.print("비밀번호 : ");
+			String 비밀번호 = scanner.next();
+			System.out.print("출금액 : ");
+			int 출금액 = scanner.nextInt();
+			
+			int 출금결과 = controll.출금(계좌번호, 비밀번호, 출금액	);
+			
+			if(출금결과==1) {
+			System.out.println("잔액 부족");	
+			}else if(출금결과==2) {
+			System.out.println("출금 성공");
+			}else if(출금결과==3) {
+			System.out.println("동일한 정보가 없습니다.");
+			}
 				
 		}else if(선택==4) {
 			System.out.println("***이체 페이지***");	
+			System.out.print("계좌번호 : ");
+			String 계좌번호 = scanner.next();
+			System.out.print("비밀번호 : ");
+			String 비밀번호 = scanner.next();
+			System.out.print("이체금액 : ");
+			int 이체금액 = scanner.nextInt();
+			System.out.print("이체계좌 : ");
+			String 이체계좌 = scanner.next();
+			
+			int 이체결과 = controll.이체(계좌번호, 비밀번호, 이체금액, 이체계좌);
+			// 1= 정상입금, 2= 
 			
 		}else if(선택==5) {
 			
@@ -69,6 +109,7 @@ public class Day09_6_은행계좌프로그램 {
 				}
 				i++;
 			}
+			
 				
 			
 			
