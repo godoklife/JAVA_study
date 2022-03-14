@@ -11,5 +11,28 @@ public class Day09_02 {
 				// 
 		
 		// 예제 P. 290~292
+	// 1. 서브클래스로 객체 생성
+	DmbCellPhone dmbCellPhone = new DmbCellPhone("자바phone", "시크한블랙", 10);
+	
+	// 2. 서브클래스로 만들어진 객체로 슈퍼클래스 내 멤버 접근
+	System.out.println("모델 : "+ dmbCellPhone.model);
+	System.out.println("색상 : "+dmbCellPhone.color);
+	
+	// 3. 서브클래스로 만들어진 객체로 본인 멤버 접근
+	System.out.println("채널 : " + dmbCellPhone.channel);
+	
+	// 4. 서브클래스로 만들어진 객체로 슈퍼클래스 내 멤버 [메서드] 접근
+	dmbCellPhone.powerOn();
+	dmbCellPhone.bell();
+	dmbCellPhone.sendVoice("여보세요");
+	dmbCellPhone.receiveVoice("안녕하세요! 저는 김용준인데요");
+	dmbCellPhone.sendVoice("네 반갑습니다.");
+	dmbCellPhone.hangUp();
+	
+	// 5. 서브클래스로 만들어진 객체로 본인 벰버 접근
+	dmbCellPhone.turnOnDmb();
+	dmbCellPhone.changeChannelDmb(20);
+	dmbCellPhone.turnOffDmb();
+	
 	}
 }
