@@ -122,7 +122,8 @@ public class BankController {
 						int j=0;	// 받는사람 계좌 인덱스 카운트
 						for(Bank tmp2 : Day09_6_은행계좌프로그램.accountList) {
 							if(tmp2.getAnumber().equals(이체계좌)) {
-								Day09_6_은행계좌프로그램.accountList[i].setAmoney(tmp2.getAmoney()+이체금액);
+								Day09_6_은행계좌프로그램.accountList[j].setAmoney(tmp2.getAmoney()+이체금액);
+								Day09_6_은행계좌프로그램.accountList[i].setAmoney(tmp.getAmoney()-이체금액);
 								return 1;	//정상 입금처리	
 							}
 							j++;	// 받는사람 계좌 인덱스 카운트
@@ -132,6 +133,7 @@ public class BankController {
 					else return 3;	// 잔액 부족
 				} 	
 				else return 4;	// 비번 틀림
+				i++;
 			}	
 			else return 5;	// 계좌 없음
 		}
