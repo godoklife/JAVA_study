@@ -92,6 +92,12 @@ public class Day09_6_은행계좌프로그램 {
 			String 이체계좌 = scanner.next();
 			
 			int 이체결과 = controll.이체(계좌번호, 비밀번호, 이체금액, 이체계좌);
+			
+			if(이체결과==1) {
+				System.out.println("정상적으로 이체되었습니다.");
+			}else if(이체결과==2) {
+				
+			}
 			// 1= 정상입금, 2= 
 			
 		}else if(선택==5) {

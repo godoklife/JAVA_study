@@ -114,33 +114,30 @@ public class BankController {
 		// 4. 이체계좌에 이체금액 더하고, 계좌번호에 이체금액 빼기
 		// * 리턴값 경우의 수 1. 성공 2. 실패(본인계좌 미스, 비번, 상대방계좌, 잔고) 
 		
-		int i=0;	// 보내는 사람 계좌 인덱스
+		int i=0;
 		for(Bank tmp : Day09_6_은행계좌프로그램.accountList) {
-			if (tmp!=null && tmp.getAnumber().equals(계좌번호)) {
-				if(tmp.getPassword().equals(비밀번호)) {
-					if(tmp.getAmoney()>이체금액) {
-						int j=0;	// 받는사람 계좌 인덱스 카운트
-						for(Bank tmp2 : Day09_6_은행계좌프로그램.accountList) {
-							if(tmp2.getAnumber().equals(이체계좌)) {
-								Day09_6_은행계좌프로그램.accountList[j].setAmoney(tmp2.getAmoney()+이체금액);
-								Day09_6_은행계좌프로그램.accountList[i].setAmoney(tmp.getAmoney()-이체금액);
-								return 1;	//정상 입금처리	
-							}
-							j++;	// 받는사람 계좌 인덱스 카운트
+			if(tmp!=null && tmp.getAnumber().equals(계좌번호) && tmp.getPassword().equals(비밀번호)) {
+				int j=0;
+				if(tmp.getAmoney()<이체금액) {
+					return 2;	// 잔액 부족
+				}else{	// 내 계좌 맞고, 비번 맞고, 잔액 충분하니 상대방 계좌 검색.
+					for(Bank tmp2 : Day09_6_은행계좌프로그램.accountList) {
+						if(tmp2!=null && tmp2.getAnumber().equals(이체계좌)) {
+							Day09_6_은행계좌프로그램.accountList[i].setAmoney(tmp.getAmoney()-이체금액);	// 보내는 사람 계좌에서 이체금액만큼 삭제
+							Day09_6_은행계좌프로그램.accountList[j].setAmoney(tmp2.getAmoney()+이체금액);	// 받는 사람 계좌에 이체금액 더하기
+							return 1;	// 정상 완료.
 						}
-						return 2;	// 받는 사람 계좌 없음
+						j++;	// 받는 사람 인덱스 카운트 업
 					}
-					else return 3;	// 잔액 부족
-				} 	
-				else return 4;	// 비번 틀림
-				i++;
-			}	
-			else return 5;	// 계좌 없음
-		}
-	 return 6;	// 예외 발생시
-		
-		
-	}
+				}
+			}	// if(계좌맞고 비번 맞을경우) END
+			else if(tmp!=null && tmp.getAnumber().equals(계좌번호) && !(tmp.getPassword().equals(비밀번호))) {
+				return 3;	// 비밀번호가 일치하지 않습니다.
+			}	// else if(비번 다를경우) END
+			i++;
+		}	// for END
+		return 4;
+	}	// 이체 END
 		// 5. 내 계좌목록
 	public Bank[] 내계좌목록(String name) {		// 동일한 계좌주의 계좌를 찾아서 배열에 담아 리턴하기.
 			// 리턴값 : Bank 형식의 배열
@@ -163,9 +160,6 @@ public class BankController {
 		}
 		// 6. 대출
 	public boolean 대출() {return false;}
-	
-	
-	
 	
 	
 }
