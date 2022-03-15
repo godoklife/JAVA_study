@@ -50,7 +50,6 @@ public class WooriBank implements BankInterface{
 	
 	@Override
 	public boolean °èÁÂ»ı¼º() {
-		
 		return false;
 	}
 	@Override
