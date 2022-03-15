@@ -1,5 +1,7 @@
 package Day10;
 
+import Day10_인터페이스연습.RemoteControl;
+
 public class Day10_02 {
 	public static void main(String[] args) {
 		// 인터페이스

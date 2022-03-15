@@ -1,4 +1,4 @@
-package Day10;
+package Day10_인터페이스연습;
 
 public interface RemoteControl {	// 인터페이스 선언
 	

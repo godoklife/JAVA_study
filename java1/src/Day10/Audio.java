@@ -1,5 +1,7 @@
 package Day10;
 
+import Day10_인터페이스연습.RemoteControl;
+
 public class Audio implements RemoteControl{
 	
 	private int volume;

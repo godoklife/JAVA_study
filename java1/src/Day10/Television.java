@@ -1,5 +1,7 @@
 package Day10;
 
+import Day10_인터페이스연습.RemoteControl;
+
 public class Television implements RemoteControl, Searchable{
 			// 클래스명	implements	인터페이스명
 	
