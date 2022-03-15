@@ -14,6 +14,15 @@ public class 롯데리아 extends 점포{	// 점포는 키오스크를 구현하므로 결국 롯데리�
 	// 2. 생성자
 	public 롯데리아() {
 	}
+	
+
+
+	public 롯데리아(String 점주, ArrayList<상품> 상품리스트) {
+		super();
+		this.점주 = 점주;
+		this.상품리스트 = 상품리스트;
+	}
+
 
 
 	// 3. 메서드
@@ -46,8 +55,8 @@ public class 롯데리아 extends 점포{	// 점포는 키오스크를 구현하므로 결국 롯데리�
 		
 		// 4. 파일처리
 		try {	// 오류가 발생할것 같은 코드 묶음 [ 예상 ]
-			FileOutputStream fileOutputStream = new FileOutputStream("d:/java/롯데리아재고.txt");
-			String 내보내기 = 상품명+","+재고+","+가격;
+			FileOutputStream fileOutputStream = new FileOutputStream("d:/java/롯데리아재고.txt", true);
+			String 내보내기 = 상품명+","+재고+","+가격+"\n";	// 콤마 : 필드 구분용 | \n : 재품 구분
 			fileOutputStream.write(내보내기.getBytes());
 		}catch(Exception e) {	// 
 			
