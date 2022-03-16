@@ -21,7 +21,7 @@ public class Day11_04_BoardApp {
 				
 			}
 			} catch (Exception e) {
-				System.out.println("경고) 선택 가능한것만 누르시오.");
+				System.out.println("경고) 보기에 있는것만 누르시오.");
 				scanner = new Scanner(System.in);	
 					// 기존 스캐너를 다시 메모리 할당 해줌으로써 메모리를 비워줌.
 			}

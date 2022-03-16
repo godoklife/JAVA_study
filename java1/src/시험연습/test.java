@@ -36,11 +36,20 @@ public class test {
 				System.out.println("초기 5명의 학생 점수를 입력받습니다.");	// 처음 입력받을때만 출력
 			
 			int count = 0;	// switch문 제어용 변수
-			firstTimeWrite = false;	// 
-			switch(count) {
-			case 0 : 
-
-			}
+			
+			while(firstTimeWrite) {
+				switch(count) {
+				case 0 : {
+					System.out.print("학생 번호를 입력하세요");
+//					int i= scanner.next();
+					
+				}
+				case 4 : {
+					firstTimeWrite = false;	
+					break;
+					}
+				}
+			}	// 처음만 돌아가는 5명 입력 while END
 		}	// 1번 선택 if END
 		else if(ch.equals("2")) {
 			System.out.println("============ 학생 점수 추가 매뉴 ============");
