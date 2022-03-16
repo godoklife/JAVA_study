@@ -2,14 +2,23 @@ package Day11_220316_BoardApp;
 
 import java.util.Scanner;
 
+
 public class Day11_04_BoardApp {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
+		Controller.load();
 		
 		while(true) {
 			try {	// 예상되는 발생 예외 : 사용자가 숫자 이외의 값 입력.
-			Controller.boardlist();	// static으로 선언했으므로 객체없이 호출 가능!!!!
+			System.out.printf("%s\t%s\t%s\t%s\t%s\t \n","번호","제목","작성자","작성일","조회수");
+			int i=1;
+			for( Board board : Controller.boardlist ) {
+				System.out.printf("%2s\t%10s\t%10s\t%10s\t%2s\t \n", i , board.getTitle() ,
+						board.getWriter() , board.getDate() , board.getViewcount() );
+				i++;
+			}
 			System.out.print("1.쓰기 2.보기 선택 >");
+			System.out.println(Controller.boardlist);
 			int ch = scanner.nextInt();
 			if(ch==1) {
 				scanner.nextLine();	// 넥스트라인 고질병때문에 스캐너 메모리 비워야함. 비우려고 써준것.
@@ -27,7 +36,7 @@ public class Day11_04_BoardApp {
 				
 			}
 			else if(ch==2) {
-				
+				// g
 			}
 			else {
 				
