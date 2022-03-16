@@ -1,6 +1,8 @@
 package Day11_220316_BoardApp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Board {
 	// 1. 필드
@@ -22,6 +24,9 @@ public class Board {
 		this.content = content;
 		this.password = password;
 		this.writer = writer;
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
+		this.date = simpleDateFormat.format(date);
 	}
 		// 3. 풀 생성자	= 어디다 쓸지 모르지만 일단 만들어두는것
 	public Board(String title, String content, String password, String writer, int viewcount, String date,

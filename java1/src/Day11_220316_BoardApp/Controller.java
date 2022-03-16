@@ -32,14 +32,25 @@ public class Controller {
 	// 4. 수정 메서드
 	public static void update() {}
 	// 5. 삭제 메서드
-	public static void delete() {}
+	public static boolean delete(int index, String password) {
+
+		if (password.equals(boardlist.get(index).getPassword())) {
+			// 현재 게시물의 패스워드와 같으면
+			boardlist.remove(index);
+			save();	// 삭제한거 저장.
+			return true;	// 삭제 성공하면 true 반환.
+		}
+		else {
+			return false;	// 비번이 일치하지 않아 실패하면 false 반환
+		}
+	}
 	// 6. 덧글쓰기 메서드
 	public static void replywrite() {}
 	// 7. 게시물저장 메서드
 	public static void save() { 		// 리스트내 모든 게시물을 파일에 저장
 		try {
 			// 1. 파일출력 클래스 
-			FileOutputStream outputStream = new FileOutputStream("D:/java/게시물파일.txt");
+			FileOutputStream outputStream = new FileOutputStream("D:/java/Day11_BoardApp.txt");
 			// 2. 파일에 작성할 내용 [ 리스트내 객체 1개씩 = 한줄씩 = 게시물 1개씩 = 객체 1개씩 ]
 			for( Board board : boardlist ) { // , : 필드구분용     \n : 객체구분용
 				String 작성내용 = board.getTitle() +","+board.getContent()+","+
@@ -65,7 +76,7 @@ public class Controller {
 										// 조회수는 필드는 정수형이므로 정수형으로 형변환 [ Integer.parseInt( 문자열 ) ]
 				boardlist.add(board);// 8. 리스트 담기 
 			}
-		}catch( Exception e ) { System.err.println(" 알림]] 파일 불러오기 실패( 관리자에게문의 )" + e); }
+		}catch( Exception e ) { }
 	}
 	// 9. 덧글저장 메서드
 	public static void replysave() {}
