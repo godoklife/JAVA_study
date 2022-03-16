@@ -60,7 +60,7 @@ public class 시험연습1 {
 						}
 					}
 				}
-				else if(ch==2) {
+				else if(ch==2) {	// 빈 인덱스 떙기는 기능 없음.
 					System.out.println("========== 학생 점수 삭제 매뉴 ==========");
 					System.out.print("삭제할 학생의 번호를 입력하세요 >");
 					int ch2 = scanner.nextInt();
