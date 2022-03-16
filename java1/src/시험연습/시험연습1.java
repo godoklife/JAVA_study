@@ -7,10 +7,15 @@ public class 시험연습1 {
 		Scanner scanner = new Scanner(System.in);
 		
 		Student[] student = new Student[100];
+		int[] rank = new int[100];
+		
+		
+		
 		while(true) {
 			try {
 				
-				//석차매기는부분
+				
+				
 				
 				
 				
@@ -20,11 +25,17 @@ public class 시험연습1 {
 				System.out.println("-------------------------------------------------------------------------");
 				System.out.println(" 번호\t이름\t국어\t영어\t수학\t총점\t평균\t석차");
 				System.out.println("-------------------------------------------------------------------------");
+				for(int i=0; i<rank.length;i++) {
+					rank[i]=1;
+				}
+				int j=0;
 				for(Student tmp : student) {
+					
 					if(tmp!=null) {
-						System.out.printf("%d\t%3s\t%d\t%d\t%d\t%d\t%.1f\n",tmp.getNum(),tmp.getName(),
-								tmp.getKor(),tmp.getEng(),tmp.getMath(), tmp.getSum(), tmp.getAvg());
+						System.out.printf("%d\t%3s\t%d\t%d\t%d\t%d\t%.1f\t%d\n",tmp.getNum(),tmp.getName(),
+								tmp.getKor(),tmp.getEng(),tmp.getMath(), tmp.getSum(), tmp.getAvg(),rank[j]);
 					}
+					j++;
 				}
 				
 				System.out.print("1. 점수 추가 | 2. 점수 삭제 \n 선택 >");
@@ -60,7 +71,7 @@ public class 시험연습1 {
 						}
 					}
 				}
-				else if(ch==2) {	// 빈 인덱스 떙기는 기능 없음.
+				else if(ch==2) {
 					System.out.println("========== 학생 점수 삭제 매뉴 ==========");
 					System.out.print("삭제할 학생의 번호를 입력하세요 >");
 					int ch2 = scanner.nextInt();
@@ -68,11 +79,20 @@ public class 시험연습1 {
 					for(Student tmp : student) {
 						if( tmp!=null && tmp.getNum()==ch2 ) {
 							System.out.println(ch2+" 번 학생을 삭제합니다.");
-							tmp=null;
-							student[i]=tmp;
+							student[i]=null;
 							break;
 						}
 						i++;
+					}
+					System.out.println("int i = "+i);
+					for(int k=i;k<student.length;k++) {	// 빈 인덱스 땡기는 반복문
+						if(k==student.length-1) {
+							student[student.length-1]=null;
+							System.out.println("마지막 복사 실행");
+							System.out.println(student.length);
+							break;
+						}
+						student[k]=student[k+1];
 					}
 					
 				}
