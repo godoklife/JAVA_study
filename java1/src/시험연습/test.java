@@ -5,8 +5,12 @@ import java.util.Scanner;
 public class test {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
+		String[][] report = new String[100][6];
 		
-		while(true) {
+		
+		
+		
+		while(true) {	// 종료조건 : 없음!
 		System.out.println("-------------------------------------------------------------------------");
 		System.out.println("\t\t성\t적\t표\t\t\t");
 		System.out.println("-------------------------------------------------------------------------");
