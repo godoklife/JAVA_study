@@ -12,6 +12,18 @@ public class Day11_04_BoardApp {
 			System.out.print("1.쓰기 2.보기 선택 >");
 			int ch = scanner.nextInt();
 			if(ch==1) {
+				scanner.nextLine();	// 넥스트라인 고질병때문에 스캐너 메모리 비워야함. 비우려고 써준것.
+				System.out.println("========= 게시물 등록 =========");
+				System.out.print("제목 : ");
+				String 제목 = scanner.nextLine();		// 공백 포함 입력 가능.
+				System.out.print("내용 : ");
+				String 내용 = scanner.nextLine();
+				System.out.print("작성자 : ");
+				String 작성자 = scanner.next();
+				System.out.print("비밀번호 : ");
+				String 비밀번호 = scanner.next();
+				
+				Controller.write(제목, 내용, 작성자, 비밀번호);
 				
 			}
 			else if(ch==2) {
