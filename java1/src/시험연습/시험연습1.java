@@ -25,18 +25,40 @@ public class 시험연습1 {
 				System.out.println("-------------------------------------------------------------------------");
 				System.out.println(" 번호\t이름\t국어\t영어\t수학\t총점\t평균\t석차");
 				System.out.println("-------------------------------------------------------------------------");
-				for(int i=0; i<rank.length;i++) {
+				for(int i=0; i<rank.length;i++) {	// 석차 저장 배열 초기화
 					rank[i]=1;
 				}
-				int j=0;
-				for(Student tmp : student) {
-					
-					if(tmp!=null) {
-						System.out.printf("%d\t%3s\t%d\t%d\t%d\t%d\t%.1f\t%d\n",tmp.getNum(),tmp.getName(),
-								tmp.getKor(),tmp.getEng(),tmp.getMath(), tmp.getSum(), tmp.getAvg(),rank[j]);
+				for(int i=0; i<student.length-1;i++) {
+					for(int j=i+1;j<student.length;j++) {
+						if(student[j]!=null && student[i].getAvg() < student[j].getAvg()){
+							rank[i]++;
+						}
+						else if(student[j]!=null && student[i].getAvg() > student[j].getAvg()){
+							rank[j]++;
+						}
 					}
-					j++;
 				}
+				for(int i=0;i<student.length;i++) {
+					if(student[i]!=null) {
+						System.out.printf("%d\t%3s\t%d\t%d\t%d\t%d\t%.1f\t%d\n",student[i].getNum(),student[i].getName(),
+							student[i].getKor(),student[i].getEng(),student[i].getMath(), student[i].getSum(), student[i].getAvg(),rank[i]);
+						
+					}
+				}
+				
+				
+				
+				
+//				int j=0;
+//				for(Student tmp : student) {
+//					
+//					if(tmp!=null) {
+//						System.out.printf("%d\t%3s\t%d\t%d\t%d\t%d\t%.1f\t%d\n",tmp.getNum(),tmp.getName(),
+//								tmp.getKor(),tmp.getEng(),tmp.getMath(), tmp.getSum(), tmp.getAvg(),rank[j]);
+//					}
+//					
+//					j++;
+//				}
 				
 				System.out.print("1. 점수 추가 | 2. 점수 삭제 \n 선택 >");
 				int ch = scanner.nextInt();
