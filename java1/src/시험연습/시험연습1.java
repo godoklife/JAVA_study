@@ -61,7 +61,19 @@ public class 시험연습1 {
 					}
 				}
 				else if(ch==2) {
-					System.out.println("========== 학생 점수 추가 매뉴 ==========");
+					System.out.println("========== 학생 점수 삭제 매뉴 ==========");
+					System.out.print("삭제할 학생의 번호를 입력하세요 >");
+					int ch2 = scanner.nextInt();
+					int i=0;	// 인덱스 카운트
+					for(Student tmp : student) {
+						if( tmp!=null && tmp.getNum()==ch2 ) {
+							System.out.println(ch2+" 번 학생을 삭제합니다.");
+							tmp=null;
+							student[i]=tmp;
+							break;
+						}
+						i++;
+					}
 					
 				}
 				else {
