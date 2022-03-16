@@ -30,7 +30,17 @@ public class Controller {
 	// 3. 보기 메서드
 //	public static void view() {}	BoardApp에서 처리함.
 	// 4. 수정 메서드
-	public static void update() {}
+	public static boolean update(int index, String title, String content, String password) {
+		if(password.equals(boardlist.get(index).getPassword())){	// 해당 글의 비번 확인
+			boardlist.get(index).setTitle(title);
+			boardlist.get(index).setContent(content);
+			save();
+			return true;	// 정상적으로 수정 완료
+		}
+		else
+			return false;	// 비번 틀렸음.
+	}
+	
 	// 5. 삭제 메서드
 	public static boolean delete(int index, String password) {
 

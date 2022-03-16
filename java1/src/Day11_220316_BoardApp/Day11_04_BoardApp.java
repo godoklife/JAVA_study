@@ -53,19 +53,41 @@ public class Day11_04_BoardApp {
 				else if(ch2==2) {
 					System.out.println("***** 수정 *****");
 					while(true) {
-						System.out.println("수정할 대상 선택\n1. 제목 | 2. 내용 | 3. 비밀번호 | 4. 취소");
+						System.out.println("수정할 대상 선택\n1. 제목 | 2. 내용 | 3. 취소 ");
 						System.out.print("선택 >"); int ch3 = scanner.nextInt();
 						if (ch3==1) {
+							System.out.println("비밀번호를 입력하세요");
+							String password = scanner.next();
 							System.out.print("제목을 입력하세요 : ");
 							scanner.nextLine();
-							String newtitle = scanner.nextLine();
-//							Controller.boardlist.getTitle;
-							
-						}else if(ch3==2) {
-							
-						}else if(ch3==3) {
-							
-						}else {
+							String title = scanner.nextLine();
+							boolean result = Controller.update(index, title, temp.getContent(), password);
+							if(result==true) {
+								System.out.println("수정 완료");
+								break;
+							}else {
+								System.out.println("비밀번호를 확인하세요.");
+							}
+						}
+						else if(ch3==2) {
+							System.out.println("비밀번호를 입력하세요");
+							String password = scanner.next();
+							System.out.print("내용을 입력하세요 : ");
+							scanner.nextLine();
+							String content = scanner.nextLine();
+							boolean result = Controller.update(index, temp.getTitle(), content, password);
+							if(result==true) {
+								System.out.println("수정 완료");
+								break;
+							}else {
+								System.out.println("비밀번호를 확인하세요.");
+							}
+						}
+						else if(ch3==3) {
+							System.out.println("취소");
+							break;
+						}
+						else {
 							System.out.println("잘못 누르셨습니다.");
 						}
 					}
