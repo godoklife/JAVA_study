@@ -115,7 +115,7 @@ public class Day12_02_String {
 		
 		// P. 510 valueOf() : 기본타입을 문자열로 변환
 		
-		String str10 = String.valueOf(10);		// 10 글자로 변환
+		String str10 = String.valueOf(10);		// 10 글자로	 변환
 		String str11 = String.valueOf(10.5);	// 10.5 글자로 변환
 		String str12 = String.valueOf(true);	// true라는 글자가 저장된다. boolean형이 아님!!
 		String str13 = 10+"";					// + 연산자에 의해 10이라는 글자로 변환. 단, " " 같이 큰따옴표에 뭐가 들어가면 안됨.
