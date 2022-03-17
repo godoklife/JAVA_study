@@ -85,7 +85,9 @@ public class Day12_02_String {
 		} else {
 			System.out.println("민번 자리수가 일치하지 않습니다.");
 		}
-		
+		System.out.println("==============================");
+
+		// P. 506 replace
 		
 	}
 }
