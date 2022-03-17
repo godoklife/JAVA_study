@@ -87,7 +87,50 @@ public class Day12_02_String {
 		}
 		System.out.println("==============================");
 
-		// P. 506 replace
+		// P. 506 replace("기존문자", "새로운문자") : 문자열 대체 [ 변경 ]
+		String oldStr = "자바는 객체지향언어 입니다. 자바는 품부한 API를 지원합니다.";
+		String newStr = oldStr.replace("자바","JAVA");
+						// 문자열.replace("기존문자", "새로운문자")
+		System.out.println("기존문자열 : "+oldStr);
+		System.out.println("새로운문자열 : "+newStr);
+		
+		System.out.println("==============================");
+		
+		
+		// P. 507 substring() vs split() : 문자열 자르기
+		String ssn3 = "880815-1234567";
+		
+		String firstNum = ssn3.substring(0,6);	// 시작인덱스, 마지막인덱스 (마지막인덱스는 저장 안함.)
+		String secondNum = ssn3.substring(7);	// 시작인덱스만 찍으면 시작인덱스 포함 쭉 저장
+		System.out.println("확인 : "+firstNum);	// 880815
+		System.out.println("확인 : "+secondNum);	// 1234567
+		
+		// split
+			// ssn3.split("-") 입력하면 880815-1234567을 "-" 기준으로 잘라서 2개 배열로 반환, 기준인 "-"은 사라짐.
+			// [0] : 880815
+			// [1] : 1234567
+		System.out.println("확인 : "+ssn3.split("-")[0]);
+		
+		System.out.println("==============================");
+		
+		// P. 510 valueOf() : 기본타입을 문자열로 변환
+		
+		String str10 = String.valueOf(10);		// 10 글자로 변환
+		String str11 = String.valueOf(10.5);	// 10.5 글자로 변환
+		String str12 = String.valueOf(true);	// true라는 글자가 저장된다. boolean형이 아님!!
+		String str13 = 10+"";					// + 연산자에 의해 10이라는 글자로 변환. 단, " " 같이 큰따옴표에 뭐가 들어가면 안됨.
+		
+		System.out.println(str10);
+		System.out.println(str11);
+		System.out.println(str12);
+		System.out.println(str13);
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 }
