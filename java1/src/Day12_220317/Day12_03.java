@@ -8,9 +8,9 @@ public class Day12_03 {
 			"Trucker의 Go 언어 프로그래밍", "혼자 공부하는 C 언어"};
 		
 		while (true) {
-//			for(String tmp : 도서목록) {
-//				System.out.println(tmp);
-//			}
+			for(String tmp : 도서목록) {
+				System.out.println(tmp);
+			}
 			System.out.print("1. 책 제목 검색 | 2. 책 제목 수정 | 선택 >");
 			byte[] bytes = new byte[100];
 			int count = System.in.read(bytes);	// 키보드로부터 바이트를 읽어봄	[ 일반예외 발생 ] 
@@ -65,7 +65,7 @@ public class Day12_03 {
 				String newStr = new String(bytes, 0, count-2);
 				
 				// 수정 시작
-				도서목록[index].replace(oldStr, newStr);
+				도서목록[index]=도서목록[index].replace(oldStr, newStr);
 				System.out.println("변경 완료");
 				
 				
