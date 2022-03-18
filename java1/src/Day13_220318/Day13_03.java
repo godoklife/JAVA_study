@@ -14,18 +14,37 @@ public class Day13_03 {
 		
 		// * 해당 월의 1날의 요일 찾기?
 			// 1. 사용자 정의 캘린더 설정.
-		calendar.set(year, month-1, 1);	// ex. 3월 1일
+		calendar.set(year, month-1, 1);	// calendar 객체를 2022년 3월 1일로 설정.
 		System.out.println("사용자가 날짜 만들기 : "+calendar.toString());
 			// 2. 3월 1일의 요일
 		int sweek = calendar.get(Calendar.DAY_OF_WEEK);
 		System.out.println(sweek);
 			// 3. 3월의 마지막 일
+		int eday = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		System.out.println("3월 마지막 일 : "+eday);
 		
-	
-		
-		
+		// 3. 출력
 		System.out.println("====================== "+year+"년 "+month+"월 ======================");
 		System.out.println("일\t월\t화\t수\t목\t금\t토");
+		
+		// * 현재 월 1일의 위치 앞에 공백 채우기
+		for(int i=1; i<sweek; i++) {
+			System.out.printf("\t");
+		}
+		
+		// 1일부터 마지막날짜 까지 출력.
+		for(int i = 1; i<=eday; i++) {
+			System.out.print(i+"\t");
+			// 토요일마다 줄바꿈 처리
+			if(sweek%7==0) System.out.println("");
+			sweek++;
+		}
+		
+		
+		
+		
+		
+		
 		
 	}	// main END
 }	// class END
