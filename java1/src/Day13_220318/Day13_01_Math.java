@@ -1,6 +1,6 @@
 package Day13_220318;
 
-public class Day13_01 {
+public class Day13_01_Math {
 	public static void main(String[] args) {
 		
 		// P. 534 Math 클래스(java.lang패키지=import 불필요.) : 수학 관련 메서드 제공. 객체 없이 사용 가능!

@@ -2,7 +2,7 @@ package Day13_220318;
 
 import java.util.Calendar;
 
-public class Day13_03 {
+public class Day13_03_Calendar {
 	public static void main(String[] args) {
 		
 		// 1. 캘린더 클래스 내 현재 날짜, 시간 객체 호출
@@ -36,7 +36,9 @@ public class Day13_03 {
 		for(int i = 1; i<=eday; i++) {
 			System.out.print(i+"\t");
 			// 토요일마다 줄바꿈 처리
-			if(sweek%7==0) System.out.println("");
+			if(sweek%7==0) 
+				System.out.println("");
+			
 			sweek++;
 		}
 		

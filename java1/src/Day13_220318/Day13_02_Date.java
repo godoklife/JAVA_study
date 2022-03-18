@@ -6,7 +6,7 @@ import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Day13_02 {
+public class Day13_02_Date {
 	public static void main(String[] args) {
 		
 		// P.539
