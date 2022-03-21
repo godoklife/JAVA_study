@@ -11,6 +11,7 @@ public class Day14_플레이어 {
 		Scanner scanner = new Scanner(System.in);
 		
 		boolean soundsw = true;
+		boolean moviesw = true;
 		
 		while(true) {
 			System.out.println("[ 1. 소리재생 / 중지 | 2. 영상재생 / 중지 ]");
@@ -31,10 +32,20 @@ public class Day14_플레이어 {
 				
 			}
 			else if(ch==2) {
+				Movie movie = new Movie();
+				if(moviesw) {
+					movie.Moviestop(true);
+					movie.start();
+					moviesw=false;
+					
+				}
+				else {
+					movie.Moviestop(moviesw);
+					moviesw=true;
+				}
 				
 			}
 			
-			
-		}
-	}
-}
+		}	// while END
+	}	// main END
+}	// class END
