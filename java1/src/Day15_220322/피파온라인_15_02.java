@@ -1,6 +1,6 @@
 package Day15_220322;
 
-public class 피파온라인_15_02 extends 게임패드_15_02{
+public class 피파온라인_15_02 implements 게임패드_15_02{
 
 	@Override
 	public void A버튼() {
