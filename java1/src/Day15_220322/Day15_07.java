@@ -24,5 +24,23 @@ public class Day15_07 {
 		threadB_15_07.stop=true;
 		
 		
+		
+		
+		// P.607 join(); 예제
+		
+		SumThread_15_07 sumThread_15_07 = new SumThread_15_07();
+		
+		sumThread_15_07.start();
+		
+		try {sumThread_15_07.join();} catch (Exception e) {}
+			// 이게 없으면 sumThread의 for문이 끝나기 전에 getSum이 실행되어벌임.
+				// 따라서 0이 출력되버림.
+			// .join()이 작동하면 섬쓰레드가 연산을 마치고 getSum이 실행되니 5050 출력됨.
+		try {Thread.sleep(100);} catch (Exception e) {}
+		
+		System.out.println("1~100의 합 : "+sumThread_15_07.getSum());
+		
+		
+		
 	}
 }
