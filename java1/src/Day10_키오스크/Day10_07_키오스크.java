@@ -28,7 +28,7 @@ public class Day10_07_키오스크 {
 		
 		try {	// try { } 안에 오류가 발생할것 같은 코드 넣기 (예상)
 		// 1. 파일 입력 객체
-		FileInputStream fileInputStream = new FileInputStream("d:/java/롯데리아재고.txt");
+		FileInputStream fileInputStream = new FileInputStream("c:/adb/롯데리아재고.txt");
 		// 2. 파일 읽어오기 [ 파일 -> 스트림(바이트열) -> 자바 ]
 			// 1. 바이트 배열 선언
 		byte[] bytes = new byte[1024];	// 1KB짜리 배열 선언
