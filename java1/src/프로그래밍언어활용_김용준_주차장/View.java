@@ -35,10 +35,6 @@ public class View {
 		LocalTime testTime4 = LocalTime.of(11, 56);
 		Parking parkingtest4 = new Parking("44구4444", testTime4, null, testDate4, 0);
 		con.parkingList.add(parkingtest4);
-		LocalDate testDate5 = LocalDate.of(2022, 03, 28);
-		LocalTime testTime5 = LocalTime.of(12, 31);
-		Parking parkingtest5 = new Parking("33구7415", testTime5, null, testDate5, 0);
-		con.parkingList.add(parkingtest5);
 		// 테스트용 필드 끝
 		
 		while(true) {	// 프로그램 종료 조건 없음
