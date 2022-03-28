@@ -15,6 +15,7 @@ public class Day19_05_TreeSet {
 			// 2. 각 노드는 최대 2개의 자식 노드를 가질 수 있다.
 			// 3. 부모보다 작으면 왼쪽 자식 / 크면 오른쪽 자식으로 배치
 			// 4. 트리 구조에서 가장 왼쪽에 있는게 가장 작은값. / 오른쪽이 가장 큰 값.
+			
 		
 		
 		// 2. TreeSet 객체에 객체(요소) 추가
@@ -31,5 +32,8 @@ public class Day19_05_TreeSet {
 		System.out.println(score.last()); 	// 가장 높은 객체를 리턴
 		System.out.println(score.lower(95));	// 주어진 객체(95)보다 바로 아래 객체를 리턴
 		System.out.println(score.higher(95)); 	// 주어진 객체(95)보다 바로 위 객체를 리턴.
+		System.out.println( score.floor(95) );  // 95포함 기준으로 왼쪽 노드 [ 95보다 같거나 작은 ] 
+		System.out.println( score.ceiling(85) ); // 85포함 기준으로 오른쪽 노드 [ 85보다 같거나 큰 ]
+		
 	}
 }
