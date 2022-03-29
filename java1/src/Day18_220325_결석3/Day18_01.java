@@ -19,7 +19,7 @@ public class Day18_01 {
 		list.add("jdbc"); // 인덱스 1에 저장
 		list.add("servlet/jsp");	// 인덱스 : 2
 		System.out.println("리스트 내 요소들 확인 : "+ list);	
-			// 무식하게 메모리주소가 나오지 않고 "[java, jdbc, servlet/jsp]" 출력됨.
+			
 		list.add(2, "Database");	// 2번 인덱스에 요소 저장. 서블릿은 자동으로 3번인덱스로 변경.
 		System.out.println("리스트 내 요소들 확인 : "+ list);	
 			// 설명 생략
