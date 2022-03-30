@@ -9,7 +9,7 @@
 	<classpathentry kind="lib" path="D:/KYJ_JavaFX/javafx-sdk-11/lib/javafx.base.jar"/>
 	<classpathentry kind="lib" path="D:/KYJ_JavaFX/javafx-sdk-11/lib/javafx.controls.jar"/>
 	<classpathentry kind="lib" path="D:/KYJ_JavaFX/javafx-sdk-11/lib/javafx.fxml.jar"/>
-	<classpathentry kind="lib" path="D:/KYJ_JavaFX/javafx-sdk-11/lib/javafx.graphics.jar"/>
+	<classpathentry kind="lib" path="D:/KYJ_JavaFX/javafx-sdk-11/lib/javafx.graphics.jar" sourcepath="D:/KYJ_JavaFX/javafx-sdk-11/lib"/>
 	<classpathentry kind="lib" path="D:/KYJ_JavaFX/javafx-sdk-11/lib/javafx.media.jar"/>
 	<classpathentry kind="lib" path="D:/KYJ_JavaFX/javafx-sdk-11/lib/javafx.swing.jar"/>
 	<classpathentry kind="lib" path="D:/KYJ_JavaFX/javafx-sdk-11/lib/javafx.web.jar"/>
