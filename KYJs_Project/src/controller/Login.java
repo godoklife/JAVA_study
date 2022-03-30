@@ -22,12 +22,13 @@ public class Login implements Initializable{
 		// 2. 생성자에서 객체 내 this 넣어주기.
 			// this : 현재 클래스의 메모리를 호출.
 	public Login() {
+		System.out.println("호출된 Login객체의 메모리 주소 : "+본인객체);
 		본인객체 = this;	
 	}
 	 // 아래 get본인객체() 는 써도 되고 안써도 됨.
-	public static Login get본인객체() {
-		return 본인객체;
-	}
+//	public static Login get본인객체() {
+//		return 본인객체;
+//	}
 	
     @FXML
     private MediaView mediaview;
@@ -48,16 +49,16 @@ public class Login implements Initializable{
 			
 			mediaview.setMediaPlayer(mediaPlayer);
 			mediaPlayer.play();
-			
+			System.out.println("Login2");
+			System.out.println("실행중인 Login 메모리 주소 : "+Login.본인객체);
 			loadpage("/view/loginpane.fxml");
 	}
 	
-	public void loadpage (String page) {
+	public void loadpage( String page ) {
 		try {
-			Parent parent = FXMLLoader.load(getClass().getResource(page));
+			Parent parent = FXMLLoader.load( getClass().getResource(page) );
 			borderpane.setCenter(parent);
-			
-		} catch (Exception e) {System.out.println(e);}
+		}catch( Exception e ) { System.out.println("해당 파일이 없습니다. "+e);}
 	}
 	
 }

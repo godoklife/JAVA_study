@@ -26,7 +26,7 @@ public class Main implements Initializable{
 			Parent parent = FXMLLoader.load(getClass().getResource(page));	// 예외처리 필수
 																		// 확장명 쓰기 귀찮으니 그냥 인수 받아올 때 확장자 붙여주는거임...
 			borderpane.setCenter(parent);	// 컨테이너 가운데에 페이지 넣기.
-		} catch (Exception e) {System.out.println(e);}
+		} catch (Exception e) {System.out.println("main");System.out.println(e);}
 	}
 	
 }

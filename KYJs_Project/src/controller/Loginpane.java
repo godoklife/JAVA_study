@@ -54,8 +54,7 @@ public class Loginpane implements Initializable{
     	// 회원가입 버튼을 누르면 login 컨트롤 클래스 내 borderpane 컨테이너 center 페이지 변경.
     	// problem -> 다른 클래스 내 컨테이너 호출 -> Login login = new Login(); 쓰면 새로운 컨테이너가 만들어짐. XX
     	// answer -> 기존 컨테이너를 가져오는 방법 -> Login 클래스의 18번라인부터 27번라인 참고
-    	
-    	Login.본인객체.loadpage("/view/signuppage.fxml");
+    	Login.본인객체.loadpage("/view/signuppane.fxml");
     	
 //    	login.loadpage("/view/signuppage.fxml");
     }
