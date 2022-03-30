@@ -1,4 +1,4 @@
-package controller;
+package controller.login;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,7 +51,7 @@ public class Login implements Initializable{
 			mediaPlayer.play();
 			System.out.println("Login2");
 			System.out.println("실행중인 Login 메모리 주소 : "+Login.본인객체);
-			loadpage("/view/loginpane.fxml");
+			loadpage("/view/login/loginpane.fxml");
 	}
 	
 	public void loadpage( String page ) {

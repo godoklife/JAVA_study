@@ -17,7 +17,7 @@ public class Main implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println("Main과 Start가 연결되었습니다..");
-		loadpage("/view/login.fxml");	// /패키지명/파일명
+		loadpage("/view/login/login.fxml");	// /패키지명/파일명
 		// 괄호 안의 주소는 인수로 넘어감	// /패키지명/파일명.fxml (26번 라인에서 ".fxml" 안 적을 경우)
 	}
 	

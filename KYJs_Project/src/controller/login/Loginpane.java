@@ -1,4 +1,4 @@
-package controller;
+package controller.login;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,7 +44,22 @@ public class Loginpane implements Initializable{
 
     @FXML
     void acclogin(ActionEvent event) {
+    	
+    	String id = txtid.getText();
+    	String password = txtpassword.getText();
+    	if(id.equals("admin") && password.equals("1234")) {
+    		System.out.println("관리자 로그인");
+    		lblconfirm.setText("관리자 로그인!!!");
+    	}
+    	
+    	
+    	
+    	
+//    	System.out.println(txtid.getText() + "가 아이디로 입력되었습니다.");
+//    	System.out.println(txtpassword.getText() + "로 패스워드가 입력되었습니다.");
+    	
     	System.out.println("로그인처리");
+    	
     	
     }
 
@@ -54,7 +69,7 @@ public class Loginpane implements Initializable{
     	// 회원가입 버튼을 누르면 login 컨트롤 클래스 내 borderpane 컨테이너 center 페이지 변경.
     	// problem -> 다른 클래스 내 컨테이너 호출 -> Login login = new Login(); 쓰면 새로운 컨테이너가 만들어짐. XX
     	// answer -> 기존 컨테이너를 가져오는 방법 -> Login 클래스의 18번라인부터 27번라인 참고
-    	Login.본인객체.loadpage("/view/signuppane.fxml");
+    	Login.본인객체.loadpage("/view/login/signuppane.fxml");
     	
 //    	login.loadpage("/view/signuppage.fxml");
     }
