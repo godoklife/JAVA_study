@@ -72,7 +72,26 @@ public class MemberDao {	// DB 접근 객체로 사용
 	}
 	
 		// 2. 로그인 메서드, 인수 : 아이디, 비밀번호
-	public boolean login(String id, String password) {return false;}
+	public boolean login(String id, String password) {
+	// 1. sql 작성
+		// and : 조건1 and 조건2	-> 이면서
+		// or  : 조건1 or  조건2	-> 이거나
+	try {	
+	String sql = "select * from member where mid=? and mpassword=?";
+	ps = con.prepareStatement(sql);
+	ps.setString(1, id);
+	ps.setString(2, password);
+	// 2. sql 조회
+	rs = ps.executeQuery();
+	if(rs.next()) {
+		return true;
+	}
+	} catch (Exception e) { System.out.println(e);}
+	// 3. sql 실행
+	
+	// 4. sql 결과
+	return false;
+	}
 		// 3. 아이디 찾기 메서드, 인수 : 이메일
 	public String findid(String email) { return null;}
 		// 4. 비밀번호 찾기 메서드, 인수 : 아이디, 이메일

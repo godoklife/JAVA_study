@@ -3,6 +3,7 @@ package controller.login;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dao.MemberDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,15 +45,17 @@ public class Loginpane implements Initializable{
 
     @FXML
     void acclogin(ActionEvent event) {
-    	
+    	// 1. 컨트롤에 입력된 값 가져오기
     	String id = txtid.getText();
     	String password = txtpassword.getText();
-    	if(id.equals("admin") && password.equals("1234")) {
-    		System.out.println("관리자 로그인");
-    		lblconfirm.setText("관리자 로그인!!!");
+    	
+    	boolean result = MemberDao.memberDao.login(id, password);
+    	
+    	if(result) {
+    		lblconfirm.setText("로그인 성공");
+    	}else {
+    		lblconfirm.setText("아이디와 비밀번호를 확인하세요");
     	}
-    	
-    	
     	
     	
 //    	System.out.println(txtid.getText() + "가 아이디로 입력되었습니다.");

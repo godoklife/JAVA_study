@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 
 public class Signuppane implements Initializable{
 	
@@ -102,9 +103,18 @@ public class Signuppane implements Initializable{
     	boolean result = MemberDao.memberDao.signup(member);
     		// 3. 확인
     	if (result) {
-    		System.out.println("가입 성공");
+    		// 1) 메시지 창 출력
+    		Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.setTitle("알림");	// 메시지 제목 설정
+    		alert.setHeaderText("안산시 중고거래에 가입을 환영합니다.");
+    		alert.setTitle("가입성공");
+    		alert.showAndWait();
+    		// 2) 화면 전환
+    		Login.본인객체.loadpage("/view/login/loginpane.fxml");
+    		
     	}else {
-    		System.out.println("가입 실패");
+    		lblconfirm.setText("실패! 관리자에게 문의");
+    		return;
     	}
     		
     	

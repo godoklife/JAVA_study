@@ -49,7 +49,6 @@ public class Login implements Initializable{
 			
 			mediaview.setMediaPlayer(mediaPlayer);
 			mediaPlayer.play();
-			System.out.println("Login2");
 			System.out.println("실행중인 Login 메모리 주소 : "+Login.본인객체);
 			loadpage("/view/login/loginpane.fxml");
 	}
