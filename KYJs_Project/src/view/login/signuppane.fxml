@@ -14,7 +14,7 @@
       <PasswordField fx:id="txtpasswordconfirm" layoutX="27.0" layoutY="194.0" prefHeight="45.0" prefWidth="350.0" promptText="비밀번호 확인" />
       <TextField fx:id="txtemail" layoutX="27.0" layoutY="239.0" prefHeight="45.0" prefWidth="350.0" promptText="이메일" />
       <TextField fx:id="txtaddress" layoutX="27.0" layoutY="284.0" prefHeight="45.0" prefWidth="350.0" promptText="주소" />
-      <Button fx:id="btnsignup" layoutX="27.0" layoutY="349.0" mnemonicParsing="false" onAction="#signup" prefHeight="81.0" prefWidth="350.0" text="로그인">
+      <Button fx:id="btnsignup" layoutX="27.0" layoutY="349.0" mnemonicParsing="false" onAction="#signup" prefHeight="81.0" prefWidth="350.0" text="작성 완료">
          <font>
             <Font name="System Bold" size="29.0" />
          </font>

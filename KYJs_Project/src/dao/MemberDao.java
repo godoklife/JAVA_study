@@ -92,13 +92,29 @@ public class MemberDao {	// DB 접근 객체로 사용
 	// 4. sql 결과
 	return false;
 	}
-		// 3. 아이디 찾기 메서드, 인수 : 이메일
-	public String findid(String email) { return null;}
-		// 4. 비밀번호 찾기 메서드, 인수 : 아이디, 이메일
-	public String findpassword(String id, String email) {return null;}
+
+	// 3. 아이디 찾기 메서드, 인수 : 이메일
+
+	public boolean findid(String email) {
+		try {
+			String sql = "selest * from member memail=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, email);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {System.out.println("아이디 찾기 예외 발생"+e);}
+		return false;	// 입력한 이메일이 없는 경우
+	}
 	
-	
-	
+	// 4. 비밀번호 찾기 메서드, 인수 : 아이디, 이메일
+	public String findpassword(String id, String email) {
+		
+		
+		return null;
+		}
 	
 	
 }
