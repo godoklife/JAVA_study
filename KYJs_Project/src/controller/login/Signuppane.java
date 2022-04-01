@@ -17,8 +17,7 @@ public class Signuppane implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
+		lblconfirm.setText("");	// 실행했을 때 lblconfirm을 사용자가 보지 못하게 공백처리
 	}
 
     @FXML
@@ -66,16 +65,42 @@ public class Signuppane implements Initializable{
     	
     	// 유효성 검사
     		// 1. id 중복 체크
+    	boolean result2 = MemberDao.memberDao.idcheck(id);
+    	if(result2) {
+    		lblconfirm.setText("이미 사용중인 아이디 입니다.");
+    		return;
+    	}
     		// 2. id 형식 체크
+    	if(id.length() < 4 || id.length() > 10) {
+    		lblconfirm.setText("아이디는 4~10자 이내여야 합니다.");
+    		return;
+    	}
     		// 3. 비밀번효 형식 체크
+    	if(password.length()<4 || password.length() > 10 ) {	// 비번이 4글자 미만, 10글자 초과면
+    		lblconfirm.setText("비밀번호는 4~10자 이내여야 합니다.");
+    		return;
+    	}
     		// 4. 비밀번호 일치 체크
+    	if( ! password.equals(passwordconfirm)) {	// 패스워드하고 패스워드컨펌하고 일치하지 않으면
+    		lblconfirm.setText("비밀번호가 일치하지 않습니다.");
+    		return;
+    	}
     		// 5. 이메일
+    	if(email.indexOf("@")==-1 ) {	// indexOf("@") : 골뱅이가 문자열에 없으면 -1 리턴, 있으면 인덱스값 리턴
+    		lblconfirm.setText("이메일 형식을 확인하세요.");
+    		return;
+    	}
     		// 6. 주소
+    	if( ! (address.contains("시")&& address.contains("동")) ) {	// .contains("시") : "시" 가 있으면 true 반환
+    		lblconfirm.setText("시, 동을 포함한 주소를 입력하세요.");
+    		return;
+    	}
     	// * 모든 유효성 검사 통과 시 객체화 후 DB에 저장.
     		// 1. 객체화 [ 회원번호 없음, id, pw, email, address, 포인트 없음, 가입일)
     	Member member = new Member(0, id, passwordconfirm, email, address, 0, since);
+    		// 2. DB 객체 내 메서드 호출
     	boolean result = MemberDao.memberDao.signup(member);
-    	
+    		// 3. 확인
     	if (result) {
     		System.out.println("가입 성공");
     	}else {

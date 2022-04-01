@@ -11,6 +11,9 @@
    <children>
       <TextField fx:id="txtid" layoutX="27.0" layoutY="104.0" prefHeight="45.0" prefWidth="350.0" promptText="아이디" />
       <PasswordField fx:id="txtpassword" layoutX="27.0" layoutY="149.0" prefHeight="45.0" prefWidth="350.0" promptText="비밀번호" />
+      <PasswordField fx:id="txtpasswordconfirm" layoutX="27.0" layoutY="194.0" prefHeight="45.0" prefWidth="350.0" promptText="비밀번호 확인" />
+      <TextField fx:id="txtemail" layoutX="27.0" layoutY="239.0" prefHeight="45.0" prefWidth="350.0" promptText="이메일" />
+      <TextField fx:id="txtaddress" layoutX="27.0" layoutY="284.0" prefHeight="45.0" prefWidth="350.0" promptText="주소" />
       <Button fx:id="btnsignup" layoutX="27.0" layoutY="349.0" mnemonicParsing="false" onAction="#signup" prefHeight="81.0" prefWidth="350.0" text="로그인">
          <font>
             <Font name="System Bold" size="29.0" />
@@ -18,8 +21,5 @@
       </Button>
       <Button fx:id="btnback" layoutX="234.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="36.0" prefWidth="143.0" text="뒤로가기" />
       <Label fx:id="lblconfirm" alignment="CENTER" layoutX="25.0" layoutY="59.0" prefHeight="45.0" prefWidth="350.0" text="에러메시지 출력 구역" textFill="RED" />
-      <PasswordField fx:id="txtpasswordconfirm" layoutX="27.0" layoutY="194.0" prefHeight="45.0" prefWidth="350.0" promptText="비밀번호 확인" />
-      <TextField fx:id="txtemail" layoutX="27.0" layoutY="239.0" prefHeight="45.0" prefWidth="350.0" promptText="이메일" />
-      <TextField fx:id="txtaddress" layoutX="27.0" layoutY="284.0" prefHeight="45.0" prefWidth="350.0" promptText="주소" />
    </children>
 </AnchorPane>
