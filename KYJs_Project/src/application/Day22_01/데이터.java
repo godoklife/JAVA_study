@@ -40,4 +40,6 @@ public class 데이터 {
 		this.내용 = 내용;
 	}
 	
+
+	
 }

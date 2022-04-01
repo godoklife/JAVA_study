@@ -72,7 +72,7 @@ public class Day22_01_controller implements Initializable{
     		txtcontentlist.appendText(
     				"번호"+tmp.get번호()+
     				"작성자"+tmp.get작성자()+
-    				"내용"+tmp.get내용());
+    				"내용"+tmp.get내용()+"\n");
     	}
     	
     	

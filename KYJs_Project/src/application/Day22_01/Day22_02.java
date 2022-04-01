@@ -62,7 +62,7 @@ public class Day22_02 {
 	
 	
 	// 3) 호출 메서드
-	public ArrayList<데이터> read (){
+	public ArrayList<데이터> get (){
 		
 	// *
 	ArrayList<데이터> 데이터목록 = new ArrayList<>();
@@ -78,33 +78,15 @@ public class Day22_02 {
 			rs.getInt(1),
 			rs.getString(2),
 			rs.getString(3));
-			
 			// 2. 객체를 리스트에 담아주기
 			데이터목록.add(tmp);
-			
 			// 성공시 데이터목록 리스트 리턴			
-			return 데이터목록;
 			
 		}
+		return 데이터목록;
 	} catch (Exception e) {System.out.println("불러오기 실패"+e);}
-	
-	
-	
-
 	
 	// 실패시
 	return null;
-	
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
