@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.util.Duration;
 
 
 public class Login implements Initializable{
@@ -55,6 +56,17 @@ public class Login implements Initializable{
 			
 			mediaview.setMediaPlayer(mediaPlayer);
 			mediaPlayer.play();
+			
+			// 동영상 반복재생 -> 멀티쓰레드 이용
+			mediaPlayer.setOnEndOfMedia(new Runnable() {
+				
+				@Override
+				public void run() {
+					mediaPlayer.seek(Duration.ZERO);
+					// 미디어의 현재 위치를 처음으로 돌리기
+				}
+			});
+			
 			System.out.println("실행중인 Login 메모리 주소 : "+Login.본인객체);
 			loadpage("/view/login/loginpane.fxml");
 	}
