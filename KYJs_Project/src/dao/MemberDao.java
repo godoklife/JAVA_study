@@ -95,25 +95,57 @@ public class MemberDao {	// DB 접근 객체로 사용
 
 	// 3. 아이디 찾기 메서드, 인수 : 이메일
 
-	public boolean findid(String email) {
+	public String findid(String email) {
 		try {
-			String sql = "selest * from member memail=?";
-			ps = con.prepareStatement(sql);
-			ps.setString(1, email);
-			
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				return true;
-			}
-		} catch (Exception e) {System.out.println("아이디 찾기 예외 발생"+e);}
-		return false;	// 입력한 이메일이 없는 경우
+		// 1. SQL 작성
+		String sql = "select * from member where memail=?";
+		// 2. sQL 조작
+		ps = con.prepareStatement(sql);
+		ps.setString(1, email);
+		// 3. SQL 실행
+			// rs에 ps에 셋팅한 질의어를 실행한 값을 저장.
+		rs = ps.executeQuery();
+		// 4. SQL 결과
+		if(rs.next()) {
+			return rs.getString(2);	// 필드의 번호
+		}
+		} catch (Exception e) {System.out.println("아이디 찾기 예외 발생."+e);}
+		
+		return null;
+		
+		
+		
+//		아래 코드도 정상 동작하는 코드임.
+//		try {
+//			String sql = "selest * from member memail=?";
+//			ps = con.prepareStatement(sql);
+//			ps.setString(1, email);
+//			
+//			rs = ps.executeQuery();
+//			if(rs.next()) {
+//				return true;
+//			}
+//		} catch (Exception e) {System.out.println("아이디 찾기 예외 발생"+e);}
+//		return false;	// 입력한 이메일이 없는 경우
 	}
 	
 	// 4. 비밀번호 찾기 메서드, 인수 : 아이디, 이메일
 	public String findpassword(String id, String email) {
-		
-		
-		return null;
+		try {
+		// 1. SQL 작성
+		String sql = "select * from member where mid=? and memail=?";
+		// 2. SQL  조작
+		ps = con.prepareStatement(sql);
+		ps.setString(1, id);
+		ps.setString(2, email);
+		// 3. SQL 실행
+		rs = ps.executeQuery();
+		// 4. SQL 결과
+		if(rs.next()) {
+			return rs.getString(3);	// 해당하는 정보를 찾으면 3번 컬럼 반환(mpassword)
+		}
+		}catch(Exception e) {System.out.println("비번찾기 예외 발생"+e);}
+		return null;	// 해당하는 정보가 없으면 null 반환
 		}
 	
 	
