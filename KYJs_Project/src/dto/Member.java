@@ -40,14 +40,14 @@ public class Member {	// 데이타 모델로 사용
 	
 	public static void sendmail(String 받는사람이메일, String 비번) {
 		// 1. 보내는 사람의 정보
-		String 보내는사람이메일 = "아이디@naver.com";
-		String 보내는사람이메일비밀번호 = "비번";
+		String 보내는사람이메일 = "보낼이메일@naver.com";
+		String 보내는사람이메일비밀번호 = "보낼이멜비번";
 		
 		// 2. 호스트 설정
 		Properties properties = new Properties();	// 컬렉션 프레임워크
 		properties.put("mail.smtp.host", "smtp.naver.com");	// 호스트 주소
 		properties.put("mail.smtp.port", 587);	// 호스트 포트번호
-		properties.put("smtp.naver.auth", true);	// 모내는 사람 이메일 인증
+		properties.put("mail.smtp.auth", "true");	// 모내는 사람 이메일 인증
 		properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
 		
 		// 3. 인증 처리 [ session : javax.java.mail 패키지 ] 
