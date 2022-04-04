@@ -1,0 +1,5 @@
+이름		fxid
+
+아이디 		lblloginid
+포인트		lblpoint
+로그아웃		lbllogout		onMouseClicked="#logout"
