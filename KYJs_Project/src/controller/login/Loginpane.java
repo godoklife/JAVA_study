@@ -3,6 +3,7 @@ package controller.login;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controller.Main;
 import dao.MemberDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,6 +55,7 @@ public class Loginpane implements Initializable{
     	
     	if(result) {
     		lblconfirm.setText("로그인 성공");
+    		Main.instance.loadpage("/view/home/home.fxml");
     	}else {
     		lblconfirm.setText("아이디와 비밀번호를 확인하세요");
     	}
