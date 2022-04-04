@@ -54,6 +54,9 @@ public class Loginpane implements Initializable{
     	boolean result = MemberDao.memberDao.login(id, password);
     	
     	if(result) {
+    		// 로그인 성공시 성공한 회원정보 저장. [ 로그아웃 시 초기화 ] 
+    		Login.member = MemberDao.memberDao.getmember(id);
+    		
     		lblconfirm.setText("로그인 성공");
     		Main.instance.loadpage("/view/home/home.fxml");
     	}else {

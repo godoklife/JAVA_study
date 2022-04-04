@@ -148,5 +148,36 @@ public class MemberDao {	// DB 접근 객체로 사용
 		return null;	// 해당하는 정보가 없으면 null 반환
 		}
 	
+	// 5. 아이디로 회원 정보 호출
+	public Member getmember (String id) {
+		try { 
+		// 1. SQL 작성
+		String sql = "select * from member where mid=?";
+		// 2. SQL 조작
+		ps = con.prepareStatement(sql);
+		ps.setString(1, id);
+		// 3. SQL 실행
+		rs = ps.executeQuery();
+		// 4. SQL 결과 
+		if(rs.next()) {
+			// 1. 객체 선언
+			Member member = new Member(rs.getInt(1), rs.getString(2), rs.getString(3),
+					rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7));
+				// rs.next() : 결과 내 다음 레코드(줄, 가로)
+				// rs.getInt(필드순서번호) : 해당 필드의 자료형을 정수형으로 가져오기.
+				// rs.getString(필스순서번호) : 해당 필스의 자료형을 문자열로 가져오기.
+			return member;
+			
+		}
+		} catch (Exception e) {System.out.println("회원정보 호출 예외 발생"+e);}
+		return null;
+	}
+	
+	
+	// 6. 회원 탈퇴
+	
+	// 7. 회원 수정
+	
+	
 	
 }
