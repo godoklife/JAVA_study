@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:controller="controller.home.Info" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="323.0" layoutY="74.0" prefHeight="33.0" prefWidth="203.0" text="회원정보" />
+      <Label layoutX="323.0" layoutY="114.0" prefHeight="33.0" prefWidth="203.0" text="아이디" />
+      <Label fx:id = "lblid" layoutX="323.0" layoutY="155.0" prefHeight="33.0" prefWidth="203.0" text="ID" />
+      <Label layoutX="323.0" layoutY="194.0" prefHeight="33.0" prefWidth="203.0" text="이메일" />
+      <Label fx:id = "lblemail" layoutX="323.0" layoutY="234.0" prefHeight="33.0" prefWidth="203.0" text="EMAIL" />
+      <Label layoutX="323.0" layoutY="274.0" prefHeight="33.0" prefWidth="203.0" text="주소" />
+      <Label fx:id = "lbladdress" layoutX="323.0" layoutY="314.0" prefHeight="33.0" prefWidth="203.0" text="안산시" />
+      <Label layoutX="323.0" layoutY="354.0" prefHeight="33.0" prefWidth="203.0" text="포인트" />
+      <Label fx:id = "lblpoint" layoutX="323.0" layoutY="394.0" prefHeight="33.0" prefWidth="203.0" text="100" />
+      <Label layoutX="323.0" layoutY="434.0" prefHeight="33.0" prefWidth="203.0" text="가입일" />
+      <Label fx:id = "lblsince" layoutX="323.0" layoutY="474.0" prefHeight="33.0" prefWidth="203.0" text="100000000" />
+   </children>
+</AnchorPane>

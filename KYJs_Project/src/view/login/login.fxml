@@ -21,7 +21,7 @@
          </top></BorderPane>
       <ImageView fitHeight="180.0" fitWidth="314.0" layoutX="159.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/20220309_023726.jpg" />
+            <Image url="@../../img/20220309_023726.jpg" />
          </image>
       </ImageView>
    </children>

@@ -31,8 +31,8 @@ public class Login implements Initializable{
 //		return 본인객체;
 //	}
 	
-	// 로그인 성공한 회원의 객체
-	public static Member member;
+	// 로그인 성공한 회원의 객체	
+	public static Member member;	// 로그인 한 유저의 회원번호, 주소, 아이디 등등 객체 필드가 여기 올라가 있음.
 	
 	
 	

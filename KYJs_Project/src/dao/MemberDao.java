@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import controller.login.Login;
 import dto.Member;
 
 public class MemberDao {	// DB 접근 객체로 사용
@@ -173,10 +174,43 @@ public class MemberDao {	// DB 접근 객체로 사용
 		return null;
 	}
 	
+	// 6. 회원 탈퇴	[ 회원번호를 인수로 받아 해당 회원번호의 레코드 식별 후 삭제 ]
+	public boolean delete(int num) {
+		try {
+		// 1. SQL 작성
+		String sql = "delete from member where mnum=?";
+			// delete from 테이블명 where 조건
+		// 2. SQL 조작
+		ps = con.prepareStatement(sql);
+		ps.setInt(1, num);
+		// 3. SQL 실행
+		ps.executeUpdate();
+			// insert, update, delete : executeUpdate() 사용.
+		// 4. SQL 결과
+		return true;	// 성공시 true 반환
+		}catch (Exception e) { System.out.println("회원 탈퇴 예외 발생"+ e);}
+		return false;	// 실패 시 false 반환
+	}
 	
-	// 6. 회원 탈퇴
+	// 7. 회원 수정	[ 회원번호, 이메일, 주소를 인수로 받아서 수정하기(회원번호를 기준으로 수정) ]
 	
-	// 7. 회원 수정
+	public boolean update(int num, String email, String address) {
+		try {
+			// 1. SQL 작성	
+				// update 테이블명 set 필드명1=수정값1, 필드명2=수정값2 where 조건
+			String sql = "update member set memail=?, maddress=? where mnum=?";
+			// 2. SQL 조작
+			ps = con.prepareStatement(sql);		
+			ps.setString(1, email);
+			ps.setString(2, address);
+			ps.setInt(3, num);
+			// 3. SQL 실행
+			ps.executeUpdate();
+			// 4. SQL 확인
+			return true;		
+		} catch (Exception e) {System.out.println("회원정보 수정 예외 발생"+e);}
+		return false;
+	}
 	
 	
 	

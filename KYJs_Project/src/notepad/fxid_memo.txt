@@ -3,3 +3,4 @@
 아이디 		lblloginid
 포인트		lblpoint
 로그아웃		lbllogout		onMouseClicked="#logout"
+회원탈퇴		lbldelete		onMouseClicked="#delete"
