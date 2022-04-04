@@ -1,6 +1,8 @@
 package controller.login;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import controller.Main;
@@ -47,6 +49,8 @@ public class Loginpane implements Initializable{
 
     @FXML
     void acclogin(ActionEvent event) {
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    	String nowdate = format.format(new Date());
     	// 1. 컨트롤에 입력된 값 가져오기
     	String id = txtid.getText();
     	String password = txtpassword.getText();
@@ -56,6 +60,14 @@ public class Loginpane implements Initializable{
     	if(result) {
     		// 로그인 성공시 성공한 회원정보 저장. [ 로그아웃 시 초기화 ] 
     		Login.member = MemberDao.memberDao.getmember(id);
+/////////////////////////////////////////////    		
+    		if(nowdate.equals(Login.member.getLastlogindate())) {
+    			System.out.println("객체 내 날짜 : "+Login.member.getLastlogindate());
+    			System.out.println("nowdate : "+nowdate);
+    			int tmpPoint = Login.member.getMpoint()+10;
+    			MemberDao.memberDao.updatepoint(Login.member.getMnum(), tmpPoint, nowdate);
+    		}
+/////////////////////////////////////////////    		
     		
     		lblconfirm.setText("로그인 성공");
     		Main.instance.loadpage("/view/home/home.fxml");

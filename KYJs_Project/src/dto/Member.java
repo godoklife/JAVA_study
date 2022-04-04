@@ -21,12 +21,12 @@ public class Member {	// 데이타 모델로 사용
 	private String maddress;	// 주소
 	private int mpoint;			// 포인트
 	private String msince;		// 가입일
-	
+	private String lastlogindate;
 	
 	// 생성자
 	public Member() {}
 
-	public Member(int mnum, String mid, String mpassword, String memail, String maddress, int mpoint, String msince) {
+	public Member(int mnum, String mid, String mpassword, String memail, String maddress, int mpoint, String msince, String lastlogindate ) {
 		this.mnum = mnum;
 		this.mid = mid;
 		this.mpassword = mpassword;
@@ -34,6 +34,7 @@ public class Member {	// 데이타 모델로 사용
 		this.maddress = maddress;
 		this.mpoint = mpoint;
 		this.msince = msince;
+		this.lastlogindate = lastlogindate;
 	}
 	
 	// 메서드
@@ -126,5 +127,15 @@ public class Member {	// 데이타 모델로 사용
 	public void setMsince(String msince) {
 		this.msince = msince;
 	}
+
+	public String getLastlogindate() {
+		return lastlogindate;
+	}
+
+	public void setLastlogindate(String lastlogindate) {
+		this.lastlogindate = lastlogindate;
+	}
+
+	
 	
 }

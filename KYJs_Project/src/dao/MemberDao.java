@@ -54,7 +54,7 @@ public class MemberDao {	// DB 접근 객체로 사용
 		try {
 		// 1. SQL 작성
 			// [ 회원번호(자동번호=auto, 제외)를 제외한 모든 필드 삽입. ]
-		String sql = "insert member(mid, mpassword, memail, maddress, mpoint, msince) value (?,?,?,?,?,?)";	// 회원번호 안넣기 때문에 6개임.
+		String sql = "insert member(mid, mpassword, memail, maddress, mpoint, msince, lastlogindate) value (?,?,?,?,?,?,?)";	// 회원번호 안넣기 때문에 6개임.
 		// 2. SQL 조작
 		ps = con.prepareStatement(sql);	// preparedStatement 인터페이스 내 연결된 DB에 sql 넣기
 		ps.setString(1, member.getMid());			// 1번 ?에 아이디 집어넣기
@@ -63,6 +63,7 @@ public class MemberDao {	// DB 접근 객체로 사용
 		ps.setString(4, member.getMaddress());
 		ps.setInt(5, member.getMpoint());			// 5번 ?에
 		ps.setString(6, member.getMsince());
+		ps.setString(7, member.getLastlogindate());
 		
 		
 		// 3. SQL 실행
@@ -85,6 +86,7 @@ public class MemberDao {	// DB 접근 객체로 사용
 	// 2. sql 조회
 	rs = ps.executeQuery();
 	if(rs.next()) {
+		
 		return true;
 	}
 	} catch (Exception e) { System.out.println(e);}
@@ -163,7 +165,7 @@ public class MemberDao {	// DB 접근 객체로 사용
 		if(rs.next()) {
 			// 1. 객체 선언
 			Member member = new Member(rs.getInt(1), rs.getString(2), rs.getString(3),
-					rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7));
+					rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8));
 				// rs.next() : 결과 내 다음 레코드(줄, 가로)
 				// rs.getInt(필드순서번호) : 해당 필드의 자료형을 정수형으로 가져오기.
 				// rs.getString(필스순서번호) : 해당 필스의 자료형을 문자열로 가져오기.
@@ -211,7 +213,23 @@ public class MemberDao {	// DB 접근 객체로 사용
 		} catch (Exception e) {System.out.println("회원정보 수정 예외 발생"+e);}
 		return false;
 	}
-	
-	
+/////////////////////////////////////////////    		
+	// 7-1 점수 10점 추가용 메서드
+	public void updatepoint(int num, int mpoint, String nowdate) {
+		try {
+			// 1. SQL 작성	
+				// update 테이블명 set 필드명1=수정값1, 필드명2=수정값2 where 조건
+			String sql = "update member set mpoint=?, lastlogindate=? where mnum=?";
+			// 2. SQL 조작
+			ps = con.prepareStatement(sql);		
+			ps.setInt(1, mpoint);
+			ps.setString(2, nowdate);
+			ps.setInt(3, num);
+			// 3. SQL 실행
+			ps.executeUpdate();
+			// 4. SQL 확인
+		} catch (Exception e) {System.out.println("회원정보 점수 추가 예외 발생"+e);}
+	}
+/////////////////////////////////////////////    		
 	
 }
