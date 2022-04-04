@@ -31,7 +31,7 @@ public class Start extends Application{
 	}
 	
 	public static void main(String[] args) {
-		launch();	// 바로 위에서 정의한 start 메서드 시작
+		launch(args);	// 바로 위에서 정의한 start 메서드 시작
 	}
 	
 }

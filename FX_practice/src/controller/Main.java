@@ -27,7 +27,7 @@ public class Main implements Initializable{
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		loadpage("/view/login.fxml");	// loadpage 객체에 fxml 주소를 인수로 전달
+		loadpage("/view/login/login.fxml");	// loadpage 객체에 fxml 주소를 인수로 전달
 	}
 
 }
