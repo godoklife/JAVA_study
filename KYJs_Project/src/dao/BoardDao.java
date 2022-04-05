@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import dto.Board;
+import dto.Reply;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -97,8 +98,55 @@ public class BoardDao {
 	}
 	
 	// 4. 글 수정 메서드
-	public boolean update(int bnum, String title, String content) { return false; }
+	public boolean update(int bnum, String title, String content) { 
+		
+		try {
+			// 1. SQL 작성
+			String sql = "update board set btitle=?, bcontent=? where bnum=?";
+			// 2. SQL 조작
+			ps = con.prepareStatement(sql);
+			ps.setString(1, title);
+			ps.setString(2, content);
+			ps.setInt(3, bnum);
+			// 3. SQL 실행
+			ps.executeUpdate();
+			// 4. SQL 결과
+			return true;
+		} catch (Exception e) {System.out.println("글 수정 메서드 예외 발생 : "+e);}
+		
+		return false; 
+	}
 	
+	// 5. 덧글 작성 메서드
+	public boolean rwrite(Reply reply) {
+		try {
+			String sql = "insert into reply(rcontent, rwrite, bnum)values(?,?,?)";
+			ps=con.prepareStatement(sql);
+			ps.setString(1, reply.getRcontent());
+			ps.setString(2, reply.getRwrite());
+			ps.setInt(3, reply.getBnum());
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("덧글 작성 메서드 예외 발생 : "+e);}
+		return false;
+	}
 	
-	
+	// 6. 덧글 삭제 메서드
+	public ObservableList<Reply> replylist(int bnum) {
+		ObservableList<Reply> replylist = FXCollections.observableArrayList();
+		
+		try {
+		String sql = "select * from reply where bnum = ?";
+		ps=con.prepareStatement(sql);
+		ps.setInt(1, bnum);
+		rs = ps.executeQuery();
+		while(rs.next()) {
+			Reply reply = new Reply(rs.getInt(1), rs.getString(2), rs.getString(3), 
+					rs.getString(4), rs.getInt(5));
+			replylist.add(reply);
+		}
+		return replylist;
+		} catch (Exception e) {System.out.println("덧글 호출 메서드 ");}
+		return null;
+	}
 }

@@ -8,6 +8,8 @@ import controller.home.Home;
 import controller.login.Login;
 import dao.BoardDao;
 import dto.Board;
+import dto.Reply;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,9 +18,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class Boardview implements Initializable{
 
@@ -50,7 +54,29 @@ public class Boardview implements Initializable{
     private TextArea txtrecontent;
 
     @FXML
-    private TableView<?> replytable;
+    private TableView<Reply> replytable;
+    
+    // 덧글 테이블 출력 메서드
+    public void replytableshow() {
+    	// 1. 현재 게시물 번호 저장
+    	int bnum = controller.board.Board.board.getBnum();
+    	// 2.
+    	ObservableList<Reply> replylist = BoardDao.boardDao.replylist(bnum);
+    	// 3. 
+    	TableColumn tc = replytable.getColumns().get(0);
+    	tc.setCellValueFactory(new PropertyValueFactory<>("rnum"));
+    	
+    	tc = replytable.getColumns().get(1);
+    	tc.setCellValueFactory(new PropertyValueFactory<>("rwrite"));
+    	
+    	tc = replytable.getColumns().get(2);
+    	tc.setCellValueFactory(new PropertyValueFactory<>("rdate"));
+    	
+    	tc = replytable.getColumns().get(3);
+    	tc.setCellValueFactory(new PropertyValueFactory<>("rcontent"));
+    	
+    	replytable.setItems(replylist);
+    }
 
     @FXML
     private Label lblview;
@@ -86,17 +112,44 @@ public class Boardview implements Initializable{
 
     @FXML
     void accrewrite(ActionEvent event) {
-
+    	String rcontent = txtrecontent.getText();
+    	String rwrite = Login.member.getMid();
+    	int bnum = controller.board.Board.board.getBnum();
+    	Reply reply = new Reply(0, rcontent, rwrite, null, bnum);
+    	boolean result = BoardDao.boardDao.rwrite(reply);
+    	replytableshow();
     }
-
+    
+    boolean updatecheck = true;	// 수정 버튼 스위치 변수
     @FXML
     void accupdate(ActionEvent event) {
-
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	if(updatecheck) {	// 수정 시작
+	    	alert.setHeaderText("게시글 수정 후 완료 버튼을 눌러주세요.");
+	    	alert.showAndWait();
+	    	
+	    	// 잠겨있던 제목과 내용을 수정가능하게 풀어줌.
+	    	txttitle.setEditable(true);
+	    	txtcontent.setEditable(true);
+	    	btnupdate.setText("수정완료");
+	    	updatecheck=false;
+	    	
+    	}else {	// 수정 완료
+    		// db처리
+    		BoardDao.boardDao.update(controller.board.Board.board.getBnum(), txttitle.getText(), txtcontent.getText());
+    		
+    		alert.setHeaderText("수정이 완료되었습니다.");
+    		alert.showAndWait();
+    		txttitle.setEditable(false);
+	    	txtcontent.setEditable(false);
+	    	btnupdate.setText("수정");
+	    	updatecheck=true;
+    	}
     }
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-    	
+    	replytableshow();
     	Board board = controller.board.Board.board;	// board 컨트롤 내 테이블에서 선택된 객체 호출
     		// (dto.Board)
     	
