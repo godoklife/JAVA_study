@@ -1,6 +1,8 @@
 package controller.board;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -58,10 +60,24 @@ public class Boardview implements Initializable{
     
     // 덧글 테이블 출력 메서드
     public void replytableshow() {
+    	// 날짜용 임시 객체
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    	String nowdate = format.format(new Date());
+    	
     	// 1. 현재 게시물 번호 저장
     	int bnum = controller.board.Board.board.getBnum();
     	// 2.
     	ObservableList<Reply> replylist = BoardDao.boardDao.replylist(bnum);
+    	
+    	for(Reply tmp : replylist) {
+    		if(tmp.getRdate().equals(nowdate) && tmp.getRwrite().equals(Login.member.getMid()) ) {
+    			BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1);	// 게시글 조회수 1 추가해서 DB에 저장
+    			
+    			Reply reply = new Reply(0, null, Login.member.getMid(), null, bnum); // 리플 DB에 내용이 null이고 글쓴이가 로그인한 사용자인 리플을 저장
+    			BoardDao.boardDao.rwrite(reply);
+    		}
+    	}
+    	
     	// 3. 
     	TableColumn tc = replytable.getColumns().get(0);
     	tc.setCellValueFactory(new PropertyValueFactory<>("rnum"));

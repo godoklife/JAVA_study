@@ -59,6 +59,10 @@ public class Board implements Initializable{
     		// 1. 테이블에서 클릭한 객체를 임시 객체에 저장
     		board = boardtable.getSelectionModel().getSelectedItem();	// 사용자가 클릭한 객체의 메모리 주소를 Board(dto) board 객체에 저장
     		// 2. 조회수 증가
+    			// 1) 리플중에 사용자 이름, 동일한 날짜가 있는지 확인.
+    			// 2-1) 없으면 조회수 1 추가 후 리플에 내용이 null, 글쓴이가 사용자인 리플 추가
+    			// 2-2) 있으면 3번으로 바로 넘어감.
+    			
     		// 3. 클릭하면 화면 전환
     		Home.home.loadpage("/view/board/boardview.fxml");
     	});

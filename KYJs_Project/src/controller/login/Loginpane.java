@@ -61,8 +61,8 @@ public class Loginpane implements Initializable{
     	if(result) {
     		// 로그인 성공시 성공한 회원정보 저장. [ 로그아웃 시 초기화 ] 
     		Login.member = MemberDao.memberDao.getmember(id);
-/////////////////////////////////////////////    		
-    		if(nowdate.equals(Login.member.getLastlogindate())) {
+/////////////////////////////////////////////    		오늘 첫 로그인시 10포인트 지급. 실행 위치 바꿔야함.
+    		if(!nowdate.equals(Login.member.getLastlogindate())) {
     			System.out.println("객체 내 날짜 : "+Login.member.getLastlogindate());
     			System.out.println("nowdate : "+nowdate);
     			int tmpPoint = Login.member.getMpoint()+10;

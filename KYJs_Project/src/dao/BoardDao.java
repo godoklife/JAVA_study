@@ -149,4 +149,9 @@ public class BoardDao {
 		} catch (Exception e) {System.out.println("덧글 호출 메서드 ");}
 		return null;
 	}
+	
+	// 7. 조회수 카운트 업
+	public void viewcountup(int count) {
+		System.out.println("카운트 업!");
+	}
 }
