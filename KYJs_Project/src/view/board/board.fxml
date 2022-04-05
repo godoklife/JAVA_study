@@ -8,18 +8,18 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.board.Board">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.board.Board">
    <children>
       <Label layoutX="51.0" layoutY="35.0" prefHeight="47.0" prefWidth="331.0" text="자유게시판">
          <font>
             <Font size="40.0" />
          </font></Label>
-      <TableView layoutX="51.0" layoutY="130.0" prefHeight="548.0" prefWidth="848.0">
+      <TableView fx:id="boardtable" layoutX="51.0" layoutY="130.0" prefHeight="548.0" prefWidth="848.0">
         <columns>
           <TableColumn prefWidth="109.0" text="번호" />
           <TableColumn prefWidth="385.0" text="제목" />
             <TableColumn minWidth="0.0" prefWidth="137.0" text="작성자" />
-            <TableColumn fx:id="boardtable" prefWidth="130.0" text="작성일" />
+            <TableColumn prefWidth="130.0" text="작성일" />
             <TableColumn minWidth="0.0" prefWidth="86.0" text="조회수" />
         </columns>
       </TableView>

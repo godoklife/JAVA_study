@@ -59,7 +59,7 @@ public class BoardDao {
 		ObservableList<Board> boardlist = FXCollections.observableArrayList();
 		try {
 			// 1. SQL 작성
-			String sql = "select * from board";
+			String sql = "select * from javafx.board";
 			// 2. SQL 조작
 			ps = con.prepareStatement(sql);
 			// 3. SQL 실행
@@ -70,8 +70,11 @@ public class BoardDao {
 				Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), 
 						rs.getString(4), rs.getString(5), rs.getInt(6));
 				
+				// 2. 객체를 리스트에 넣기
 				boardlist.add(board);
+				
 			}
+			return boardlist;
 			
 		} catch (Exception e) {System.out.println("모든 글 호출 메서드 예외 발생"+e);}
 		return null;
