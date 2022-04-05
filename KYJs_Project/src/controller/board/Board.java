@@ -2,6 +2,7 @@ package controller.board;
 
 import controller.home.Home;
 import dao.BoardDao;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,7 +23,11 @@ public class Board implements Initializable{
     }
     
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
-    	boolean result = BoardDao.boardDao.boardlist();
+    	// * arraylist가 아닌 ObserableList 사용하는 이유? [ tableview ] 
+    	// 1. DB에서 모든 게시글 가져오기.
+    	ObservableList<dto.Board> boardlist = BoardDao.boardDao.list();
+    	System.out.println(boardlist.toString());
+    	
     	
     };
 	

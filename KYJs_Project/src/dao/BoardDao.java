@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import dto.Board;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class BoardDao {
 	
@@ -52,7 +54,28 @@ public class BoardDao {
 		
 	}
 	// 2. 모든 글 호출 메서드
-	public boolean boardlist() { return false; }
+	public ObservableList<Board> list()	{
+		// * 리스트 선언
+		ObservableList<Board> boardlist = FXCollections.observableArrayList();
+		try {
+			// 1. SQL 작성
+			String sql = "select * from board";
+			// 2. SQL 조작
+			ps = con.prepareStatement(sql);
+			// 3. SQL 실행
+			rs = ps.executeQuery();
+			// 4. SQL 결과
+			while(rs.next()) {	// 다음 레코드가 없을 때 까지 반복
+				// 1. 객체화
+				Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), 
+						rs.getString(4), rs.getString(5), rs.getInt(6));
+				
+				boardlist.add(board);
+			}
+			
+		} catch (Exception e) {System.out.println("모든 글 호출 메서드 예외 발생"+e);}
+		return null;
+	}
 	
 	// 3. 글 삭제 메서드
 	public boolean delete(int bnum) { return false; }
