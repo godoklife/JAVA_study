@@ -38,7 +38,7 @@
             <Label fx:id = "lbldelete" onMouseClicked="#delete" layoutX="235.0" layoutY="526.0" text="회원탈퇴" />
             <Label fx:id ="lblupdate" layoutX="165.0" onMouseClicked="#update" layoutY="526.0" text="회원수정" />
             <Label onMouseClicked="#accinfo" layoutX="100.0" layoutY="526.0" text="회원정보" />
-            <Label layoutX="108.0" layoutY="466.0" text="자유게시판" />
+            <Label fx:id = "lblboard" onMouseClicked="#accboard" layoutX="108.0" layoutY="466.0" text="자유게시판" />
             <Label layoutX="48.0" layoutY="325.0" text="공지" />
             <Line endX="-39.0" layoutX="143.0" layoutY="346.0" startX="-100.0" strokeWidth="3.0" />
             <Label layoutX="48.0" layoutY="354.0" text="공지사항" />

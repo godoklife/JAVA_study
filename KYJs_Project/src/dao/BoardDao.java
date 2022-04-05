@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import dto.Board;
+
 public class BoardDao {
 	
 	private Connection con;			// 1. DB 연결시 사용하는 클래스
@@ -20,7 +22,7 @@ public class BoardDao {
 		try {
 			// DB연동
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://192.168.0.1:3306/javafx?serverTimezone=UTC","root","1234");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx?serverTimezone=UTC","root","1234");
 			
 		}catch(Exception e) {System.out.println("BoardDao DB주소 연동 예외 발생"+e);}
 	}
@@ -28,8 +30,27 @@ public class BoardDao {
 	// 메서드
 	
 	// 1. 글쓰기 메서드
-	public boolean write(Board board) { return false;}
+	public boolean write(Board board) { 
+		try {
+		
+		// 1) SQL 작성
+			String sql = "insert board(btitle, bcontent, bwrite) values(?,?,?)";
+			
+		// 2) SQL 조작
+			ps = con.prepareStatement(sql);
+			ps.setString(1, board.getBtitle());
+			ps.setString(2, board.getBcontent());
+			ps.setString(3, board.getBwrite());
 	
+		// 3. SQL 실행
+			ps.executeUpdate();
+		// 4) SQL 결과 조회
+			// 단순 저장이기에 결과 조회 불필요.
+			return true;
+		}catch(Exception e) {System.out.println("글쓰기 메서드 예외 발생"+e);}
+		return false;
+		
+	}
 	// 2. 모든 글 호출 메서드
 	public boolean boardlist() { return false; }
 	

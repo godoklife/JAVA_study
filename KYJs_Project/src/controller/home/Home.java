@@ -21,6 +21,11 @@ import javafx.scene.layout.BorderPane;
 
 public class Home implements Initializable{
 				// fxml 실행 시 초기값 설정 메서드를 제공하는 인터페이스
+	public static Home home;
+	public Home() {
+		System.out.println("호출된 Home 객체의 메모리 주소 : "+home);
+		home = this;
+	}
 	
 	@FXML
 	private Label lblloginid;
@@ -38,7 +43,15 @@ public class Home implements Initializable{
 	private Label lblupdate;
 	
 	@FXML
+	private Label lblboard;
+	
+	@FXML
 	private BorderPane borderpane;
+	
+	@FXML
+	public void accboard(MouseEvent e) {
+		loadpage("/view/board/board.fxml");
+	}
 	
 	@FXML
 	public void update(MouseEvent e) {
