@@ -56,9 +56,11 @@ public class Board implements Initializable{
     	// * tableview 에서 해당 셀을 클릭했을 떄 이벤트
     	//boardtable.setOnMouseClicked(null);
     	boardtable.setOnMouseClicked( e -> {
-    		System.out.println(e);
+    		// 1. 테이블에서 클릭한 객체를 임시 객체에 저장
     		board = boardtable.getSelectionModel().getSelectedItem();	// 사용자가 클릭한 객체의 메모리 주소를 Board(dto) board 객체에 저장
-    		System.out.println(board);
+    		// 2. 조회수 증가
+    		// 3. 클릭하면 화면 전환
+    		Home.home.loadpage("/view/board/boardview.fxml");
     	});
     	
     	
