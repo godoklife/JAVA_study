@@ -1,15 +1,20 @@
 package controller.board;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import controller.home.Home;
 import controller.login.Login;
+import dao.BoardDao;
 import dto.Board;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -59,10 +64,23 @@ public class Boardview implements Initializable{
     void accdelete(ActionEvent event) {
     	
     	// 1. 경고 메시지 출력
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("경고!");
+    	alert.setHeaderText("정말 글을 삭제하시겠습니까?");
+    	Optional<ButtonType> optional =  alert.showAndWait();	// showAndWait() 메서드의 반환 타입 -> 선택한 버튼
     	
     	// 2. 확인 버튼 누르면
+    	if(optional.get() == ButtonType.OK) {
+    		// 3. 삭제 실행
+    		boolean result = BoardDao.boardDao.delete(controller.board.Board.board.getBnum());
+    		if (result) {
+    			alert.setAlertType(AlertType.INFORMATION);
+    			alert.setHeaderText("삭제처리되었습니다.");
+    			alert.showAndWait();
+    	    	Home.home.loadpage("/view/board/board.fxml");
+    		}
+    	}
     	
-    	// 3. 삭제 실행
     	
     }
 
