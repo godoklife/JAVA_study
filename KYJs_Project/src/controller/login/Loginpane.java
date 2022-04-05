@@ -51,6 +51,7 @@ public class Loginpane implements Initializable{
     void acclogin(ActionEvent event) {
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     	String nowdate = format.format(new Date());
+    	System.out.println("if문 전 nowdate : "+nowdate);
     	// 1. 컨트롤에 입력된 값 가져오기
     	String id = txtid.getText();
     	String password = txtpassword.getText();
