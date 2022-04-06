@@ -88,7 +88,7 @@ public class Productview implements Initializable {
     	alert.setHeaderText("정말 수정 하시겠습니까?");
     	Optional<ButtonType> optional = alert.showAndWait();
     	if(optional.get() == ButtonType.OK) {
-    	Home.home.loadpage("/view/product/productadd.fxml");
+    	Home.home.loadpage("/view/product/productupdate.fxml");
     	}
     }
     

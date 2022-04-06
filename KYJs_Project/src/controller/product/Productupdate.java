@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import controller.home.Home;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -70,7 +72,13 @@ public class Productupdate implements Initializable {
 
     @FXML
     void back(ActionEvent event) {
-
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setHeaderText("정말 수정을 취소하고 뒤로 가시겠습니까?");
+    	Optional<ButtonType> answer = alert.showAndWait();
+    	if(answer.get()==ButtonType.OK) {
+    		Home.home.loadpage("/view/product/product.fxml");
+    	}
+    			
     }
     
     private String pimage = null;	// 파일 경로 저장용 변수
@@ -166,7 +174,10 @@ public class Productupdate implements Initializable {
     	txtpname.setText(product.getPname());
     	txtpcontent.setText(product.getPcontent());
     	txtpprice.setText(product.getPprice()+"");
-    	
+    	if(product.getPcategory().equals("남성의류")) otp1.setSelected(true);
+    	else if(product.getPcategory().equals("여성의류")) otp2.setSelected(true);
+    	else if(product.getPcategory().equals("휴대폰")) otp3.setSelected(true);
+    	else if(product.getPcategory().equals("노트북")) otp4.setSelected(true);
 
     	
     }

@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.product.Productadd">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.product.Productupdate">
    <children>
       <ImageView fitHeight="48.0" fitWidth="63.0" layoutX="53.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -36,7 +36,7 @@
       <RadioButton fx:id="otp4" layoutX="314.0" layoutY="474.0" mnemonicParsing="false" text="노트북" toggleGroup="$category" />
       <Button fx:id="btnimgadd" layoutX="522.0" layoutY="206.0" mnemonicParsing="false" onAction="#imgadd" prefHeight="23.0" prefWidth="331.0" text="이미지 등록" />
       <ImageView fx:id="img" fitHeight="240.0" fitWidth="320.0" layoutX="528.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnadd" layoutX="522.0" layoutY="518.0" mnemonicParsing="false" onAction="#add" prefHeight="23.0" prefWidth="331.0" text="제품 등록" textFill="RED">
+      <Button fx:id="btnadd" layoutX="522.0" layoutY="518.0" mnemonicParsing="false" onAction="#add" prefHeight="23.0" prefWidth="331.0" text="제품 수정하기" textFill="RED">
          <font>
             <Font size="25.0" />
          </font>
