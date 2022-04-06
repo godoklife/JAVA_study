@@ -41,7 +41,7 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="btnback" layoutX="522.0" layoutY="581.0" mnemonicParsing="false" onAction="#back" prefHeight="23.0" prefWidth="331.0" text="취소">
+      <Button fx:id="btnback" layoutX="523.0" layoutY="591.0" mnemonicParsing="false" onAction="#back" prefHeight="23.0" prefWidth="331.0" text="취소">
          <font>
             <Font size="25.0" />
          </font>

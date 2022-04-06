@@ -60,14 +60,16 @@ public class Boardview implements Initializable{
     
     // 덧글 테이블 출력 메서드
     public void replytableshow() {
-    	// 날짜용 임시 객체
-    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    	String nowdate = format.format(new Date());
+    	
     	
     	// 1. 현재 게시물 번호 저장
     	int bnum = controller.board.Board.board.getBnum();
     	// 2.
     	ObservableList<Reply> replylist = BoardDao.boardDao.replylist(bnum);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    	
+    	// 날짜용 임시 객체		// 보드 클래스로 이동할것.
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    	String nowdate = format.format(new Date());
     	
     	for(Reply tmp : replylist) {
     		if(tmp.getRdate().equals(nowdate) && tmp.getRwrite().equals(Login.member.getMid()) ) {
@@ -77,7 +79,7 @@ public class Boardview implements Initializable{
     			BoardDao.boardDao.rwrite(reply);
     		}
     	}
-    	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    	
     	// 3. 
     	TableColumn tc = replytable.getColumns().get(0);
     	tc.setCellValueFactory(new PropertyValueFactory<>("rnum"));
