@@ -83,7 +83,7 @@ public class Productadd implements Initializable{
     	int mnum = Login.member.getMnum();
     	
     	// 2. °´Ã¼È­
-    	Product product = new Product(0, pname, null, pcontent, pcategory, pprice, 1, null, mnum);
+    	Product product = new Product(0, pname, pimage, pcontent, pcategory, pprice, 1, null, mnum);
     	
     	// 3. DBÃ³¸®
     	boolean result = ProductDao.productDao.add(product);

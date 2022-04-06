@@ -30,7 +30,7 @@ public class ProductDao {
 			String sql = "insert into product (pname, pimage, pcontent, pcategory, pprice, pactivation, mnum) values(?, ?, ?, ?, ?, ?, ?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, product.getPname());
-			ps.setString(2, null);
+			ps.setString(2, product.getPimage());
 			ps.setString(3, product.getPcontent());
 			ps.setString(4, product.getPcategory());
 			ps.setInt(5, product.getPprice());
