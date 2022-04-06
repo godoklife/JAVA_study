@@ -11,18 +11,16 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.login.Login">
    <children>
       <MediaView fx:id="mediaview" fitHeight="720.0" fitWidth="1280.0" />
-      <BorderPane fx:id="borderpane" layoutX="94.0" layoutY="206.0" prefHeight="500.0" prefWidth="400.0">
-         <top>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="환영합니다!" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="60.0" />
-               </font>
-            </Text>
-         </top></BorderPane>
-      <ImageView fitHeight="180.0" fitWidth="314.0" layoutX="137.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <Text fill="#d80c18" layoutX="209.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="번개장터">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="70.0" fitWidth="49.0" layoutX="151.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../img/bigthunder.png" />
+            <Image url="@../../img/thunder.png" />
          </image>
       </ImageView>
+      <BorderPane fx:id="borderpane" layoutX="94.0" layoutY="206.0" prefHeight="500.0" prefWidth="400.0" />
    </children>
 </AnchorPane>

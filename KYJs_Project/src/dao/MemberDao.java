@@ -230,6 +230,28 @@ public class MemberDao {	// DB 접근 객체로 사용
 			// 4. SQL 확인
 		} catch (Exception e) {System.out.println("회원정보 점수 추가 예외 발생"+e);}
 	}
-/////////////////////////////////////////////    		
+/////////////////////////////////////////////    	
+	
+	public String getmemberid (int mnum) {
+		try { 
+		// 1. SQL 작성
+		String sql = "select mid from member where mnum=?";	
+			// member 테이블에서 mnum을 기준으로 검색해서 mid를 가져오겠다.
+		// 2. SQL 조작
+		ps = con.prepareStatement(sql);
+		ps.setInt(1, mnum);
+		// 3. SQL 실행
+		rs = ps.executeQuery();
+		// 4. SQL 결과 
+		if(rs.next()) {
+			String userid = rs.getString(1);
+			return userid;
+		}else
+			return null;
+		} catch (Exception e) {System.out.println("회원정보 호출 예외 발생"+e);}
+		return null;
+	}
+	
+	
 	
 }

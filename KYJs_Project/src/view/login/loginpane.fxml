@@ -9,9 +9,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.login.Loginpane">
    <children>
-      <TextField fx:id="txtid" layoutX="27.0" layoutY="59.0" prefHeight="81.0" prefWidth="350.0" promptText="아이디" />
-      <PasswordField fx:id="txtpassword" layoutX="27.0" layoutY="169.0" prefHeight="81.0" prefWidth="350.0" promptText="비밀번호" />
-      <Button fx:id="btnlogin" layoutX="14.0" layoutY="295.0" mnemonicParsing="false" onAction="#acclogin" prefHeight="81.0" prefWidth="350.0" text="로그인">
+      <TextField fx:id="txtid" layoutX="27.0" layoutY="60.0" prefHeight="80.0" prefWidth="350.0" promptText="아이디" />
+      <PasswordField fx:id="txtpassword" layoutX="27.0" layoutY="170.0" prefHeight="80.0" prefWidth="350.0" promptText="비밀번호" />
+      <Button fx:id="btnlogin" layoutX="27.0" layoutY="280.0" mnemonicParsing="false" onAction="#acclogin" prefHeight="80.0" prefWidth="350.0" text="로그인">
          <font>
             <Font name="System Bold" size="29.0" />
          </font>
@@ -19,6 +19,6 @@
       <Button fx:id="btnsignup" layoutX="234.0" layoutY="14.0" mnemonicParsing="false" onAction="#accsignup" prefHeight="36.0" prefWidth="143.0" text="회원가입" />
       <Button fx:id="btnfindid" layoutX="234.0" layoutY="386.0" mnemonicParsing="false" onAction="#accfindid" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #00ff99;" text="아이디 찾기" />
       <Button fx:id="btnfindpassword" layoutX="234.0" layoutY="435.0" mnemonicParsing="false" onAction="#accfindpassword" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #3cc73c;" text="비밀번호 찾기" />
-      <Label fx:id="lblconfirm" alignment="CENTER" layoutX="27.0" layoutY="250.0" prefHeight="45.0" prefWidth="350.0" text="에러메시지 출력 구역" textFill="RED" />
+      <Label fx:id="lblconfirm" alignment="CENTER" layoutX="27.0" layoutY="250.0" prefHeight="45.0" prefWidth="350.0" textFill="RED" />
    </children>
 </AnchorPane>

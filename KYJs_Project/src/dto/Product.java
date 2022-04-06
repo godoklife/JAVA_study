@@ -2,15 +2,15 @@ package dto;
 
 public class Product {
 	
-	private int pnum;
-	private String pname;
-	private String pimage;
-	private String pcontent;
-	private String pcategory;
-	private int pprice;
-	private int pactivation;
-	private String pdate;
-	private int mnum;
+	private int pnum;			// pk
+	private String pname;		// 판매 제목
+	private String pimage;		// 이미지 url
+	private String pcontent;	// 내용
+	private String pcategory;	// 카테고리
+	private int pprice;			// 가격
+	private int pactivation;	// 1 : 판매중, 2 : 예약중, 3 : 판매완료
+	private String pdate;		// 작성 날짜
+	private int mnum;			// 작성자 fk
 	
 	public Product() {
 		// TODO Auto-generated constructor stub

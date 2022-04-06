@@ -18,7 +18,7 @@
          <image>
             <Image url="@../../img/thunder.png" />
          </image></ImageView>
-      <Label layoutX="89.0" layoutY="36.0" prefHeight="47.0" prefWidth="331.0" text="제품 등록 페이지" textFill="RED">
+      <Label layoutX="89.0" layoutY="36.0" prefHeight="47.0" prefWidth="331.0" text="제품 등록하기" textFill="RED">
          <font>
             <Font size="40.0" />
          </font></Label>

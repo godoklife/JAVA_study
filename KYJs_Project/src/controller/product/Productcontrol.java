@@ -74,6 +74,9 @@ public class Productcontrol implements Initializable{
     					// 2. 클릭한 제품을 저장
     					select = productlist.get(id);
     					
+    					// 3. 화면 전환
+    					Home.home.loadpage("/view/product/productview.fxml");
+    					
     				});	// 람다식 : 인수 -> {실행코드}
     			
     			gridPane.add(button, col, row);	// 해당하는 열 번호, 행 번호에 버튼 쿠가
@@ -113,6 +116,9 @@ public class Productcontrol implements Initializable{
     					System.out.println("test3 : "+test3);
     					// 2. 클릭한 제품을 저장
     					select = productlist.get(id);
+    					
+    					// 3. 화면전환
+    					Home.home.loadpage("/view/product/productview.fxml");
     					
     				});	// 람다식 : 인수 -> {실행코드}
     			
