@@ -46,6 +46,9 @@ public class Home implements Initializable{
 	private Label lblboard;
 	
 	@FXML
+	private Label lblproduct;
+	
+	@FXML
 	private BorderPane borderpane;
 	
 	@FXML
@@ -61,6 +64,11 @@ public class Home implements Initializable{
 	@FXML	
 	public void accinfo(MouseEvent e) {
 		loadpage("/view/home/info.fxml");
+	}
+	
+	@FXML
+	public void product(MouseEvent e) {
+		loadpage("/view/product/product.fxml");
 	}
 	
 	public void loadpage( String page ) {
