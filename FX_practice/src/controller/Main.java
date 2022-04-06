@@ -11,7 +11,8 @@ import javafx.scene.layout.BorderPane;
 
 public class Main implements Initializable{
 					// initializable : 해당하는 FXML이 열렸을 때, 메서드를 제공하는 인터페이스.
-	// 1. 필드
+
+	
 	@FXML
 	private BorderPane borderpane;	
 		// main.FXML에 들어있는 BorderPane의 fx:id( = borderpane)
