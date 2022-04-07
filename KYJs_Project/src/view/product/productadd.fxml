@@ -24,7 +24,7 @@
          </font></Label>
       <Line endX="746.0" layoutX="153.0" layoutY="84.0" startX="-100.0" stroke="RED" strokeWidth="5.0" />
       <TextField fx:id="txtpname" layoutX="53.0" layoutY="206.0" prefHeight="23.0" prefWidth="331.0" promptText="제품명" />
-      <TextArea fx:id="txtpcontent" layoutX="53.0" layoutY="252.0" prefHeight="146.0" prefWidth="331.0" promptText="제품 상세설명" text="&#10;" />
+      <TextArea fx:id="txtpcontent" layoutX="53.0" layoutY="252.0" prefHeight="146.0" prefWidth="331.0" promptText="제품 상세설명" />
       <TextField fx:id="txtpprice" layoutX="53.0" layoutY="420.0" prefHeight="23.0" prefWidth="331.0" promptText="제품 가격" />
       <RadioButton fx:id="otp1" layoutX="67.0" layoutY="474.0" mnemonicParsing="false" text="남성의류">
          <toggleGroup>
