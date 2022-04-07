@@ -1,4 +1,4 @@
-package application;
+package AAexamples;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;

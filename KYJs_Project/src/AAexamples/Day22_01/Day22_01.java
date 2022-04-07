@@ -1,4 +1,4 @@
-package application.Day22_01;
+package AAexamples.Day22_01;
 // 수요일 [ javaFX 처음 사용 ] 
 
 	// javaFX 사용 설정

@@ -1,4 +1,4 @@
-package application.Day22_01;
+package AAexamples.Day22_01;
 
 public class 데이터 {
 	private int 번호;

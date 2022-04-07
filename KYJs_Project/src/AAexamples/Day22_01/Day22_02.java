@@ -1,4 +1,4 @@
-package application.Day22_01;
+package AAexamples.Day22_01;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package application;
+package AAexamples;
 
 
 // javafx만 import [ awt, swing은 구버전에서 사용 ] 
