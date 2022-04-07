@@ -60,6 +60,26 @@ public class Productview implements Initializable {
     private TableView<Product> tableview;
 
     @FXML
+    private Button btnactivation;
+
+    @FXML
+    void accactivation(ActionEvent event) {
+    	if(Productcontrol.select.getPactivation()==1) {
+    		txtpactivation.setText("예약중");
+    		ProductDao.productDao.activation(Productcontrol.select.getPnum());
+    		return;
+    	}else if(Productcontrol.select.getPactivation()==2) {
+    		txtpactivation.setText("판매완료");
+    		ProductDao.productDao.activation(Productcontrol.select.getPnum());
+    		return;
+    	}else {
+    		txtpactivation.setText("판매중");
+    		ProductDao.productDao.activation(Productcontrol.select.getPnum());
+    		return;
+    	}
+    }
+    
+    @FXML
     void accback(ActionEvent event) {
     	Home.home.loadpage("/view/product/product.fxml");
     }
@@ -108,10 +128,13 @@ public class Productview implements Initializable {
     	
     	if(product.getPactivation()==1) {
     		txtpactivation.setText("판매 상태 : 판매중");
+    		btnactivation.setText("예약중으로 변경");
     	}else if(product.getPactivation()==2) {
     		txtpactivation.setText("판매 상태 : 예약중");
+    		btnactivation.setText("판매완료로 변경");
     	}else {
     		txtpactivation.setText("판매 상태 : 판매완료");
+    		btnactivation.setText("판매중으로 변경");
     	}
     	String mid = MemberDao.memberDao.getmemberid(product.getMnum());
     	if(mid==null) mid="탈퇴한 회원입니다.";
@@ -125,6 +148,9 @@ public class Productview implements Initializable {
     		btndelete.setVisible(false);
     		btnupdate.setVisible(false);
     	}
+    	
+    	
+    	// 제품 상태가 판매중이면 버튼의 텍스트를 '거래완료로 바꾸기' 로 변경
     	
     	
     }

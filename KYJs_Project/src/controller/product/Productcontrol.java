@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -30,19 +31,37 @@ public class Productcontrol implements Initializable{
 
     @FXML
     private VBox vbox;
+    
+    @FXML
+    private TextField txtsearch;
+
+    @FXML
+    private Button btnsearch;
 
     @FXML
     void accadd(ActionEvent event) {
     	Home.home.loadpage("/view/product/productadd.fxml");	// 제품 추가 fxml
+    	
+    }
+    
+    @FXML
+    void accsearch(ActionEvent event) {	// 검색 버튼을 눌렀을떄
+    	String search = txtsearch.getText();	// 검색창에 입력 된 텍스트 가져오기
+    	System.out.println("검색창에 입력된 텍스트 : "+txtsearch.getText());
+    	show(search);
     }
     
     public static Product select;	// 선택된 버튼의 제품을 저장하는 필드
     
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-    	// 1. 모든 제품 가져오기
-    	ArrayList<Product> productlist = ProductDao.productDao.list();
+    void show(String search) {
     	
+    	if(vbox.getChildren().isEmpty()==false) {	// .isEmpty() : 해당 객체 가 비어 있는지 확인
+    			// vbox내 객체가 비어 있지 않으면?
+    		vbox.getChildren().remove(0);	// vbox내 기존 객체를 삭제
+    	}
+    	
+    	// 1. 모든 제품 가져오기
+    	ArrayList<Product> productlist = ProductDao.productDao.list(Home.category, search);
     	// 2. 그리드 클래스 [ 행 / 열 ] 
     	GridPane gridPane = new GridPane();
     		// * 그리드 간 여백
@@ -54,7 +73,6 @@ public class Productcontrol implements Initializable{
     	// 3. 반복문
     	for(int row = 0; row < productlist.size()/3; row++) {	// 행 반복문, 한 행에 3열 넣기 위해 나누기 3
     		for(int col = 0; col < 3; col++) {	// 열 반복문, 열은 3칸
-    			
     			// 1. 이미지 
     			ImageView imageView = new ImageView(new Image(productlist.get(i).getPimage()));
     				imageView.setFitWidth(250);		// 이미지 가로 길이
@@ -70,28 +88,21 @@ public class Productcontrol implements Initializable{
     					System.out.println(e.toString());
     					int id = Integer.parseInt(e.toString().split(",")[0].split("=")[2]);
     					System.out.println("e에서 id만 빼온 결과 : "+id);
-    					
     					// 2. 클릭한 제품을 저장
     					select = productlist.get(id);
-    					
     					// 3. 화면 전환
     					Home.home.loadpage("/view/product/productview.fxml");
-    					
     				});	// 람다식 : 인수 -> {실행코드}
     			
     			gridPane.add(button, col, row);	// 해당하는 열 번호, 행 번호에 버튼 쿠가
     			i++;
     		}
-    		
-    		
-    		
     	}
     	// * 3배수의 나머지값
     	int row = productlist.size() / 3;
     	int remain = productlist.size() % 3;
     	if(remain!=0) {
     		for(int col = 0; col < remain; col++) {	// 열 반복문, 열은 3칸
-    			
     			// 1. 이미지 
     			ImageView imageView = new ImageView(new Image(productlist.get(i).getPimage()));
     				imageView.setFitWidth(250);		// 이미지 가로 길이
@@ -121,17 +132,17 @@ public class Productcontrol implements Initializable{
     					Home.home.loadpage("/view/product/productview.fxml");
     					
     				});	// 람다식 : 인수 -> {실행코드}
-    			
     			gridPane.add(button, col, row+1);	// 해당하는 열 번호, 행 번호에 버튼 쿠가
     			i++;
     		}
     	}
-    	
-    	
-    	
     	// 4.
     	vbox.getChildren().add(gridPane);
-    	
+    }
+    
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+    	show(null);	// 처음 게시판 열릴때는 null값 삽입. = 전부 출력
     }
 	
 }

@@ -48,13 +48,25 @@ public class Home implements Initializable{
 	@FXML
 	private Label lblproduct;
 	
+    @FXML
+    private Label lblproduct2;
+
+    @FXML
+    private Label lblproduct3;
+
+    @FXML
+    private Label lblproduct4;
+	
 	@FXML
 	private BorderPane borderpane;
+	
 	
 	@FXML
 	public void accboard(MouseEvent e) {
 		loadpage("/view/board/board.fxml");
 	}
+	
+
 	
 	@FXML
 	public void update(MouseEvent e) {
@@ -66,11 +78,33 @@ public class Home implements Initializable{
 		loadpage("/view/home/info.fxml");
 	}
 	
+	public static String category;	// 어떤 게시판을 클릭했는지 저장하는 변수
+	
 	@FXML
 	public void product(MouseEvent e) {
+		category = "남성의류";
 		loadpage("/view/product/product.fxml");
 	}
 	
+	@FXML
+	public void product2(MouseEvent e) {
+		category = "여성의류";
+		loadpage("/view/product/product.fxml");
+	}
+	
+	@FXML
+	public void product3(MouseEvent e) {
+		category = "휴대폰";
+		loadpage("/view/product/product.fxml");
+	}
+	
+	@FXML
+	public void product4(MouseEvent e) {
+		category = "노트북";
+		loadpage("/view/product/product.fxml");
+	}
+	
+
 	public void loadpage( String page ) {
 		try {
 			Parent parent = FXMLLoader.load( getClass().getResource(page) );
