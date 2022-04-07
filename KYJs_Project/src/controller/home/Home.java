@@ -117,6 +117,7 @@ public class Home implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		lblloginid.setText(Login.member.getMid());
 		lblpoint.setText("포인트 : "+Login.member.getMpoint());
+		loadpage("/view/chatting.fxml");
 	}
 	
 	@FXML	// 로그아웃 클릭시 이벤트

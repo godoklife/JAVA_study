@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="txt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" style="-fx-background-color: #ceffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Chatting">
+   <children>
+      <Button fx:id="btnsend" layoutX="610.0" layoutY="611.0" mnemonicParsing="false" onAction="#accsend" prefHeight="50.0" prefWidth="80.0" text="보내기" />
+      <Button fx:id="btnconnect" layoutX="730.0" layoutY="521.0" mnemonicParsing="false" onAction="#accconnect" prefHeight="50.0" prefWidth="80.0" text="접속" />
+      <TextArea fx:id="txtcontent" layoutX="40.0" layoutY="161.0" prefHeight="400.0" prefWidth="650.0" />
+      <TextField fx:id="txtmsg" layoutX="40.0" layoutY="611.0" prefHeight="50.0" prefWidth="550.0" />
+      <TextField fx:id="txtnickname" layoutX="730.0" layoutY="261.0" prefHeight="50.0" prefWidth="200.0" />
+      <TextField fx:id="txtserverip" layoutX="730.0" layoutY="351.0" prefHeight="50.0" prefWidth="200.0" />
+      <TextField fx:id="txtserverport" layoutX="730.0" layoutY="441.0" prefHeight="50.0" prefWidth="200.0" />
+      <Label fx:id="lblnickname" layoutX="730.0" layoutY="231.0" text="닉네임" />
+      <Label fx:id="lblserverip" layoutX="730.0" layoutY="321.0" text="서버아이피" />
+      <Label fx:id="lblserverport" layoutX="730.0" layoutY="411.0" text="서버포트" />
+      <Label layoutX="46.0" layoutY="8.0" text="실시간 채팅방" textFill="#573c3c">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Line endX="865.0" endY="-7.0" layoutX="95.0" layoutY="92.0" startX="-100.0" stroke="#5779ff" strokeWidth="10.0" />
+   </children>
+</AnchorPane>

@@ -10,7 +10,7 @@ public class Client {
 	// 서버에 접속된 클라이언트의 클래스
 	
 	// 1. 소캣
-	Socket socket;
+	public Socket socket;	// public 이여야 패키지가 달라도 접근이 가능!!!
 	
 	// 2. 생성자
 	public Client(Socket socket) {

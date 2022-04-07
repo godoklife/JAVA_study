@@ -69,15 +69,35 @@ public class Servercontrol implements Initializable {
     	
     }
     // 3. 서버 종료 메서드
-    public void serverstop() {}
+    public void serverstop() {
+    	// 1. 접속된 모든 클라이언트들의 소켓 닫기
+    	try {
+    		for(Client client : clientlist) {
+        		client.socket.close();
+        	}	
+    		
+    		// 2. 서버 소켓 닫기
+    		serverSocket.close();
+    		// 3. 스레드풀 닫기
+    		threadpool.shutdown();
+		} catch (Exception e) {System.out.println("serverstop Exception : "+e);}
+    	
+    	
+    }
     
 
     @FXML
     void accserver(ActionEvent event) {
     	if(btnserver.getText().equals("서버 실행")) {
+    		
+    		serverstart();
+    		
     		txtserver.appendText("서버를 실행합니다.\n");	//textarea에 내용 추가
     		btnserver.setText("서버 중지");
     	}else if(btnserver.getText().equals("서버 중지")){
+    		
+    		serverstop();
+    		
     		txtserver.appendText("장비를 정지합니다.\n");	//textarea에 내용 추가
     		btnserver.setText("서버 실행");
     	}
