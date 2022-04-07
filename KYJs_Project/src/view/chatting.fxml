@@ -20,7 +20,7 @@
       <Label fx:id="lblnickname" layoutX="730.0" layoutY="231.0" text="닉네임" />
       <Label fx:id="lblserverip" layoutX="730.0" layoutY="321.0" text="서버아이피" />
       <Label fx:id="lblserverport" layoutX="730.0" layoutY="411.0" text="서버포트" />
-      <Label layoutX="46.0" layoutY="8.0" text="실시간 채팅방" textFill="#573c3c">
+      <Label layoutX="46.0" layoutY="8.0" text="실시간 채팅방" textFill="#5b3232">
          <font>
             <Font size="48.0" />
          </font>

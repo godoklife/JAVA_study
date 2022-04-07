@@ -137,11 +137,11 @@ public class Productadd implements Initializable{
     	// 1. 파일 입력 스트림 [ 이돈 단위 : byte ] 
     	FileInputStream fileInputStream = new FileInputStream(file);	// file : fileChooser에서 선택된 파일 객체.
     	// 2. 파일 출력 스트림
-    	File copyfile = new File("C:\\Users\\504\\git\\tmp\\JAVA_study\\KYJs_Project\\src\\img\\"+file.getName());
+    	File copyfile = new File("C:\\Users\\Matebook14\\git\\JAVA_study\\KYJs_Project\\src\\img\\"+file.getName());
     		// 새로운 경로 설정의 용도.
     	FileOutputStream fileOutputStream = new FileOutputStream(copyfile);
     	// 3. 바이트 배열 선언
-    	byte[] bytes = new byte[1024*1024*100];	// 100메가바이트
+    	byte[] bytes = new byte[1024*1024*100];	// 최대 100메가바이트
     	// 4. 반복문을 이용한 inputStream의 파일 스트림을 모두 읽어오기
     	int size;
     	while( ( size = fileInputStream.read(bytes) ) > 0 ) {	// 읽어 온 바이트가 0보다 작으면 종료.
