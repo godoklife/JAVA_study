@@ -118,7 +118,11 @@ public class Chatting implements Initializable{
     void accconnect(ActionEvent event) {
     	if(btnconnect.getText().equals("채팅방 입장")) {
     		clientstart();// 클라이언트 실행 메서드
-    		
+        	txtmsg.setEditable(true);		// 접속 전에는 입력 못하게 막아놓기
+        	txtcontent.setDisable(false);	// 재팅창 목록 사용 금지
+        	btnsend.setDisable(false);		// 접속 전에는 버튼 사용 금지
+        	txtmsg.setText("");				// 메시지 입력창 비워주기
+        	txtmsg.requestFocus();
     		
     		txtcontent.appendText("==========[채팅방에 입장합니다.]==========\n");
     		btnconnect.setText("채팅방 퇴장");
@@ -127,16 +131,28 @@ public class Chatting implements Initializable{
     		
     		txtcontent.appendText("==========[채팅방에서 퇴장합니다.]==========\n");
     		btnconnect.setText("채팅방 입장");
+        	txtmsg.setText("채팅방 연결 후 입력 가능합니다~");
+        	txtmsg.setEditable(false);		// 접속 전에는 입력 못하게 막아놓기
+        	txtcontent.setDisable(true);	// 재팅 뷰어 비활성화 처리
+        	btnsend.setDisable(true);		// 접속 전에는 버튼 사용 금지
     	}
     }
 
     @FXML
-    void accsend(ActionEvent event) {
-
+    void accsend(ActionEvent event) {	// 전송 버튼을 눌렀을 때
+    	send(txtmsg.getText()+"\n");	// 메시지 입력창에 입력된 텍스트 가져와서 보내기
+    	txtmsg.setText("");				// 메시지 입력창 비워주기
+    	txtmsg.requestFocus();			// 보내기 후 메시지 입력창으로 포커스(키보드 커서) 이동
     }
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+    	// 쳇방 열렸을 때 초기값 메서드
+    	//txtcontent.setEditable(false);	// 채팅 뷰어에는 입력 못하게 막아놓기
+    	txtmsg.setText("채팅방 연결 후 입력 가능합니다~");
+    	txtmsg.setEditable(false);		// 접속 전에는 입력 못하게 막아놓기
+    	txtcontent.setDisable(true);	// 재팅 뷰어 비활성화 처리
+    	btnsend.setDisable(true);		// 접속 전에는 버튼 사용 금지
     	
     }
 

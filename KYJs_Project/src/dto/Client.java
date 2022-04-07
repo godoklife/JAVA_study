@@ -15,9 +15,10 @@ public class Client {
 	// 2. 생성자
 	public Client(Socket socket) {
 		this.socket = socket;
+		receive();	// 서버와 연결된 클라이언트 객체가 생성될 때 받는 메서드
 	}
 	
-	// 3. 서버로 메시지 받는 메서드
+	// 3. 서버로 메시지 받는 메서드 [ 실행조건 : 서버와 클라이언트가 연결되었을 때 ]
 	public void receive() {	
 		
 		// 멀티스레드의 구현 방법 2가지 - Thread(class), Runnable(interface)
@@ -41,7 +42,7 @@ public class Client {
 		};
 		
 	}
-	// 4. 서버가 메시지 보내는 메서드
+	// 4. 서버가 메시지 보내는 메서드 [ 실행 조건 : 서버가 메시지를 받았을때 ] 
 	public void send(String msg) {
 		Runnable runnable = new Runnable() {
 			
