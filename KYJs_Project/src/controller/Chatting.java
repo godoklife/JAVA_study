@@ -7,14 +7,21 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controller.login.Login;
+import dao.RoomDao;
+import dto.Room;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 
 public class Chatting implements Initializable{
@@ -32,7 +39,7 @@ public class Chatting implements Initializable{
     private TextField txtmsg;
 
     @FXML
-    private TableView<?> roomtable;
+    private TableView<Room> roomtable;
 
     @FXML
     private TextField txtroomname;
@@ -49,9 +56,65 @@ public class Chatting implements Initializable{
     @FXML
     private TextArea txtmidlist;
 
+    // 서버 소켓 생성 [ 모든 메서드에서 사용 가능 ]
+    public Servercontrol server;
+    public Room selectroom;	// 테이블뷰에서 선택된 방을 저장하는 변수
+    public void show() {
+    	// 1. db로부터 모든 방 목록 가져오기
+    	ObservableList<Room> roomlist = RoomDao.roomDao.roomlist();
+    	
+    	// 2. 테이블뷰의 첫번째 필드를 가져와서 방 번호 필드로 설정
+    	TableColumn tc = roomtable.getColumns().get(0);
+    	tc.setCellValueFactory(new PropertyValueFactory<>("roomnumber"));
+    	
+    	// 3. 테이블 뷰의 두번쨰 필드를 가져와서 방 이름 필드로 설정
+    	tc = roomtable.getColumns().get(1);
+    	tc.setCellValueFactory(new PropertyValueFactory<>("roomname"));
+    	
+    	// $. 테이블 뷰의 세번쨰 필드를 가져와서 방 인원 필드로 설정.
+    	tc = roomtable.getColumns().get(2);
+    	tc.setCellValueFactory(new PropertyValueFactory<>("mcount"));
+    	
+    	// 5. 테이블뷰에 리스트를 넣어주기
+    	roomtable.setItems(roomlist);
+    			
+    	// 6. 테이블뷰를 클릭했을때 
+    	roomtable.setOnMouseClicked( e -> {
+    		
+    		// 7. 클릭된 객체를 가져와서 selectroom에 저장
+    		selectroom = roomtable.getSelectionModel().getSelectedItem();
+    		
+    		// 8. 레이블에 띄워주기
+    		lblselect.setText("현재 선택된 방 : "+roomtable.getSelectionModel().getSelectedItem().getRoomname());
+    		
+    		// 9. 비활성화 되어 있던 접속 버튼을 활성화 시키키
+    		btnconnect.setDisable(false);
+    	});
+    }
+    
     @FXML
     void accadd(ActionEvent event) {	// 방 개설 버튼 클릭시
-
+    	// 1. 컨트롤에 입력된 방 이름을 가져오기
+    	String roomname = txtroomname.getText();
+    	if(roomname.length()<4) {	// 방 이름이 네글자 미만이면 개설 거부
+    		Alert alert = new Alert(AlertType.WARNING);
+        	alert.setHeaderText("방의 제목은 최소 네 글자 이상이여야 합니다.");
+        	alert.showAndWait();
+    		return;
+    	}
+    	// 2. 방 객체화
+    	Room room = new Room(0, roomname, "127.0.0.1", 0);
+    	// 3. DB처리
+    	RoomDao.roomDao.roomadd(room);
+    	// 4. 해당 방의 서버 메모리 할당
+    	server = new Servercontrol();
+    	// 서버 시작! [ 인수로 ip와 port 넘기기 ] 
+    	server.serverstart(room.getRoomip(), RoomDao.roomDao.getroomnum());
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	alert.setHeaderText("방이 개설되었습니다. 방 번호 : "+RoomDao.roomDao.getroomnum());
+    	alert.showAndWait();
+    	txtroomname.setText("");	// 방 제목 입력칸 공백처리
+    	show();
     }
 
     @FXML
@@ -70,13 +133,13 @@ public class Chatting implements Initializable{
      */
     
     // 2. 클라이언트 실행 메서드
-    public void clientstart() {
+    public void clientstart(String ip, int port) {
     	Thread clientthread = new Thread() {
     		@Override
     		public void run() {
     			System.out.println("clientstart method가 호출되었습니다.");
     			try {
-					socket = new Socket("127.0.0.1",33990);	// 서버의 ip와 포트번호를 넣어주기 [ 서버와 연결 ]
+					socket = new Socket(ip, port);	// 서버의 ip와 포트번호를 넣어주기 [ 서버와 연결 ]
 					send(Login.member.getMid()+"님이 입장하셨습니다.\n");
 					receive();// 접속과 동시에 받기 메서드는 무한루프
 				} catch (Exception e) {System.out.println(e);}
@@ -134,7 +197,7 @@ public class Chatting implements Initializable{
     @FXML
     void accconnect(ActionEvent event) {
     	if(btnconnect.getText().equals("채팅방 입장")) {
-    		clientstart();// 클라이언트 실행 메서드
+    		clientstart(selectroom.getRoomip(), selectroom.getRoomnumber());// 클라이언트 실행 메서드
         	txtmsg.setEditable(true);		// 접속 전에는 입력 못하게 막아놓기
         	txtcontent.setDisable(false);	// 재팅창 목록 사용 금지
         	btnsend.setDisable(false);		// 접속 전에는 버튼 사용 금지
@@ -170,6 +233,9 @@ public class Chatting implements Initializable{
     	txtmsg.setEditable(false);		// 접속 전에는 입력 못하게 막아놓기
     	txtcontent.setDisable(true);	// 재팅 뷰어 비활성화 처리
     	btnsend.setDisable(true);		// 접속 전에는 버튼 사용 금지
+    	txtmidlist.setEditable(false);	// 회원 목록 사용자가 수정 금지
+    	btnconnect.setDisable(true);	// 접속 전 채팅방 입장 버튼 사용 금지 ( 방을 선택하면 버튼 활성화)
+    	show();
     	
     }
 
