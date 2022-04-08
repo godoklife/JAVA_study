@@ -4,11 +4,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import controller.login.Login;
 import dao.RoomDao;
 import dto.Room;
+import dto.Roomlive;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,7 +61,7 @@ public class Chatting implements Initializable{
     // 서버 소켓 생성 [ 모든 메서드에서 사용 가능 ]
     public Servercontrol server;
     public Room selectroom;	// 테이블뷰에서 선택된 방을 저장하는 변수
-    public void show() {
+    public void show() {	
     	// 1. db로부터 모든 방 목록 가져오기
     	ObservableList<Room> roomlist = RoomDao.roomDao.roomlist();
     	
@@ -90,6 +92,7 @@ public class Chatting implements Initializable{
     		// 9. 비활성화 되어 있던 접속 버튼을 활성화 시키키
     		btnconnect.setDisable(false);
     	});
+    	
     }
     
     @FXML
@@ -117,10 +120,7 @@ public class Chatting implements Initializable{
     	show();
     }
 
-    @FXML
-    void accmsg(ActionEvent event) {	// 채팅창 엔터 입력시
-
-    }
+    
 
 
     // 1. 클라이언트 소켓 선언.
@@ -198,11 +198,21 @@ public class Chatting implements Initializable{
     void accconnect(ActionEvent event) {
     	if(btnconnect.getText().equals("채팅방 입장")) {
     		clientstart(selectroom.getRoomip(), selectroom.getRoomnumber());// 클라이언트 실행 메서드
+    			// 현재 방에 접속된 명단 추가
+    		Roomlive roomlive = new Roomlive(0, selectroom.getRoomnumber(), Login.member.getMid());
+    		// db처리
+    		RoomDao.roomDao.addroomlive(roomlive);
+    		
+    		
         	txtmsg.setEditable(true);		// 접속 전에는 입력 못하게 막아놓기
         	txtcontent.setDisable(false);	// 재팅창 목록 사용 금지
         	btnsend.setDisable(false);		// 접속 전에는 버튼 사용 금지
         	txtmsg.setText("");				// 메시지 입력창 비워주기
         	txtmsg.requestFocus();
+        	
+        	txtroomname.setDisable(true);	// 채팅방 입장ㅎ하면 챗방 이름 생성칸 비활성화
+        	btnadd.setDisable(true);		// 채팅방 입장하면 챗방 생성버튼 비활성화
+        	
     		
     		txtcontent.appendText("==========[채팅방에 입장합니다.]==========\n");
     		btnconnect.setText("채팅방 퇴장");
@@ -215,20 +225,65 @@ public class Chatting implements Initializable{
         	txtmsg.setEditable(false);		// 접속 전에는 입력 못하게 막아놓기
         	txtcontent.setDisable(true);	// 재팅 뷰어 비활성화 처리
         	btnsend.setDisable(true);		// 접속 전에는 버튼 사용 금지
+        	
+        	txtroomname.setDisable(false);	// 채팅방 나가면 챗방 이름 생성칸 활성화
+        	btnadd.setDisable(false);		// 채팅방 나가면 채팅방 생성버튼 활성화처리
+        	
+        	// 1. 방 접속 명단에서 삭제하기
+        	
+        	// 2. 만약에 방 접속 명단이 0명이면 방 삭제
+        	
+        	// 2-1. 서버소켓 죵료
+        	
+        	// 2-2.
+        	selectroom = null;
+        	
+        	// 2-3.
+        	lblselect.setText("현재 선택된 방 : ");
+
     	}
     }
-
+    
     @FXML
-    void accsend(ActionEvent event) {	// 전송 버튼을 눌렀을 때
-    	send(txtmsg.getText()+"\n");	// 메시지 입력창에 입력된 텍스트 가져와서 보내기
+    void accmsg(ActionEvent event) {	// 채팅창 엔터 입력시
+    	String msg  = Login.member.getMid()+" : "+txtmsg.getText()+"\n";
+    	send(msg);
     	txtmsg.setText("");				// 메시지 입력창 비워주기
     	txtmsg.requestFocus();			// 보내기 후 메시지 입력창으로 포커스(키보드 커서) 이동
+    	
+    	// 현재 채팅장에 접속중인 아이디 출력(실시간 아님, DB에서 끌어오는거임)
+    	ArrayList<Roomlive>roomlivelist = RoomDao.roomDao.getroomlivelist(selectroom.getRoomnumber());
+    	txtmidlist.setText("");
+    	int i = 1;
+    	for(Roomlive tmp : roomlivelist) {
+    		txtmidlist.appendText(i+". "+tmp.getMid()+"\n");
+    		i++;
+    	}
+    	i=1;
     }
+    
+    @FXML
+    void accsend(ActionEvent event) {	// 전송 버튼을 눌렀을 때
+    	send(Login.member.getMid()+" : "+txtmsg.getText()+"\n");	// 메시지 입력창에 입력된 텍스트 가져와서 보내기
+    	txtmsg.setText("");				// 메시지 입력창 비워주기
+    	txtmsg.requestFocus();			// 보내기 후 메시지 입력창으로 포커스(키보드 커서) 이동
+    	
+    	// 현재 채팅장에 접속중인 아이디 출력(실시간 아님, DB에서 끌어오는거임)
+    	ArrayList<Roomlive>roomlivelist = RoomDao.roomDao.getroomlivelist(selectroom.getRoomnumber());
+    	txtmidlist.setText("");
+    	int i = 1;
+    	for(Roomlive tmp : roomlivelist) {
+    		txtmidlist.appendText(i+". "+tmp.getMid()+"\n");
+    		i++;
+    	}
+    	i=1;
+    }
+    
+    
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
     	// 쳇방 열렸을 때 초기값 메서드
-    	//txtcontent.setEditable(false);	// 채팅 뷰어에는 입력 못하게 막아놓기
     	txtmsg.setText("채팅방 연결 후 입력 가능합니다~");
     	txtmsg.setEditable(false);		// 접속 전에는 입력 못하게 막아놓기
     	txtcontent.setDisable(true);	// 재팅 뷰어 비활성화 처리
@@ -237,6 +292,14 @@ public class Chatting implements Initializable{
     	btnconnect.setDisable(true);	// 접속 전 채팅방 입장 버튼 사용 금지 ( 방을 선택하면 버튼 활성화)
     	show();
     	
+    	
+    	
+    	// show()에서 ip랑 포트 싸와서 server에다 던져주면 기존에 만든 방들 서버 열수 있을거 같은데??
+//////////////////////////////////////////////////////
+ //   	server = new Servercontrol();
+    	// 서버 시작! [ 인수로 ip와 port 넘기기 ] 
+//    	server.serverstart(room.getRoomip(), RoomDao.roomDao.getroomnum());
+//////////////////////////////////////////////////////
     }
 
 }

@@ -81,6 +81,7 @@ public class Servercontrol{	// 이제 FXML과 관련 없는 순수 자바 쏘쓰
     ServerSocket serverSocket;
     // 2. 서버 실행 메서드 [ 인수로 IP와 PORT넘버를 받아서 서버소켓 바인딩(생성) ] 
     public void serverstart(String ip, int port) {
+    	System.out.println("serverstart method called");
     	try {
     		// 1. 서버 소켓 메모리 할당
         	serverSocket = new ServerSocket();
@@ -92,6 +93,7 @@ public class Servercontrol{	// 이제 FXML과 관련 없는 순수 자바 쏘쓰
 			@Override
 			public void run() {
 				try {
+					
 					while(true) {
 						Socket socket = serverSocket.accept();	// 1. 요청 수락 후에 수락된 소켓을 저장한다.
 						clientlist.add(new Client(socket));		// 2. 연결된 클라이언트를 생성 후 리스트에 저장

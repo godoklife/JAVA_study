@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dto.Product;
 import dto.Room;
+import dto.Roomlive;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -72,6 +73,37 @@ public class RoomDao {
 			return roomlist;
 			
 		} catch (Exception e) {System.out.println("roomlist method exception : "+e);}
+		return null;
+	}
+	
+	// 4. 채팅방 접속 명단 추가
+	public boolean addroomlive(Roomlive roomlive) {
+		try {
+			String sql = "insert into roomlive(roomnumber,mid) values(?, ?)";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, roomlive.getRoomnumber());
+			ps.setString(2, roomlive.getMid());
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("addroomlive exception : "+e);}
+		return false;
+	}
+	
+	// 5. 채팅방에 접속된 모든 명단 호출
+	public ArrayList<Roomlive> getroomlivelist(int roomnumber){
+		ArrayList<Roomlive>getroomlivelist = new ArrayList<>();
+		try {
+			String sql = "select * from roomlive where roomnumber=?";
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, roomnumber);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Roomlive roomlive = new Roomlive(rs.getInt(1), rs.getInt(2), rs.getString(3));
+				getroomlivelist.add(roomlive);
+			}
+			return getroomlivelist;
+			
+		} catch (Exception e) {System.out.println("getroomlivelist exception : "+e);}
 		return null;
 	}
 	
