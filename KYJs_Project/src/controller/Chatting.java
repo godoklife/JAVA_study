@@ -2,7 +2,6 @@ package controller;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -26,31 +26,39 @@ public class Chatting implements Initializable{
     private Button btnsend;
 
     @FXML
-    private Button btnconnect;
-
-    @FXML
     private TextArea txtcontent;
 
     @FXML
     private TextField txtmsg;
 
     @FXML
-    private TextField txtnickname;
+    private TableView<?> roomtable;
 
     @FXML
-    private TextField txtserverip;
+    private TextField txtroomname;
 
     @FXML
-    private TextField txtserverport;
+    private Button btnconnect;
 
     @FXML
-    private Label lblnickname;
+    private Button btnadd;
 
     @FXML
-    private Label lblserverip;
+    private Label lblselect;
 
     @FXML
-    private Label lblserverport;
+    private TextArea txtmidlist;
+
+    @FXML
+    void accadd(ActionEvent event) {	// 방 개설 버튼 클릭시
+
+    }
+
+    @FXML
+    void accmsg(ActionEvent event) {	// 채팅창 엔터 입력시
+
+    }
+
 
     // 1. 클라이언트 소켓 선언.
     Socket socket;	
@@ -149,8 +157,6 @@ public class Chatting implements Initializable{
 
     @FXML
     void accsend(ActionEvent event) {	// 전송 버튼을 눌렀을 때
-//  	String msg = txtmsg.getText()+"\n";
-//    	send(msg);
     	send(txtmsg.getText()+"\n");	// 메시지 입력창에 입력된 텍스트 가져와서 보내기
     	txtmsg.setText("");				// 메시지 입력창 비워주기
     	txtmsg.requestFocus();			// 보내기 후 메시지 입력창으로 포커스(키보드 커서) 이동
