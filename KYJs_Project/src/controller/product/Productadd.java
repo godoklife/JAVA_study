@@ -145,7 +145,7 @@ public class Productadd implements Initializable{
     	// 4. 반복문을 이용한 inputStream의 파일 스트림을 모두 읽어오기
     	int size;
     	while( ( size = fileInputStream.read(bytes) ) > 0 ) {	// 읽어 온 바이트가 0보다 작으면 종료.
-    		fileOutputStream.write(bytes, 0, size);	// 읽어온 바이트만큼 내보내기.
+    		fileOutputStream.write(bytes, 0, size);	// 읽어온 바이트만큼만 내보내기.
     	}
     	// 5. 용량이 큰 경우에는 스트림 종료 필수.
     	fileInputStream.close();

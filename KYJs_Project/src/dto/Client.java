@@ -28,19 +28,21 @@ public class Client {
 			@Override
 			public void run() {
 				try {
-					InputStream inputStream = socket.getInputStream();
-					byte[] bytes = new byte[2048];
-					inputStream.read(bytes);
-					String msg = new String(bytes);	// 바이트 배열을 문자열로 변환 [ 문자열 클래스 기능 ]
-					// 서버가 받은 메시지를 현재 서버에 접속된 모든 클라이언트에게 다시 보내기
-					for(Client client : Servercontrol.clientlist) {
-						client.send(msg);
+					while(true) {
+						InputStream inputStream = socket.getInputStream();
+						byte[] bytes = new byte[2048];
+						inputStream.read(bytes);
+						String msg = new String(bytes);	// 바이트 배열을 문자열로 변환 [ 문자열 클래스 기능 ]
+						// 서버가 받은 메시지를 현재 서버에 접속된 모든 클라이언트에게 다시 보내기
+						for(Client client : Servercontrol.clientlist) {
+							client.send(msg);
+						}
 					}
 					
-				} catch (Exception e) {System.out.println("run exception : "+e);}
+				} catch (Exception e) {System.out.println("Client class receive method exception : "+e);}
 			}
 		};
-		
+		Servercontrol.threadpool.submit(runnable);
 	}
 	// 4. 서버가 메시지 보내는 메서드 [ 실행 조건 : 서버가 메시지를 받았을때 ] 
 	public void send(String msg) {
@@ -52,8 +54,9 @@ public class Client {
 					// 1. 출력 스레드
 					OutputStream outputStream = socket.getOutputStream();
 					outputStream.write(msg.getBytes());
-				} catch (Exception e) {System.out.println(e);}
+				} catch (Exception e) {System.out.println("Client class send method exception : "+e);}
 			}
 		};
+		Servercontrol.threadpool.submit(runnable);
 	}
 }

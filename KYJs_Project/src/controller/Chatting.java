@@ -2,6 +2,7 @@ package controller;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -62,21 +63,19 @@ public class Chatting implements Initializable{
     
     // 2. 클라이언트 실행 메서드
     public void clientstart() {
-    	Thread receivethread = new Thread() {
+    	Thread clientthread = new Thread() {
     		@Override
     		public void run() {
     			System.out.println("clientstart method가 호출되었습니다.");
     			try {
-    				System.out.println("receivethread");
 					socket = new Socket("127.0.0.1",33990);	// 서버의 ip와 포트번호를 넣어주기 [ 서버와 연결 ]
-					
 					send(Login.member.getMid()+"님이 입장하셨습니다.\n");
-						receive();// 접속과 동시에 받기 메서드는 무한루프S
+					receive();// 접속과 동시에 받기 메서드는 무한루프
 				} catch (Exception e) {System.out.println(e);}
     		};
     	};	// 멀티스레그 구현 끝
     	
-    	receivethread.start();	// 멀티스레드 실행
+    	clientthread.start();	// 멀티스레드 실행
     }
     
     // 3. 클라이언트 종료 메서드
@@ -93,9 +92,10 @@ public class Chatting implements Initializable{
     		@Override
     		public void run() {
     			try {
-					OutputStream outputStream = socket.getOutputStream();	// 1. 출력 스트림
+					OutputStream outputStream = socket.getOutputStream();	// 1. 출력 스트림에 소켓 설정
 					outputStream.write(msg.getBytes());	// 2. 전송하기
 					outputStream.flush();// 3. 출력스트림 초기화
+					System.out.println("send method : "+new String(msg.getBytes()));
 				} catch (Exception e) {System.out.println("send method exception : "+e);}
     		};
     	};	// 멀티스레드 구현 끝
@@ -106,11 +106,19 @@ public class Chatting implements Initializable{
     	try {
 			while (true) {
 				System.out.println("receive test");
+				System.out.println("연결된 서버의 주소 : "+socket.getInetAddress()); 
 				InputStream inputStream = socket.getInputStream();	// 입력 스트림
+				System.out.println("receive method 1");
 				byte[] bytes = new byte[2048];	// 2KB짜리 바이트 배열 선언
+				System.out.println("2");
+				System.out.println("바이트 배열 : "+new String(bytes));
 				inputStream.read(bytes);	// 인풋 스트림에 들어있는 데이타를 바이트 배열로 이동
+				System.out.println("3");
 				String message = new String(bytes);	// 바이트배열을 문자열로 변환
+				System.out.println("4");
 				txtcontent.appendText(message);	// textarea에 문자열 출력
+				System.out.println("5");
+				System.out.println("txtcontent.appendText 실행 후 String message : "+ message);
 			}
 		} catch (Exception e) {System.out.println("receive method exception : "+e);}
     }
@@ -141,6 +149,8 @@ public class Chatting implements Initializable{
 
     @FXML
     void accsend(ActionEvent event) {	// 전송 버튼을 눌렀을 때
+//  	String msg = txtmsg.getText()+"\n";
+//    	send(msg);
     	send(txtmsg.getText()+"\n");	// 메시지 입력창에 입력된 텍스트 가져와서 보내기
     	txtmsg.setText("");				// 메시지 입력창 비워주기
     	txtmsg.requestFocus();			// 보내기 후 메시지 입력창으로 포커스(키보드 커서) 이동

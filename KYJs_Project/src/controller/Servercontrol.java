@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -26,12 +28,31 @@ public class Servercontrol implements Initializable {
     private TextArea txtserver;
     
     //* 서버에 연결된 클라이언트를 저장하는 메서드
-    public static Vector<Client> clientlist = new Vector<>();
+    public static Vector<Client> clientlist = new Vector<>();	// 접속된 클라이언트들이 저장될 리스트
     	// Vector를 사용하는 이유 ? 동기화를 지원하기 때문 ! -> 멀티쓰래드를 사용해야하는데 동기화를 미지원하면 골때림
     		// Arraylist는 동기화 미지원...
     // * 멀티스레드를 관리해주는 스레드들
     public static ExecutorService threadpool;	// 선언만 하고 메모리 할당은 안해줌. 서버스타트 메서드 아랫쪽에 메모리 할당 객체 있음.
     	//ExecutorServiece : 스레드풀 구현 인터페이스
+    
+    
+    
+    //////////////////////////////////////////////////
+    
+    Socket socket;	// 소켓을 선언만 해둠
+    
+    // 1. 서버 데이타 송신부
+    void receive() {
+    	try {
+			InputStream inputStream = socket.getInputStream();
+			
+			
+		} catch (Exception e) {System.out.println("서버 송신부 예외 발생"+e);}
+    }
+    
+    
+    //////////////////////////////////////////////////
+    
     
     // 1. 서버 소켓 선언S
     ServerSocket serverSocket;
@@ -46,7 +67,6 @@ public class Servercontrol implements Initializable {
         	
         	// 2. 서버 소켓 바인딩  [ = ip와 port 를 소켓에 설정 ] 
         	serverSocket.bind(new InetSocketAddress("127.0.0.1", 33990));
-        	
         	
 		} catch (Exception e) {System.out.println(e);}
     		// 3. 클라이언트의 요청 대기 [ = 멀티스레드를 사용하는 이유? 1. 연결 2. 보내기 3. 받기 -> 동시에 처리하기 위해. ]
