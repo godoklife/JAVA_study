@@ -1,5 +1,8 @@
 package app;
 
+import controller.Chatting;
+import controller.login.Login;
+import dao.RoomDao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,6 +38,21 @@ public class Start extends Application{
 			// 2. 외부 스타일시트를 씬 객체에 적용
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 ///////////////////////////////////////////////////////////////////////////////////////////////////////			
+			
+		// setOnCloseRequest : 윈도우 창에서 X버튼 눌러서 껐을 때 이벤트
+		arg0.setOnCloseRequest(e->{
+			// 만약 로그인이 되어있으면
+			if(Login.member != null	) {
+				// 1. 방 접속 명단 삭제
+				RoomDao.roomDao.roomlivedelete(Login.member.getMid());
+				// 2. 방 삭제	
+				if(Chatting.selectroom != null) {
+					RoomDao.roomDao.roomdelete(Chatting.selectroom.getRoomnumber());
+				}
+				// 3. 선택 방 저장하는 변수 초기화
+				Chatting.selectroom=null;	// 초기화 할 필요가 있나?	
+			}
+		});		// 람다식 END
 			
 		arg0.setResizable(false);	// 4. 스테이지(창) 크기 재조정 불가 
 		arg0.setTitle("번개장터");	// 2. 스테이지 창 이름 설정

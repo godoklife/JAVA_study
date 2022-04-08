@@ -107,5 +107,36 @@ public class RoomDao {
 		return null;
 	}
 	
+	// 6. 접속 명단에서 삭제
+	public boolean roomlivedelete(String mid) {
+		try {
+			String sql = "delete from roomlive where mid=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("deleteroomlive exception : "+e);}
+		return false;
+	}
+	
+	// 7. 채팅방 삭제 [ 조건 : 해당 채팅방에 접속 명단이 0 이라면! ] 
+	public boolean roomdelete(int roomnumber) {
+		try {
+			String sql = "select * from roomlive where roomnumber = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, roomnumber);
+			rs = ps.executeQuery();
+			if(rs.next()) {	// 결과가 하나라도 있으면 종료
+				return false;
+			}else {	// 결과가 없으면 삭제쿼리문 날리기
+				sql = "delete from room where roomnumber = ?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, roomnumber);
+				ps.executeUpdate();
+				return true;
+			}
+		} catch (Exception e) {System.out.println("roomdelete exception : "+e);}
+		return false;
+	}
 	
 }

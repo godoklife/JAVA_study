@@ -47,7 +47,10 @@ public class Servercontrol{	// 이제 FXML과 관련 없는 순수 자바 쏘쓰
 								client.send(msg);
 							}
 						}
-					} catch (Exception e) {System.out.println("Client class receive method exception : "+e);}
+					} catch (Exception e) {
+						serverstop();
+						System.out.println("Client class receive method exception : "+e);
+						}
 				}
 			};
 			threadpool.submit(runnable);
@@ -62,7 +65,10 @@ public class Servercontrol{	// 이제 FXML과 관련 없는 순수 자바 쏘쓰
 						// 1. 출력 스레드
 						OutputStream outputStream = socket.getOutputStream();
 						outputStream.write(msg.getBytes());
-					} catch (Exception e) {System.out.println("Client class send method exception : "+e);}
+					} catch (Exception e) {
+						serverstop();
+						System.out.println("Client class send method exception : "+e);
+						}
 				}
 			};
 			threadpool.submit(runnable);
@@ -87,18 +93,23 @@ public class Servercontrol{	// 이제 FXML과 관련 없는 순수 자바 쏘쓰
         	serverSocket = new ServerSocket();
         	// 2. 서버 소켓 바인딩  [ = ip와 port 를 소켓에 설정 ] 
         	serverSocket.bind(new InetSocketAddress(ip, port));
-		} catch (Exception e) {System.out.println("Server class serverstart method |serverSocket binding | Execption : "+e);}
+		} catch (Exception e) {
+			serverstop();
+			System.out.println("Server class serverstart method |serverSocket binding | Execption : "+e);
+			}
     		// 3. 클라이언트의 요청 대기 [ = 멀티스레드를 사용하는 이유? 1. 연결 2. 보내기 3. 받기 -> 동시에 처리하기 위해. ]
     	Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
 				try {
-					
 					while(true) {
 						Socket socket = serverSocket.accept();	// 1. 요청 수락 후에 수락된 소켓을 저장한다.
 						clientlist.add(new Client(socket));		// 2. 연결된 클라이언트를 생성 후 리스트에 저장
 					}	
-				} catch (Exception e) {System.out.println("Server class serverstart method |serverSocket acception | Execption : "+e);}
+				} catch (Exception e) {
+					serverstop();
+					System.out.println("Server class serverstart method |serverSocket acception | Execption : "+e);
+					}
 			}
 		};	// 멀티스레드 구현 끝
     	// 스레드풀에 메모리를 초기화 시키기
@@ -117,6 +128,9 @@ public class Servercontrol{	// 이제 FXML과 관련 없는 순수 자바 쏘쓰
     		serverSocket.close();
     		// 3. 스레드풀 닫기
     		threadpool.shutdown();
-		} catch (Exception e) {System.out.println("serverstop Exception : "+e);}
+		} catch (Exception e) {
+			serverstop();
+			System.out.println("serverstop Exception : "+e);
+		}
     }	// serverstop method END
 }	// Servercontrol class END

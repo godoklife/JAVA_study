@@ -60,7 +60,7 @@ public class Chatting implements Initializable{
 
     // 서버 소켓 생성 [ 모든 메서드에서 사용 가능 ]
     public Servercontrol server;
-    public Room selectroom;	// 테이블뷰에서 선택된 방을 저장하는 변수
+    public static Room selectroom;	// 테이블뷰에서 선택된 방을 저장하는 변수
     public void show() {	
     	// 1. db로부터 모든 방 목록 가져오기
     	ObservableList<Room> roomlist = RoomDao.roomDao.roomlist();
@@ -82,7 +82,9 @@ public class Chatting implements Initializable{
     			
     	// 6. 테이블뷰를 클릭했을때 
     	roomtable.setOnMouseClicked( e -> {
-    		
+    		System.out.println("마우스로 클릭한 값 : "+e);
+			if(roomtable.getSelectionModel().getSelectedItem()==null) return;	// 방 목록 없을때 클릭하면 터지는거 막는 조건문
+			
     		// 7. 클릭된 객체를 가져와서 selectroom에 저장
     		selectroom = roomtable.getSelectionModel().getSelectedItem();
     		
@@ -142,7 +144,10 @@ public class Chatting implements Initializable{
 					socket = new Socket(ip, port);	// 서버의 ip와 포트번호를 넣어주기 [ 서버와 연결 ]
 					send(Login.member.getMid()+"님이 입장하셨습니다.\n");
 					receive();// 접속과 동시에 받기 메서드는 무한루프
-				} catch (Exception e) {System.out.println(e);}
+				} catch (Exception e) {
+					clientstop();
+					System.out.println(e);
+					}
     		};
     	};	// 멀티스레그 구현 끝
     	
@@ -167,7 +172,10 @@ public class Chatting implements Initializable{
 					outputStream.write(msg.getBytes());	// 2. 전송하기
 					outputStream.flush();// 3. 출력스트림 초기화
 					System.out.println("send method : "+new String(msg.getBytes()));
-				} catch (Exception e) {System.out.println("send method exception : "+e);}
+				} catch (Exception e) {
+					clientstop();
+					System.out.println("send method exception : "+e);
+					}
     		};
     	};	// 멀티스레드 구현 끝
     	sendthread.start();
@@ -191,12 +199,19 @@ public class Chatting implements Initializable{
 				System.out.println("5");
 				System.out.println("txtcontent.appendText 실행 후 String message : "+ message);
 			}
-		} catch (Exception e) {System.out.println("receive method exception : "+e);}
+		} catch (Exception e) {
+			clientstop();
+			System.out.println("receive method exception : "+e);
+			}
     }
     
     @FXML
     void accconnect(ActionEvent event) {
     	if(btnconnect.getText().equals("채팅방 입장")) {
+    		if(selectroom==null) {
+    			System.out.println("selectroom이 null이다");
+    			return;
+    		}
     		clientstart(selectroom.getRoomip(), selectroom.getRoomnumber());// 클라이언트 실행 메서드
     			// 현재 방에 접속된 명단 추가
     		Roomlive roomlive = new Roomlive(0, selectroom.getRoomnumber(), Login.member.getMid());
@@ -230,17 +245,21 @@ public class Chatting implements Initializable{
         	btnadd.setDisable(false);		// 채팅방 나가면 채팅방 생성버튼 활성화처리
         	
         	// 1. 방 접속 명단에서 삭제하기
-        	
+        	RoomDao.roomDao.roomlivedelete(Login.member.getMid());
         	// 2. 만약에 방 접속 명단이 0명이면 방 삭제
-        	
+        	boolean result = RoomDao.roomDao.roomdelete(selectroom.getRoomnumber());
         	// 2-1. 서버소켓 죵료
-        	
+        	if(result) {
+        		server.serverstop();
+        		show();	// 방 삭제 후 리프레시
+        	}
         	// 2-2.
         	selectroom = null;
         	
         	// 2-3.
         	lblselect.setText("현재 선택된 방 : ");
-
+        	
+        	
     	}
     }
     
@@ -291,15 +310,7 @@ public class Chatting implements Initializable{
     	txtmidlist.setEditable(false);	// 회원 목록 사용자가 수정 금지
     	btnconnect.setDisable(true);	// 접속 전 채팅방 입장 버튼 사용 금지 ( 방을 선택하면 버튼 활성화)
     	show();
-    	
-    	
-    	
-    	// show()에서 ip랑 포트 싸와서 server에다 던져주면 기존에 만든 방들 서버 열수 있을거 같은데??
-//////////////////////////////////////////////////////
- //   	server = new Servercontrol();
-    	// 서버 시작! [ 인수로 ip와 port 넘기기 ] 
-//    	server.serverstart(room.getRoomip(), RoomDao.roomDao.getroomnum());
-//////////////////////////////////////////////////////
+
     }
 
 }
