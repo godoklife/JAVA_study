@@ -267,21 +267,36 @@ public class MemberDao {	// DB 접근 객체로 사용
 		return 0;
 	}
 	///////////////////////////////////////////////////////////////////////////
-	// 10. 날짜별로 회원가입 회원 수 반환
-	public Map<String, Integer> datetotal() {
+	
+	// 10. (인수 : 테이블명, 필드명 ) 을 받아서 날짜별 개수 반환
+	public Map<String, Integer> datetotal(String table, String field){
 		Map<String, Integer> map = new HashMap<>();
-		String sql = "select msince, count(*) from member group by";
+		String sql = "select substring_index("+field+", ' ', 1), count(*) from "+table+" group by substring_index("+field+", ' ', 1)";
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				map.put(rs.getString(1), rs.getInt(2));
-					// 검색 결과 레코드의 첫번쨰 필드, 두번째 필드	
 			}
 			return map;
-		} catch (Exception e) {System.out.println(e);}
+		} catch(Exception e) {System.out.println(e);}
 		return null;
 	}
 	
+	// 11. 카테고리별 개수	// 10번과 통합됨	
+//	public Map<String, Integer> countcategory() {
+//		Map<String, Integer> map = new HashMap<>();
+//		String sql = "select pcategory, count(*) from product group by pcategory";
+//		try {
+//			ps = con.prepareStatement(sql);
+//			rs = ps.executeQuery();
+//			while(rs.next()) {
+//				map.put(rs.getString(1), rs.getInt(2));
+//			}
+//			return map;
+//		} catch (Exception e) {System.out.println(e);}
+//		return null;
+//		
+//	}
 	
 }

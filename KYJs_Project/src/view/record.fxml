@@ -3,6 +3,7 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TitledPane?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="txt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" style="-fx-background-color: #ceffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Record">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" style="-fx-background-color: #ceffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Record">
    <children>
       <Label layoutX="46.0" layoutY="8.0" text="통계" textFill="#5b3232">
          <font>
@@ -24,7 +25,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <BarChart layoutX="271.0" layoutY="9.0" prefHeight="269.0" prefWidth="549.0">
+                        <BarChart fx:id="mbc" layoutX="271.0" layoutY="9.0" prefHeight="269.0" prefWidth="549.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -40,7 +41,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <BarChart layoutX="268.0" layoutY="11.0" prefHeight="270.0" prefWidth="553.0">
+                        <BarChart fx:id="pbc" layoutX="430.0" layoutY="11.0" prefHeight="270.0" prefWidth="391.0">
                            <xAxis>
                               <CategoryAxis side="BOTTOM" />
                            </xAxis>
@@ -48,6 +49,7 @@
                               <NumberAxis side="LEFT" />
                            </yAxis>
                         </BarChart>
+                        <PieChart fx:id="ppc" layoutX="14.0" layoutY="11.0" prefHeight="259.0" prefWidth="400.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -56,7 +58,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <BarChart layoutX="253.0" layoutY="14.0" prefHeight="270.0" prefWidth="553.0">
+                        <BarChart fx:id="bbc" layoutX="253.0" layoutY="14.0" prefHeight="270.0" prefWidth="553.0">
                            <xAxis>
                               <CategoryAxis side="BOTTOM" />
                            </xAxis>

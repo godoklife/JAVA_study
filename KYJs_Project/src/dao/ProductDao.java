@@ -46,7 +46,17 @@ public class ProductDao {
 	public ArrayList<Product> list (String category, String search) {
 		ArrayList<Product> productlist = new ArrayList<Product>();
 		try {
-			if(search==null) {
+			if(category==null && search == null) {	// 모든 제품 다 뺴오기
+				System.out.println("test1");
+				String sql = "select pcategory, count(*) from product group by pcategory";
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					Product product = new Product(rs.getInt(1), rs.getString(2), rs.getString(3),
+							rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getInt(9));
+					productlist.add(product);
+				}
+			}else if(search==null) {
 				String sql = "select * from product where pcategory = ? order by pnum desc";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, category);
