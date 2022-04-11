@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 import controller.login.Login;
 import dto.Member;
@@ -251,7 +253,35 @@ public class MemberDao {	// DB 접근 객체로 사용
 		} catch (Exception e) {System.out.println("회원정보 호출 예외 발생"+e);}
 		return null;
 	}
-	
+	///////////////////////////////////////////////////////////////////////////
+	// 9. 테이블의 전체 필드수 반환
+	public int counttotal(String table) {
+		String sql = "select count(*) from "+table;	// 
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {System.out.println(e);}
+		return 0;
+	}
+	///////////////////////////////////////////////////////////////////////////
+	// 10. 날짜별로 회원가입 회원 수 반환
+	public Map<String, Integer> datetotal() {
+		Map<String, Integer> map = new HashMap<>();
+		String sql = "select msince, count(*) from member group by";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				map.put(rs.getString(1), rs.getInt(2));
+					// 검색 결과 레코드의 첫번쨰 필드, 두번째 필드	
+			}
+			return map;
+		} catch (Exception e) {System.out.println(e);}
+		return null;
+	}
 	
 	
 }

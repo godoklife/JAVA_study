@@ -60,6 +60,14 @@ public class Home implements Initializable{
 	@FXML
 	private BorderPane borderpane;
 	
+	@FXML
+	private Label lblrecord;
+	
+	@FXML
+	public void accrecord(MouseEvent e) {
+		loadpage("/view/record.fxml");
+	}
+	
 	
 	@FXML
 	public void accboard(MouseEvent e) {
