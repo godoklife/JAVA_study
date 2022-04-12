@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import dto.Board;
 import dto.Reply;
@@ -25,8 +27,8 @@ public class BoardDao {
 		try {
 			// DB연동
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://cirrus.cpfogy2aejex.ap-northeast-2.rds.amazonaws.com:3306/javafx?serverTimezone=UTC","root","rladydwns1");
-			
+//			con = DriverManager.getConnection("jdbc:mysql://비밀이지롱);
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx?serverTimezone=UTC","root","1234");
 		}catch(Exception e) {System.out.println("BoardDao DB주소 연동 예외 발생"+e);}
 	}
 	
@@ -141,23 +143,41 @@ public class BoardDao {
 		ps.setInt(1, bnum);
 		rs = ps.executeQuery();
 		while(rs.next()) {
+			// 리플의 내용이 널값이면 객체화 안함
+			if( !(rs.getString(2)==null)) {
 			Reply reply = new Reply(rs.getInt(1), rs.getString(2), rs.getString(3), 
 					rs.getString(4), rs.getInt(5));
 			replylist.add(reply);
+			}
 		}
 		return replylist;
 		} catch (Exception e) {System.out.println("덧글 호출 메서드 ");}
 		return null;
 	}
 	
-	// 7. 조회수 카운트 업
+	// 7-1 내용이 null인 리플을 조회해서 있는지 없는지만 확인.(상세 데이터는 필요 없음, null 리플이 게시글 첫 조회 플레그 역할)
+	public boolean nullreplycheck(String mid, int bnum){
+		String sql = "select * from reply where rcontent is null and bnum=? and substring_index(rdate, ' ', 1)=curdate() and rwrite = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, bnum);
+			ps.setString(2, mid);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {System.out.println("nullreply method Exception : "+e);}
+		return false;
+	}
+	
+	// 7-2. 조회수 카운트 업
 	public void viewcountup(int count, int bnum) {
 		System.out.println("카운트 업!");
-		String count2 = count+"";
-		String bnum2 = bnum+"";
 		try {
-			String sql = "update board set bview="+count2+" where bnum="+bnum2;
+			String sql = "update board set bview=? where bnum=?";
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, count);
+			ps.setInt(2, bnum);
 			ps.executeUpdate();
 		} catch (Exception e) {System.out.println("viewcountup method Exception : "+e);}
 	

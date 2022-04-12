@@ -67,40 +67,45 @@ public class Boardview implements Initializable{
     	// 2.
     	ObservableList<Reply> replylist = BoardDao.boardDao.replylist(bnum);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    	
-    	// 날짜용 임시 객체		// 보드 클래스로 이동할것.
-    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    	String nowdate = format.format(new Date());
-    	boolean viewcounttmp=false;
-    	boolean iscountchanged=false;
-    	int i=0;	// index
-    	for(Reply tmp : replylist) {
-    		viewcounttmp=true;
-
-    		System.out.println("for문 진입");
-    		System.out.println(tmp.getRdate().split(" ")[0]);
-    		
-    		// 리플에 내용이 null인 리플의 작성날짜와 작성자를 기준으로 글의 조회수를 올림.
-    		if( !( tmp.getRdate().split(" ")[0].equals(nowdate) && tmp.getRwrite().equals(Login.member.getMid()) ) ) {
-    			System.out.println("if문 진입");
-    			BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1, bnum);	// 게시글 조회수 1 추가해서 DB에 저장
-    			Reply reply = new Reply(0, null, Login.member.getMid(), null, bnum); // 리플 DB에 내용이 일정하고 글쓴이가 로그인한 사용자인 리플을 저장
-    				// 목적 ?? 조회수 체크용
-    			BoardDao.boardDao.rwrite(reply);
-    		}
-    		if(tmp.getRcontent()==null) {
-    			iscountchanged=true;
-    			replylist.remove(i);
-    		}
-    		i++;
-    	}
-    	if (viewcounttmp==false) {
-    		iscountchanged=true;
-    		BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1, bnum);
-			Reply reply = new Reply(0, null, Login.member.getMid(), null, bnum); // 리플 DB에 내용이 일정하고 글쓴이가 로그인한 사용자인 리플을 저장
-			BoardDao.boardDao.rwrite(reply);
-    	}
+//    	// 날짜용 임시 객체		// 보드 클래스로 이동할것.
+//    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//    	String nowdate = format.format(new Date());
+//    	boolean viewcounttmp=false;
+//    	boolean iscountchanged=false;
+//    	int i=0;	// index
+//    	for(Reply tmp : replylist) {
+//    		viewcounttmp=true;
+//
+//    		System.out.println("for문 진입");
+//    		System.out.println(tmp.getRdate().split(" ")[0]);
+//    		
+//    		// 내용이 null인 리플의 작성날짜와 회원아이디를 기준으로 글의 조회수를 올림.
+//    		if( !( tmp.getRdate().split(" ")[0].equals(nowdate) && tmp.getRwrite().equals(Login.member.getMid()) ) ) {
+//    			System.out.println("if문 진입");
+//    			BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1, bnum);	// 게시글 조회수 1 추가해서 DB에 저장
+//    			Reply reply = new Reply(0, null, Login.member.getMid(), null, bnum); // 리플 DB에 내용이 일정하고 글쓴이가 로그인한 사용자인 리플을 저장
+//    				// 목적 ?? 조회수 체크용
+//    			BoardDao.boardDao.rwrite(reply);
+//    		}
+//    		if(tmp.getRcontent()==null) {	// 내용이 null인 리플이 사용자에게 표시되지 않도록 옵서블리스트에서 삭제처리
+//    			iscountchanged=true;
+//    			replylist.remove(i);
+//    		}
+//    		i++;
+//    	}
+//    	if (viewcounttmp==false) {
+//    		iscountchanged=true;
+//    		BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1, bnum);
+//			Reply reply = new Reply(0, null, Login.member.getMid(), null, bnum); // 리플 DB에 내용이 일정하고 글쓴이가 로그인한 사용자인 리플을 저장
+//			BoardDao.boardDao.rwrite(reply);
+//    	}
 //    	if (iscountchanged)
 //    		replylist = BoardDao.boardDao.replylist(bnum);
+    	
+    	
+    	
+    	// 스파게티의 진수 ㅠㅠ 그냥 BoardDao에 7-1, 7-2 만들자
+    	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    	
     	// 3. 
     	TableColumn tc = replytable.getColumns().get(0);
@@ -114,8 +119,8 @@ public class Boardview implements Initializable{
     	
     	tc = replytable.getColumns().get(3);
     	tc.setCellValueFactory(new PropertyValueFactory<>("rcontent"));
-    	
-    	replytable.setItems(replylist);
+    	if(replylist!=null)
+    		replytable.setItems(replylist);
     }
 
     @FXML
@@ -187,11 +192,27 @@ public class Boardview implements Initializable{
     	}
     }
     
+    
+    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
     	replytableshow();
     	Board board = controller.board.Board.board;	// board 컨트롤 내 테이블에서 선택된 객체 호출
-    		// (dto.Board)
+    	
+    	// 리플중에 내용이 null이고, 작성자 ID가 사용자와 같고, 작성날짜가 오늘인지 확인하는 조건문.
+    		// false : 사용자가 한번도 또는 오늘은 해당 글을 읽지 않음
+    		// true : 사용자가 이미 해당 글을 읽음
+    			
+    	if ( !(BoardDao.boardDao.nullreplycheck( Login.member.getMid(), board.getBnum() ) ) ) {
+    			// NOT 게이트를 붙였음으로 반대로 해석할것 ->  리플중에 내용이 null AND 작성자ID=사용자 AND 작성날짜=curdate() => if문 미실행
+    		BoardDao.boardDao.viewcountup(board.getBview()+1, board.getBnum());	// DB에 조회수 1 올려주기
+    		board.setBview(board.getBview()+1);	// 객체 내 메모리에 조회수 1 올려주기
+    		Reply writeNullReply = new Reply(0, null, Login.member.getMid(), null, board.getBnum());	// null리플(=플래그 역할) 작성하기 위해 객체화
+    		BoardDao.boardDao.rwrite(writeNullReply);	// 리플 작성
+    		Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.setHeaderText(Login.member.getMid()+"님은 "+board.getBtitle()+" 글을 오늘 처음 조회하셨습니다.");
+    		alert.showAndWait();
+    	}
     	
     	// 각 컨트롤에 선택된 board의 데이터를 뽑아와서 뿌려주기.
     	lblwriter.setText("작성자 : "+board.getBwrite());

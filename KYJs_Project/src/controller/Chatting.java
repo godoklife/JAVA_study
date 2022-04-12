@@ -240,6 +240,8 @@ public class Chatting implements Initializable{
         	txtmsg.setEditable(false);		// 접속 전에는 입력 못하게 막아놓기
         	txtcontent.setDisable(true);	// 재팅 뷰어 비활성화 처리
         	btnsend.setDisable(true);		// 접속 전에는 버튼 사용 금지
+        	btnconnect.setDisable(true);
+        	
         	
         	txtroomname.setDisable(false);	// 채팅방 나가면 챗방 이름 생성칸 활성화
         	btnadd.setDisable(false);		// 채팅방 나가면 채팅방 생성버튼 활성화처리
