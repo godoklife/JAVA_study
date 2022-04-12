@@ -23,7 +23,7 @@ public class RoomDao {
 	public RoomDao() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx?serverTime=UTC", "root", "1234");
+			con = DriverManager.getConnection("jdbc:mysql://cirrus.cpfogy2aejex.ap-northeast-2.rds.amazonaws.com:3306/javafx?serverTime=UTC", "root", "rladydwns1");
 		} catch (Exception e) {System.out.println("RoomDao DB연동 예외 발생 : "+ e);}
 	}
 	

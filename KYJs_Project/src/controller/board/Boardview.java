@@ -71,11 +71,14 @@ public class Boardview implements Initializable{
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     	String nowdate = format.format(new Date());
     	boolean viewcounttmp=false;
+    	int i=0;	// index
     	for(Reply tmp : replylist) {
     		viewcounttmp=true;
 
     		System.out.println("for문 진입");
     		System.out.println(tmp.getRdate().split(" ")[0]);
+    		
+    		// 리플에 내용이 null인 리플의 작성날짜와 작성자를 기준으로 글의 조회수를 올림.
     		if( !( tmp.getRdate().split(" ")[0].equals(nowdate) && tmp.getRwrite().equals(Login.member.getMid()) ) ) {
     			System.out.println("if문 진입");
     			BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1, bnum);	// 게시글 조회수 1 추가해서 DB에 저장
@@ -83,6 +86,10 @@ public class Boardview implements Initializable{
     				// 목적 ?? 조회수 체크용
     			BoardDao.boardDao.rwrite(reply);
     		}
+    		if(tmp.getRcontent()==null) {
+    			replylist.remove(i);
+    		}
+    		i++;
     	}
     	if (viewcounttmp==false) {
     		BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1, bnum);

@@ -41,6 +41,12 @@ public class Board_write implements Initializable{
     	String title = txttitle.getText();
     	String content = txtcontent.getText();
     	String write = Login.member.getMid();
+    	if(title==null || content==null) {
+    		Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.setHeaderText("제목이나 내용이 비었습니다.");
+    		alert.showAndWait();
+    		Home.home.loadpage("/view/board/board.fxml");
+    	}
     	// 2. 객체화 [ 글 번호(DB에서 자동추가=생략, 제목, 내용, 작성자, 작성일(DB에서 자동추가=생략), 조회수(자동추가=생략)
     	Board board = new Board(0, title, content, write, null, 0);
     	// 3. DB에 저장
@@ -48,7 +54,7 @@ public class Board_write implements Initializable{
     	
     	if(result) {
     		Alert alert = new Alert(AlertType.INFORMATION);
-    		alert.setHeaderText("작성이 완료되었습니다ㅏㅏㅏ");
+    		alert.setHeaderText("작성이 완료되었습니다.");
     		alert.showAndWait();
     		Home.home.loadpage("/view/board/board.fxml");
     	}
