@@ -151,7 +151,16 @@ public class BoardDao {
 	}
 	
 	// 7. 조회수 카운트 업
-	public void viewcountup(int count) {
+	public void viewcountup(int count, int bnum) {
 		System.out.println("카운트 업!");
+		String count2 = count+"";
+		String bnum2 = bnum+"";
+		try {
+			String sql = "update board set bview="+count2+" where bnum="+bnum2;
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+		} catch (Exception e) {System.out.println("viewcountup method Exception : "+e);}
+	
+		
 	}
 }

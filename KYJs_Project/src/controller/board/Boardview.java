@@ -70,14 +70,24 @@ public class Boardview implements Initializable{
     	// 날짜용 임시 객체		// 보드 클래스로 이동할것.
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     	String nowdate = format.format(new Date());
-    	
+    	boolean viewcounttmp=false;
     	for(Reply tmp : replylist) {
-    		if(tmp.getRdate().equals(nowdate) && tmp.getRwrite().equals(Login.member.getMid()) ) {
-    			BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1);	// 게시글 조회수 1 추가해서 DB에 저장
-    			
-    			Reply reply = new Reply(0, null, Login.member.getMid(), null, bnum); // 리플 DB에 내용이 null이고 글쓴이가 로그인한 사용자인 리플을 저장
+    		viewcounttmp=true;
+
+    		System.out.println("for문 진입");
+    		System.out.println(tmp.getRdate().split(" ")[0]);
+    		if( !( tmp.getRdate().split(" ")[0].equals(nowdate) && tmp.getRwrite().equals(Login.member.getMid()) ) ) {
+    			System.out.println("if문 진입");
+    			BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1, bnum);	// 게시글 조회수 1 추가해서 DB에 저장
+    			Reply reply = new Reply(0, null, Login.member.getMid(), null, bnum); // 리플 DB에 내용이 일정하고 글쓴이가 로그인한 사용자인 리플을 저장
+    				// 목적 ?? 조회수 체크용
     			BoardDao.boardDao.rwrite(reply);
     		}
+    	}
+    	if (viewcounttmp==false) {
+    		BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1, bnum);
+			Reply reply = new Reply(0, null, Login.member.getMid(), null, bnum); // 리플 DB에 내용이 일정하고 글쓴이가 로그인한 사용자인 리플을 저장
+			BoardDao.boardDao.rwrite(reply);
     	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    	
     	// 3. 

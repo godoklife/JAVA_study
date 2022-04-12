@@ -7,10 +7,12 @@ import java.util.ResourceBundle;
 
 import controller.Main;
 import dao.MemberDao;
+import dto.Member;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 
 public class Loginpane implements Initializable{
 	
@@ -59,18 +61,21 @@ public class Loginpane implements Initializable{
     	boolean result = MemberDao.memberDao.login(id, password);
     	
     	if(result) {
-    		// 로그인 성공시 성공한 회원정보 저장. [ 로그아웃 시 초기화 ] 
-    		Login.member = MemberDao.memberDao.getmember(id);
-/////////////////////////////////////////////    		오늘 첫 로그인시 10포인트 지급. 실행 위치 바꿔야함.
-    		if(!nowdate.equals(Login.member.getLastlogindate())) {
-    			System.out.println("객체 내 날짜 : "+Login.member.getLastlogindate());
-    			System.out.println("nowdate : "+nowdate);
-    			int tmpPoint = Login.member.getMpoint()+10;
-    			MemberDao.memberDao.updatepoint(Login.member.getMnum(), tmpPoint, nowdate);
-    		}
-/////////////////////////////////////////////    		
+/////////////////////////////////////////////    		오늘 첫 로그인시 10포인트 지급.
+    		Member pointTMP = MemberDao.memberDao.getmember(id);
+			if(!nowdate.equals(pointTMP.getLastlogindate())) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("오늘 첫 로그인이시네요! 10점 흭득!");
+				alert.showAndWait();
+			System.out.println("객체 내 날짜 : "+pointTMP.getLastlogindate());
+			System.out.println("nowdate : "+nowdate);
+			int tmpPoint = pointTMP.getMpoint()+10;
+			MemberDao.memberDao.updatepoint(pointTMP.getMnum(), tmpPoint, nowdate);
+			}
+///////////////////////////////////////////// 
+			// 로그인 성공시 성공한 회원정보 저장. [ 로그아웃 시 초기화 ] 
+			Login.member = MemberDao.memberDao.getmember(id);
     		
-    		lblconfirm.setText("로그인 성공");
     		Main.instance.loadpage("/view/home/home.fxml");
     	}else {
     		lblconfirm.setText("아이디와 비밀번호를 확인하세요");
