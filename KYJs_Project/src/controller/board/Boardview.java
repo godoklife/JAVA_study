@@ -71,6 +71,7 @@ public class Boardview implements Initializable{
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     	String nowdate = format.format(new Date());
     	boolean viewcounttmp=false;
+    	boolean iscountchanged=false;
     	int i=0;	// index
     	for(Reply tmp : replylist) {
     		viewcounttmp=true;
@@ -87,15 +88,19 @@ public class Boardview implements Initializable{
     			BoardDao.boardDao.rwrite(reply);
     		}
     		if(tmp.getRcontent()==null) {
+    			iscountchanged=true;
     			replylist.remove(i);
     		}
     		i++;
     	}
     	if (viewcounttmp==false) {
+    		iscountchanged=true;
     		BoardDao.boardDao.viewcountup(controller.board.Board.board.getBview()+1, bnum);
 			Reply reply = new Reply(0, null, Login.member.getMid(), null, bnum); // 리플 DB에 내용이 일정하고 글쓴이가 로그인한 사용자인 리플을 저장
 			BoardDao.boardDao.rwrite(reply);
     	}
+//    	if (iscountchanged)
+//    		replylist = BoardDao.boardDao.replylist(bnum);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    	
     	// 3. 
     	TableColumn tc = replytable.getColumns().get(0);
