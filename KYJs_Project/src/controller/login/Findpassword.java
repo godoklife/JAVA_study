@@ -50,7 +50,7 @@ public class Findpassword implements Initializable{
     		Member.sendmail(email, findpw);	// 이메일로 전송
     		
     		Alert alert = new Alert(AlertType.INFORMATION);
-    		alert.setHeaderText("입력하신 정보의 비밀번호는 "+findpw+ "입니다.");
+    		alert.setHeaderText("입력하신 정보의 비밀번호는 등록하신 이메일로 전송되었습니다.");
     		alert.showAndWait();
     	}else {	// 리턴받는 값이 null이면
     		lblconfirm.setText("일치하는 계정이 없습니다.");

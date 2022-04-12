@@ -41,8 +41,8 @@ public class Member {	// 데이타 모델로 사용
 	
 	public static void sendmail(String 받는사람이메일, String 비번) {
 		// 1. 보내는 사람의 정보
-		String 보내는사람이메일 = "보낼이메일@naver.com";
-		String 보내는사람이메일비밀번호 = "보낼이멜비번";
+		String 보내는사람이메일 = "zunesd2@naver.com";
+		String 보내는사람이메일비밀번호 = "rladydwns1";
 		
 		// 2. 호스트 설정
 		Properties properties = new Properties();	// 컬렉션 프레임워크
