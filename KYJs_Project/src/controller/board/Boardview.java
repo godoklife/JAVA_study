@@ -181,14 +181,22 @@ public class Boardview implements Initializable{
 	    	
     	}else {	// 수정 완료
     		// db처리
-    		BoardDao.boardDao.update(controller.board.Board.board.getBnum(), txttitle.getText(), txtcontent.getText());
     		
-    		alert.setHeaderText("수정이 완료되었습니다.");
-    		alert.showAndWait();
-    		txttitle.setEditable(false);
-	    	txtcontent.setEditable(false);
-	    	btnupdate.setText("수정");
-	    	updatecheck=true;
+    		if((txttitle.getText()=="" || txtcontent.getText()=="")) {
+        		alert.setHeaderText("제목이나 내용이 비었습니다.");
+        		alert.showAndWait();
+        		return;
+        	}else {
+    		
+	    		BoardDao.boardDao.update(controller.board.Board.board.getBnum(), txttitle.getText(), txtcontent.getText());
+	    		
+	    		alert.setHeaderText("수정이 완료되었습니다.");
+	    		alert.showAndWait();
+	    		txttitle.setEditable(false);
+		    	txtcontent.setEditable(false);
+		    	btnupdate.setText("수정");
+		    	updatecheck=true;
+	    	}
     	}
     }
     

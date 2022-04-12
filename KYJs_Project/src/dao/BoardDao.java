@@ -27,7 +27,7 @@ public class BoardDao {
 		try {
 			// DB연동
 			Class.forName("com.mysql.cj.jdbc.Driver");
-//			con = DriverManager.getConnection("jdbc:mysql://비밀이지롱);
+//			con = DriverManager.getConnection("jdbc:mysql://remoteaddress");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx?serverTimezone=UTC","root","1234");
 		}catch(Exception e) {System.out.println("BoardDao DB주소 연동 예외 발생"+e);}
 	}

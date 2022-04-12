@@ -23,7 +23,7 @@ public class MemberDao {	// DB 접근 객체로 사용
 		try {
 		// DB 연동
 		Class.forName("com.mysql.cj.jdbc.Driver");	// 1. DB 드라이버 가져오기
-//		con = DriverManager.getConnection("jdbc:mysql://비밀이지롱);
+//		con = DriverManager.getConnection("jdbc:mysql://remoteaddress");
 		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx?serverTimezone=UTC","root","1234");
 
 			// 2. DB 주소, 아이디, 비번 연동
