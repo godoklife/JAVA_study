@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>7. 폼 태그</title>
+</head>
+<body>
+
+	<!-- 
+		폼 form 양식  :사용자에게 입력, 선택 할 수 있는 서식
+			1. <input> : 입력 상자 
+				* 속성 
+					1. type : 입력 타입 [ 형식 ] 
+						1. text : 문자를 입력받는다
+						2. password : 비밀번호 입력 받기 [ 입력한 내용을 가림 ] 
+						3. radio : 라디오버튼, 이름 지정 후 사용, 보통 중복선택 불가할 때 사용
+						4. checkbox : 체크박스, 이름 지정 후 사용, 보통 중복선택 가능할 때 사용
+						5. button : 걍 버튼
+						6. submit : 입력받은 데이타들을 전송하는 버튼
+						7. reset : 입력받은 양식들을 초기화 하는 버튼
+						8. color : 색상 팔래트 줄력 후, 입력받기 가능
+						9. date : 달력 출력 후 날짜 선택
+						10. datetime-local : 달력 출력 후 날짜, 시간 선택 
+						11. month : 월 선택
+						12. time : 시간 선택
+						13. week : 달력 출력 후 주를 선택
+						14. email : 이메일 입력 받는 박스(사용자가 골뱅이 입력 안하면 경고창 띄움)
+						15. number : 숫자 입력 상자(up,down)
+						16. range : 슬라이드바
+						
+					2. value : 미리 값 넣기
+					3. readonly : 말 그대로 읽기전용 [ 수정 금지 ]
+					4. diabled : 사용 금지 [ 회색으로 처리되는거, 클릭이 안됨 ] 
+					5. placeholder : 가이드 입력(사용자가 입력하면 사라지는 글)
+					6. autofocus : 포커스 자동 변경
+			2. <select> : 목록 상자
+				1. <option> 목록에 들어갈 value
+			3. textarea
+				1. 사용자로부터 글을 입력받는 박스. 크기 지정은 픽셀 단위가 아니라 글자 단위.
+				2. rows : 가로 글자수
+				3. cols : 세로 글;자수
+			4 . input list = "이름" : html 5 부터 추가된 리스트
+				1. <datalist id = "이름"> <option value = "미니이리"> 
+					a. <option value = "미니이리">
+				   </datalist>	
+	 -->
+	 <form>	<!-- 입력 틀(양식) -->
+	 	이름 : <input type = "text" value="유재석" readonly = "readonly"> <br>
+	 	아이디 : <input type = "text" placeholder="아이디를 입력" autofocus="autofocus"> <br>
+	 	회원등급 : <input type = "text" value="일반" disabled="disabled"> <br>
+	 	비밀번호 : <input type = "password"> <br>	<!-- 입력 타입을 비번으로 설정하면 입력값이 보이지 않게 설정됨. -->
+	 	라디오버튼[이름이 같은 경우 중복선택 불가] :	<input type = "radio" name = "email"> 예 
+	 										<input type = "radio" name = "email" checked="checked"> 아니오 <br>
+	 	체크박스[이름이 같은 경우 중복선택 불가, 보통 체크박스는 이름을 다르게 해서 중복입력 받는데 사용.] : <input type = "checkbox" name = "item1"> 뉴스 
+	 									<input type = "checkbox" name = "item2"> 드라마
+	 									<input type = "checkbox" name = "item3"> 스포스 <br>
+	 	목록상자 : <input type = "text"> @
+	 				<select>
+	 					<option> 직접 입력 </option>
+	 					<option> naver.com </option>	 				
+	 					<option> gmail.com </option>
+	 				</select> <br>
+	 				
+	 	자기소개 : <textarea rows="3" cols="30"></textarea> <br>
+	 		 		<!--  textarea는 픽셀 단위가 아니라 글자수 단위임. -->
+	 	버튼 : <input type = "button" value="버튼">
+	 			<input type = "submit" value = "폼 전송버튼">
+	 			<input type = "reset" value = "다시쓰기">	 	<br>
+	 			
+	 	색상 : <input type = "color"> <br>	
+	 	날짜 		: <input type = "date">	<!-- 달력 출력 -->
+	 			  <input type = "datetime-local"><br> <!--  달력, 시간 -->
+	 	이메일	: <input type = "email"> <br> <!-- 골뱅이가 들어가야 입력이 됨. -->
+	 	월 단위 	: <input type = "month"> <br>
+	 	시간 단위 	: <input type = "time">	<br>
+	 	주 단위	: <input type = "week"> <br>
+	 	숫자 단위 	: <input type = "number" min="1" max="31"> <br>	<!-- min max 안 정해주면 무한임 -->
+	 	범위 		: <input type = "range" min ="0" max = "100" step = "10"><br>
+	 	리스트	: <input list = "이름">
+	 				<datalist id = "이름">
+	 					<option value = "yahoo">
+	 					<option value = "naver">
+	 					<option value = "google">
+	 					<option value = "licos">
+	 				</datalist><br>
+	 	
+	 		 		
+	 </form>
+
+</body>
+</html>
