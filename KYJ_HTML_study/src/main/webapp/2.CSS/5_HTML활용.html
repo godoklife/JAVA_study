@@ -13,8 +13,8 @@
 		}
 		div, span{	/* span에는 가로 세로 사이즈 적용이 안된다 !!! ->> 그래서 span보다는 div를 조금 더 자주 씀. */
 			border : solid 3px red;
-			width : 600px;				/* 미지정시 브라우저 화면 크기의 100% */
-			height : 200px;
+			width : 1000px;				/* 미지정시 브라우저 화면 크기의 100% */
+			height : 300px;
 		}
 		
 		#t1{ background-color : red;}
@@ -40,6 +40,17 @@
 			text-align: center;
 		}
 		
+		.col1{
+			width : 100px;
+		}
+		
+		.col2{ width : 150px; }
+		
+		.col3{ width : 300px; }
+		
+		.col4{ width : 400px; }
+		
+		
 	</style>
 
 </head>
@@ -58,10 +69,10 @@
 			안녕하세요! (2)
 			<table>
 				<tr>
-					<th> 종류 </th>
-					<th> 대인 </th>
-					<th> 소인 </th>
-					<th> 비고 </th>
+					<th class="col1"> 종류 </th>
+					<th class="col2"> 대인 </th>
+					<th class="col3"> 소인 </th>
+					<th class="col4"> 비고 </th>
 				</tr>
 				<tr>
 					<td> 주간권 </td>
