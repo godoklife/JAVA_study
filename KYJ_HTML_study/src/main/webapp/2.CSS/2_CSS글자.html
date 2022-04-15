@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+
+	<style type = "text/css">
+	
+	@font-face {
+	    font-family: 'CookieRun-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	
+	@font-face {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+		/* 주석처리 할 내용 */
+		/* 선택자 { 속성명 } */
+		*{font-family:"궁서"; color:blue;}
+		
+		h3{	/* h3태그를 선택해서 꾸미지 */
+			font-family:"CookieRun-Regular";
+			text-decoration: overline line-through underline; /* overline : 윗줄 긋기, line-through : 취소선. underline : 밑줄*/
+			text-align : center;	/* 폰트 정렬 */
+			text-shadow : 3px 3px 5px orange;	/* 그림자 색상 */
+						/* x축  y축 z축  색상   */
+						
+		}
+		
+		p{ /* p태그만 선택해서 꾸미기 */
+			font-family: 'BMJUA';
+			background-color: lime;	/* 글자 배경색 */
+			line-height: 200%;		/* 줄간격 */
+			font-size : 25px;		/* 폰트 크기 */
+			font-style : italic;	/* 폰트 기울기 */
+			font-weight: bold;		/* 폰트 굵게 */
+			
+			letter-spacing : 2px;	/* 자간 */
+			word-spacing : 10px;		/* 어간 */
+		}
+		
+		a{
+			text-decoration: none;	/* 밑줄 제거 */
+			color : black;
+		}
+		
+		a:hover{	/* a태그에 마우스를 올렸을 때 */
+			color : orange;
+		}
+		
+		a:visited {	/* a태그를 클릭한 기록이 있을 때 */
+			color : green;
+		}
+		
+		a:active {	/* a태그를 클릭했을 때 */
+			color : red;
+		}
+		
+		
+	</style>
+
+</head>
+<body>
+	<!-- 
+		선택자 { 속성명 = 값 }
+			1. font-family : "글꼴명" -> 글꼴 선택하기
+			2. color : red 			-> 글자색상
+			3. text-decoration : 
+				overline		: 윗줄
+				underline		: 밑줄
+				line-through	: 취소선
+			4. text-align : 텍스트 정렬
+				center	: 가운데 정렬
+				left	: 좌측	
+				right	: 우측
+			5. text-shadow	: 3px 3px 5px orange;	-> x축 y축 z축 글에 그림자색상 지정
+			6. line-height	: 줄간격 ( 150%~180%이 표준)
+			7. letter-spacing	: 자간
+			8. word-spacing	: 어간
+			9. font-size	: 글자 크기
+			10. font-style : italic		-> [ 글자 기울이기 ] 
+			11. font-weight : bold		-> [ 글자 굵게 ]
+			12. a태그 이벤트 선택자 
+				a:hover		: a태그에 마우스를 올렸을 때
+				a:visited	: a태그를 클릭한 기록이 있을 때
+				a:active	: a태그를 클릭했을 때
+			
+			
+			
+	 -->
+
+	
+	<h3> 삼성전자 - 웹폰트 - 쿠키런</h3>
+	<p>주소지 상 본사는 경기도 수원시 영통구 삼성로 129 (매탄동) 삼성디지털시티다. 
+		<br>그러나 사무동이 서울특별시 서초구 서초동 강남역 근처의 삼성타운에 있어 본사가 사무동이라고 알고 있는 사람들이 많다.<p>
+	<p>	하지만 2016년, 미래전략실을 제외한 삼성타운에 있는 사무동까지 모두 삼성디지털시티로 옮기기로 결정내렸다.</p><br>
+	
+	
+	<a href="http://www.naver.com">네이버</a><br>
+	
+	
+	
+
+	
+</body>
+</html>
