@@ -3,13 +3,89 @@
 <head>
 <meta charset="EUC-KR">
 <title>5. HTML 활용</title>
+
+	<style type="text/css">
+		
+		body{
+			background-image : url("pattern.jpg");		/* 배경 자동반복 기본값은 on임. */
+			background-repeat : no-repeat;				/* 배경 자동반복 끄기 설정 */
+			color : blue;
+		}
+		div, span{	/* span에는 가로 세로 사이즈 적용이 안된다 !!! ->> 그래서 span보다는 div를 조금 더 자주 씀. */
+			border : solid 3px red;
+			width : 600px;				/* 미지정시 브라우저 화면 크기의 100% */
+			height : 200px;
+		}
+		
+		#t1{ background-color : red;}
+		#t2{ background-color : skyblue;}
+		#t3{ background-color : green;}
+		
+		table, th, td{
+			border : solid 2px black;
+		}
+		table {
+			border-collapse: collapse;
+			margin: 10px;	/* div 안에 있는 태그이므로, div로부터 마진을 10px 잡는다.(div의 마진도 잡힘) */
+			color : black;
+		}
+		
+		th{
+			padding : 10px;
+			background-color: #eeeeee;
+		}
+		
+		td{
+			padding : 10px;
+			text-align: center;
+		}
+		
+	</style>
+
 </head>
 <body>
 
 
 
+	<h3> 배경 이미지 </h3>
 	
-
+		<div id = "t1"> <!--  한줄을 차지하는 박스 모델 -->
+			안녕하세요 ! 
+		</div>
+		
+	<h3> 테이블 </h3>
+		<div id = "t2">
+			안녕하세요! (2)
+			<table>
+				<tr>
+					<th> 종류 </th>
+					<th> 대인 </th>
+					<th> 소인 </th>
+					<th> 비고 </th>
+				</tr>
+				<tr>
+					<td> 주간권 </td>
+					<td> 20,000원 </td>
+					<td> 10,000원 </td>
+					<td rowspan = "3"> 공원 입장 및 놀리공원 이용<br> (일부 놀이공원 별도 요금)</td>
+				</tr>
+				<tr>
+					<td> 야간권 </td>
+					<td> 3,000원 </td>
+					<td> 50,000원 </td>
+				</tr>
+				<tr>
+					<td> 2일권 </td>
+					<td> 100,000원 </td>
+					<td> 150,000원 </td>
+				</tr>
+			</table>
+			
+			
+		</div>
+		<span id = "t3">
+			안녕하세요! (3)
+		</span>
 
 </body>
 </html>
