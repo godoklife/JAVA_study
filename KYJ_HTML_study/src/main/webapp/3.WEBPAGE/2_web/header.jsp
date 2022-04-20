@@ -13,8 +13,10 @@
 	    font-weight: normal;
 	    font-style: normal;
 		}
-	
 		li{
+			list-style : none;
+		}
+		#menus li{
 			list-style: none;
 			/* float: left; */
 			display: inline;

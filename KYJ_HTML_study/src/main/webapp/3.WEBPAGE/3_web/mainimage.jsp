@@ -7,19 +7,17 @@
 <title>Insert title here</title>
 	
 	<style type="text/css">
-		*{
-			margin : 0px;
-			padding : 0px;
+		#mainimg{
+			text-align: center;
 		}
 	</style>
-	
+
 </head>
 <body>
-	
-	<%@include file = "header.jsp" %>
-	<%@include file = "mainimage.jsp" %>
-	<%@include file = "main.jsp" %>
-	<%@include file = "footer.jsp" %>
+
+	<div id = "mainimg">
+		<img src = "img/main.jpg" width = "1440">
+	</div>
 	
 </body>
 </html>

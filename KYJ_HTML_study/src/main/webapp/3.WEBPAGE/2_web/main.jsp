@@ -57,16 +57,20 @@
 			float : right;
 		}
 		#left_main .title1{
+			margin-top : 5px;
 			border-bottom: solid 2px black;
 			padding-bottom: 10px;
+			clear : both;
 		}
 		#left_main .items{
 			height : 30px;
 		}
 		#left_main .items .subject{
+			width : 350px;
 			float: left;
+			margin-top : 10px;
 		}
-		#left_main .itmes .date{
+		#left_main .items .date{
 			float : right;
 		}
 		

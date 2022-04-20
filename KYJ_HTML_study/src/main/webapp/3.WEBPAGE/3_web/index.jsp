@@ -5,13 +5,17 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-	
+
+
 	<style type="text/css">
 		*{
-			margin : 0px;
-			padding : 0px;
+			margin : 0;
+			padding : 0;
 		}
+		
+	
 	</style>
+
 	
 </head>
 <body>
