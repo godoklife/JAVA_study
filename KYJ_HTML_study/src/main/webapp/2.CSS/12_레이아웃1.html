@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+	<style type="text/css">
+		#box1, #box2, #box3{
+			width : 300px;
+			border : solid 1px red;
+			margin : 0 auto;	/* 박스권 가운데 정렬 : margin : 0 auto; */
+			padding : 20px;		
+		}
+		#box2{
+			text-align: right;	/* 박스 내용물 정렬 : text-align : 방향; */
+		}
+		#box3{
+			text-align: center;
+		}
+		#a, #b, #c, #d{
+			width : 100px;
+			height : 50px;
+			margin : 10px;
+			color : black;
+			text-align : center;
+			border : solid 1px red;
+		}
+		#a, #b{
+			background-color: green;
+		}
+		#c{
+			float : right;	/* float : 다른 상자 위에 겹칠 수 있음. */
+			background-color: blue;
+		}
+		#d{
+			float : left;
+			background-color: gray;
+		}
+		#f{
+			float:left;
+		}
+		h3{
+			clear : both;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div id = "box1">
+		안녕하세요
+	</div>
+	
+	<div id = "box2">
+		안녕하세요2~
+	</div>
+	
+	<div id = "box3">
+		<img alt = "" src="../pizza3.jpg" width="100px">
+	</div>
+	<div id="a"> 요소 A</div>
+	<div id="b"> 요소 B</div>
+	<div id="c"> 요소 C</div>
+	<div id="d"> 요소 D</div>
+	<div id="f"><img alt="" src="pattern.jpg" width=100px></div>
+	<h3> 패턴 이미지</h3>
+	<p> 패턴 이미지 입니다</p>
+	
+	<!--  
+		
+		float : left	왼쪽 겹쳐서 배치
+		float : right	오른쪽 겹쳐서 배치
+		clear : both	float속성 제거 ->> 플롯 속성을 끊을 오브젝트부터 사용.
+		
+	 -->
+
+
+</body>
+</html>

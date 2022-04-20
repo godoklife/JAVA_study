@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>15. 포지션</title>
+	<style type="text/css">
+		#a, #b, #c, #d, #e, #f, #g, #h, #i, #g2, #h2, #i2, #k{
+			width : 100px;
+			height : 60px;
+			background-color: yellow;
+			border : solid 1px red;
+		}
+		#b{	/* 상대 위치 : 현 div 시작점을 기준으로 위치를 설정 */
+			position: relative;		/* 상대 위치로 설정 */
+			left : 50px;
+			top : 30px;
+		}
+		#e{	/* 절대 위치 : 상위 태그의(e의 경우 body) 북서쪽 끝을 기준으로 시작점 잡고 위치를 설정.*/
+			position: absolute;		/* 절대 위치로 설정 */
+			left : 50px;
+			top : 30px;
+		}
+		#parent{
+			width  : 350px;
+			height : 200px;
+			border : solid 1px blue;
+			position : relative;
+			left : 50px;
+			top : 30px;
+		}
+		#h{	/* h의 상위 태그는 parent이므로, 상위태그가 relative이든 absolute이든 그걸 기준으로 위치 설정. */
+			position: absolute;
+			left : 30px;
+			top : 40px;
+		}
+		#parent2{
+			width  : 350px;
+			height : 200px;
+			border : solid 1px blue;
+			position : absolute;
+			left : 200px;
+			top : 60px;
+		}
+		#h2{	/* 별거 없음. 부모의 위치 따라감. */
+			position: absolute;
+			left : 30px;
+			top : 40px;
+		}
+		#k{
+			position: fixed;
+			top : 30px;
+			right : 50px;
+		}
+		
+	</style>
+
+</head>
+<body>
+
+	<!-- 
+		
+		position : relative;	[ 상대 위치 ->> 본인의 현재 위치는 기준으로 위치 설정. ]
+		position : absolute;	[ 절대 위치 ->> 상위 태그의 북서쪽 끝을 기점으로 위치 설정.]
+		position : fixed;		[ left : 30px; top : 30px; ->> 좌측 30px, 상단 30px 위치에 고정 ]
+		
+	 -->
+	
+	
+	<h3> 상대 위치 지정 </h3>
+		<div id="a"> 요소 A </div>
+		<div id="b"> 요소 B </div>
+		<div id="c"> 요소 C </div>
+		
+	<h3> 절대 위치 지정 </h3>
+		<div id="d"> 요소 D </div>
+		<div id="e"> 요소 E </div>
+		<div id="f"> 요소 F </div>
+		
+	<h3> 부모 : 상대 위치(relative)일 경우의 절대위치를 넣으면??</h3>
+	<div id="parent">
+		<div id="g"> 요소 G </div>
+		<div id="h"> 요소 H </div>
+		<div id="i"> 요소 I </div>
+	</div>
+	
+	<h3> 부모 : 상대 위치(relative)일 경우의 절대위치를 넣으면??</h3>
+	<div id="parent2">
+		<div id="g2"> 요소 G2 </div>
+		<div id="h2"> 요소 H2 </div>
+		<div id="i2"> 요소 I2 </div>
+	</div>
+	
+	<div id="k"> 위치 고정 </div>
+	
+</body>
+</html>

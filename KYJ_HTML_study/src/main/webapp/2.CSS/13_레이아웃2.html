@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+	<style type="text/css">
+		
+		*{
+			border : solid 1px red;
+			text-align : center;
+			font-size : 40px;
+		}
+		
+		#web{
+			margin : 0 auto;
+		}
+		#header{
+			background-color: green;
+		}
+		#container{
+			width : 1200px;		/* 와이드모니터 기준 일반적으로 1100~1300px 자주 사용 */
+			background-color: orange;
+			margin : 0 auto;
+			height : 600px;
+		}
+		#left{
+			width : 900px;
+			background-color : red;
+			float : left;
+			height : 600px;
+		}
+		#right{
+			width : 296px;	/* 1200px - 900px - 보더 4개=4px = 296px, 보더 계산 안하고 300px넣어버리면 밖으로 나가버림. */
+			background-color : blue;
+			float : right;
+			height : 600px;
+		}
+		#footer{
+			background-color: gray;
+			clear : both;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="web">
+		<div id="header">상단 헤더</div>
+		<div id="container">
+			<div id="left">메인 좌측</div>
+			<div id="right">메인 우측</div>
+		</div>
+		<div id="footer">하단 푸터</div>		
+	</div>
+
+</body>
+</html>
