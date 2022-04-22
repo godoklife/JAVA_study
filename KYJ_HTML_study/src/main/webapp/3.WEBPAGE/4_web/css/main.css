@@ -1,0 +1,67 @@
+@font-face {
+    font-family: 'CookieRun-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+*{
+	font-family: "CookieRun-Regular";
+	margin : 0px;
+	padding : 0px;
+}
+
+a{
+	text-decoration: none;
+	color : black;
+}
+a:hover{
+	color: skyblue;
+}
+
+.header_logo{
+	font-size : 30px;
+}
+.carousel-item img{
+	width : 100%;
+}
+#cs{
+	margin-top : 150px;
+}
+
+.item .title {
+	font-size: 20px;
+	line-height: 100%;
+}
+
+.item .content {
+	font-size : 12px;
+	margin-bottom: 50px;
+}
+.item .price_yen{
+	color: gray;
+	text-decoration: line-through;
+}
+.item .price_yen{
+	color: black;
+	font-weight: bold;
+	font-size: 15px;
+	
+}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
