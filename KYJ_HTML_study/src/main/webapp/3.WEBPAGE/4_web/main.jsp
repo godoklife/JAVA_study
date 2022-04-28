@@ -52,8 +52,6 @@
 						<br>
 						<span class = "badge bg-warning text-dark my-3"> 公丰硅价 </span>
 						<span class = "badge bg-warning text-dark my-3"> 秦款漂价 </span>
-						
-						
 						</p>
 					</div>
 				</div>
