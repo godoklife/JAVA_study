@@ -28,7 +28,7 @@
 					<div class = "col-md-4 d-flex justify-content-end" >
 						<ul class = "nav"> <!--  nav : 리스트의 글머리 삭제, 가로배치. -->
 							<li><a href = "http://www.naver.com" >로그인</a> | </li>
-							<li><a href = "">회원가입</a> | </li>
+							<li><a href = "join.jsp">회원가입</a> | </li>
 							<li><a href = "">장바구니</a></li>
 						</ul>
 					</div>

@@ -1,0 +1,85 @@
+@charset "EUC-KR";
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ font-family: 'Nanum Gothic', sans-serif;
+}
+
+*{
+	font-family: "Nanum Gothic";
+	color: black;
+}
+
+a{
+	text-decoration: none;
+	color: #ababab;
+}
+
+a:hover{
+	color: #eeeeee;
+}
+
+.tophead{
+	font-size: 12px;
+	margin-left :25px;
+}
+
+#hunslogo{
+	font-size : 30px;
+	font-weight: bold;
+	color : black;
+}
+.sidemenu{
+	position: fixed;
+	left:10px;
+	margin-top : 80px;
+	max-height: 515px !important;
+}
+
+.sidebar a{
+	font-size: 14px;
+	color: black;
+	font-weight: bold;
+}
+
+.content{
+	margin-top: 80px;
+}
+#titlearea{
+	text-align: center;
+	margin-bottom: 80px;
+}
+#titlearea .title{
+	color: #2e2e2e;
+	font-size: 20px;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.card{
+	border-style: none;
+}
+
+.footer{
+	border-top: solid 1px #eeeeee;
+}
+
+.footer p{
+	font-size: 13px;
+/* 	color: #2e2e2e; */
+	margin: -1px 0;
+}
+
+.footer .title{
+	letter-spacing: 3px;
+	color: #999999;
+	font-size: 14px;
+}
+
+#findbox a{
+	font-size: 11px;
+}
+#findbox{
+	font-size: 11px;
+}

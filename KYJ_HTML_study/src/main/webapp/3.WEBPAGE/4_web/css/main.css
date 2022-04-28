@@ -49,19 +49,40 @@ a:hover{
 	font-size: 15px;
 	
 }
+.titleline{
+	border-bottom: solid 5px orange;
+	width: 200px; 
+	margin: 0 auto;
+}
+.form-control{
+	background-color: white !important; /* 중복일경우 !important : 우선 적용*/
+}	
 
+.grayline{
+	border-bottom: solid 5px #eeeeee;
+	border-top: solid 5px #eeeeee;
+}
+#join input{
+	margin : 7px 0;
+	height : 50px;
+	vertical-align: middle;
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+}
+#join button{
+	margin : 7px 0;
+	height : 50px;
+}
+#fontbold{
+	font-weight: bold;
+	line-height: 120%
+}
+#fontgray{
+	color: gray;
+}
+#line{
+	border-top: solid 3px #eeeeee;
+	border-bottom : solid 3px #eeeeee;
+}
+#bottomline{
+	border-bottom: solid 3px #eeeeee;
+}
