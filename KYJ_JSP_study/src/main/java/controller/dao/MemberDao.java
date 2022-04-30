@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import controller.dto.Board;
 import controller.dto.Member;
@@ -12,7 +13,9 @@ public class MemberDao {
 	private Connection con;			// DB 연결 클래스
 	private PreparedStatement ps;	// DB 조작 
 	private ResultSet rs;			// DB 결과 
-
+	
+	public static MemberDao instance = new MemberDao();
+	
 	public MemberDao() {
 		// jdbc : java data base connecter
 			// 1. project build path에 mysqljdbc.jar 추가
@@ -84,4 +87,54 @@ public class MemberDao {
 		return false;
 	}
 	
+	public ArrayList<Board> boardlist() {	// 게시물 싹다 불러오는 메서드
+		ArrayList<Board> result = new ArrayList<>();
+		String sql = "select * from board";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				result.add(board);
+			}
+			return result;
+		} catch (Exception e) {System.out.println("MemberDao_boardlist_exception : "+e);}
+		return null;
+	}
+	public Board viewboard(int bno) {
+		String sql = "select * from board where bno="+bno;
+		try {
+		
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				return board;
+			}
+		} catch (Exception e) {System.out.println("MemberDao_viewboard_exception : "+e);}
+		return null;
+		
+	}
+	public void boarddelete(int bno) {
+		String sql = "delete from board where bno="+bno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.execute();
+		} catch (Exception e) {System.out.println("MemberDao_boarddelete_exception : "+e);}
+		
+	}
+	
+	public void boardmodify(Board board) {
+		String sql = "update board set btitle=?, bcontent=? where bno=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, board.getBtitle());
+			ps.setString(2, board.getBcontent());
+			ps.setInt(3, board.getBno());
+			ps.executeUpdate();
+		} catch (Exception e) {System.out.println("Memberdao_boardmodify_exception : "+e);}
+				
+		
+	}
 }

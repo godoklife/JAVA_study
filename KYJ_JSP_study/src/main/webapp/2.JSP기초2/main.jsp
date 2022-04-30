@@ -1,3 +1,6 @@
+<%@page import="controller.dto.Board"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="controller.dao.MemberDao"%>
 <%@page import="controller.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,13 +12,20 @@
 </head>
 <body>
 	<h3> 회원제 게시판 </h3>
+	<%
+		Member loginuser = (Member)session.getAttribute("user");
+	%>
+	
+	<%
+		if(loginuser==null){
+	%>
 	<a href = "signup.jsp"><button> 회원가입 </button></a> 
-	
-	
+	<%
+		}
+	%>
 	
 		<!--  자바스크립트 반복문 구역 -->
 		<%
-			Member loginuser = (Member)session.getAttribute("user");
 			if(loginuser != null){
 				System.out.println("세션이 살아 있읍니다.");
 		%>
@@ -41,11 +51,27 @@
 		<%
 			}
 		%>
+		
+		
 	<table> 
 	<tr>
-		<th> 번호 </th> <th> 제목 </th> <th> 내용 </th> <th> 작성자 </th>
+		<th> 번호 </th> <th> 작성자 </th> <th> 제목 </th> <th> 작성일 </th>
 	</tr>
-		
+	<%if(MemberDao.instance.boardlist()!=null){ // sql 탐색을 두번 하는 상당히 비효율적인 조건문임.
+		ArrayList<Board> result = MemberDao.instance.boardlist();
+		for(int i=0; i<result.size(); i++){
+	%>
+		<tr>
+			<td><a href = "view.jsp?bno=<%=result.get(i).getBno()%>"><%=result.get(i).getBno()%>번 </a></td>
+			<td><a href = "view.jsp?bno=<%=result.get(i).getBno()%>"><%=result.get(i).getBwriter()%></a></td>
+			<td><a href = "view.jsp?bno=<%=result.get(i).getBno()%>"><%=result.get(i).getBtitle()%></a></td>
+			
+			<td><a href = "view.jsp?bno=<%=result.get(i).getBno()%>"><%=result.get(i).getBdate()%></a></td>
+			
+			<!--  링크 던져주는건 get방식만 가능 : 주소에 값을 띄워주는. -->
+		</tr>
+		<%}%>
+	<%} %>	
 	</table>
 	
 </body>
