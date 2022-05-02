@@ -24,8 +24,10 @@
 	
 	
 	<!-- 사용자 정의 JS -->
-	<script src="js/main.js" type="text/javascript"></script>
+	<script src="/KYJ_JSPWEB_study/js/main.js" type="text/javascript"></script>
 	<!-- 부트스트랩 스크립트 -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- jquery 최신 CDN -->
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </body>
 </html>
