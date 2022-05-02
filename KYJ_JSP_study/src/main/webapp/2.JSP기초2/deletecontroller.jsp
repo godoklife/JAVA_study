@@ -8,3 +8,4 @@
     	MemberDao.instance.boarddelete(bno);
     	response.sendRedirect("main.jsp");
     %>
+    

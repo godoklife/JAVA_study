@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3> 자바 스크립트 위치 : body 태그 </h3>
+	
+	
+	<!--  1. HTML에 직접 JS를 작성하는 경우 -->
+	<script type="text/javascript">
+		var 메시지1 = "자바스크립트 var변수";
+		// 변수 선언
+		const 메시지2 = "자바스크립트 const변수";
+		// 변수 선운
+		let 메시지3 = "자바스크립트 let변수";
+		// 마찬가지로 변수 선언
+//		alert(메시지1);	// alert("알림메세지");
+		// javafx에서의 alert 하고 같은 메시지팝업창.
+		document.write("안녕하세요"+"<br>");
+		// 문서(HTML)에 작성하기. 변수 또는 일반 string 인수로 사용 가능.
+		console.log(메시지1);
+		for(var i=0; i<5; i++){
+			// 자바와 모양은 같지만, 자료형이 따로 없음. 
+				// JS의 자료형은 var, const, let 세가지 뿐.
+			document.write(메시지2 + "<br>")
+		}
+		
+	
+	</script>
+	
+	<p> js에서 작성된 변수 : <span id = "spantag1"> </span> 입니다. </p>
+	<p> js에서 연산된 변수 : <span id = "spantag2"> </span> 입니다. </p>
+	<p> js에서 작성된 함수 실행문 : <span id = "spantag3"> 선택색상 </span> 입니다.</p>
+	<button onclick="함수1()"> 함수1 실행 </button>	
+	
+	<ol id = "orderlist1"></ol>
+	<ol id = "orderlist2"></ol>
+	<button onclick="함수2()"> 함수2 실행 </button>	
+	
+	
+	<ol id = "orderlist3"></ol>
+	
+	<input type = "text" id = "input1" placeholder = "제품명">
+	<button onclick = "함수3()">함수 3 실행</button><br>
+	<button onclick = "함수4()">함수 4 실행</button>
+	
+	<button onclick="함수5('유재석', '남자')"> 인수가 곁들여진 함수5 실행 버튼</button>
+	
+	<!--  2. JS 파일을 HTML에 첨부할 경우 -->
+	<script src = "test.js" type="text/javascript"></script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>
