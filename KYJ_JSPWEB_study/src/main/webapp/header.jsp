@@ -13,14 +13,27 @@
 </head>
 <body>
 	<!-- 해더페이지는 서로 다른 페이지(경로)에서 실행되어야 하기 때문에 절대경로로 작성해야함. -->
-	<a href="/KYJ_JSPWEB_study/main.jsp"> main page </a>
-	<a href="/KYJ_JSPWEB_study/member/login.jsp"> 로그인 </a>
-	<a href="/KYJ_JSPWEB_study/member/signup.jsp"> 회원가입 </a>
-	
-	<div class="container">
-		해더 영역 컨테이너
+	<%
+		String loginid = (String)session.getAttribute("login");	// 세션 호출, 기본타입 : Object
+	%>
+	<div class="fixed-top" style="background-color:skyblue;">
+		<div class="container">
+			<!--  공통 -->
+			<div class = "row">
+				<div class="col-md-4 offset-8 text-center">
+				<a href="/KYJ_JSPWEB_study/main.jsp">HOME</a>
+				<!--  로그인이 되지 않은 상태 -->
+				<% if(loginid==null) { %>
+					<a href="/KYJ_JSPWEB_study/member/login.jsp"> 로그인 </a>
+					<a href="/KYJ_JSPWEB_study/member/signup.jsp"> 회원가입 </a>
+				<% } else if (loginid!=null) {%>
+					<a href="/KYJ_JSPWEB_study/Logout" id="logout"> 로그아웃 </a>
+					<a href="/KYJ_JSPWEB_study/member/memberinfo.jsp"> 회원정보</a>
+				<% } %>
+				</div>
+			</div>
+		</div>
 	</div>
-	
 	
 	
 	<!-- 사용자 정의 JS -->

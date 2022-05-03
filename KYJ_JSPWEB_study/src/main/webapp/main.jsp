@@ -10,7 +10,7 @@
 	<!--  해더 영역 -->
 	<%@include file="header.jsp" %>
 	<!--  메인 영역 -->
-	<div class = "container">
+	<div class = "container" style="width=100px; height=200px; background-color: red;">
 		메인 영역 컨테이너
 	</div>	
 
