@@ -13,7 +13,7 @@
 	<div class = "container">
 		<div class = "row">
 			<div class = "col-md-6"> <img src = "img/testcat.jpg" width="100%"></div>
-			<div class = "col-md-3 offset-9"> test
+			<div class = "col-md-6"> <video controls src="img/testcatmp4.mp4" width= "100%"></video>
 			</div>
 		</div>	
 	</div>	

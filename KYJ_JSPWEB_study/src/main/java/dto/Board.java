@@ -8,7 +8,7 @@ public class Board {
 	private int bview;
 	private String bdate;
 	private String bfile;
-	private String mid;
+	private String mid;	// 게시판 표시용, DB에는 저장 X
 	
 	public Board() {}
 	
