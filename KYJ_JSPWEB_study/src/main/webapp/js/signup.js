@@ -143,14 +143,15 @@ $(function(){	// jquery 문법. javascript 아님.
 		// 이메일 주소 유효성 체크
 	$("#memail").keyup(function(){
 		let memail = $("#memail").val();
+		let memailaddress = $("#memailaddress").val();
 //		let emailj = /^([a-zA-Z]{1,50})@([a-zA-Z]{1,50}).com$/;
 		let emailj = /^([a-zA-Z0-9]{3,30})$/;
-		if(memail==""){
+		let emailaddressj = /^([a-zA-Z0-9]{1,30})"."([a-zA-Z]{1,30})$/;
+		let emailaddressj2 = /^([a-zA-Z0-9]{1,30}).([a-zA-Z]{1,10}).([a-zA-Z]{1,10})$/;
+		if(memail=="" || memailaddress==""){
 			$("#emailcheck").html("이메일 주소를 입력해주세요.");
 			pass[5] = false;
-		}else if(emailj.test(memail)){
-			// 중복검사 해야함.
-			let memailaddress = $("#memailaddress").val();
+		}else if(emailj.test(memail) &&( (emailaddressj.test(memailaddress)) || emailaddressj2.test(memailaddress))){
 			let tmp = memail+"@"+memailaddress;
 			$.ajax({
 				url:"../Emailcheck",
@@ -167,20 +168,57 @@ $(function(){	// jquery 문법. javascript 아님.
 				}
 			});
 		}else{
-			$("#emailcheck").html("이메일 주소는 3~30자 이내여야 합니다.");
+			$("#emailcheck").html("이메일 주소는 영문 3~30자 이내여야 합니다.");
 			pass[5] = false;
 		}
 		
 	});
+	
+	$("#memailaddress").keyup(function(){
+		let memail = $("#memail").val();
+		let memailaddress = $("#memailaddress").val();
+//		let emailj = /^([a-zA-Z]{1,50})@([a-zA-Z]{1,50}).com$/;
+		let emailj = /^([a-zA-Z0-9]{3,30})$/;
+		let emailaddressj = /^([a-zA-Z0-9]{1,30})"."([a-zA-Z]{1,30})$/;
+		let emailaddressj2 = /^([a-zA-Z0-9]{1,30}).([a-zA-Z]{1,10}).([a-zA-Z]{1,10})$/;
+		
+		if(emailj.test(memail)){
+			if(emailj.test(memail) &&( (emailaddressj.test(memailaddress)) || emailaddressj2.test(memailaddress))){
+				let tmp = memail+"@"+memailaddress;
+				$.ajax({
+					url:"../Emailcheck",
+					data:{"email":tmp},
+					dataType : "text",
+					success:function(args){
+						if(args==1){
+							$("#emailcheck").html("이미 가입되어있는 이메일 주소 입니다.");
+							pass[5] = false;
+						}else if(args==0){
+							$("#emailcheck").html("사용 가능한 이메일 주소 입니다.");
+							pass[5] = true;
+						}
+					}
+				});
+			}else{
+				$("#emailcheck").html("그런 이메일 주소는 없습니다");
+				pass[5] = false;
+			}
+		}
+	});
+	
+	
 	// 이메일 주소 목록상자 선택시
 	$("#emailselect").change(function(){	// 목록 상자내 값이 변경되었을때 이벤트 발동
 		let emailselect = $("#emailselect").val();
 		if(emailselect==""){
 			$("#memailaddress").val("");
-			$("#memailaddress").attr("readonly", false);	
+			$("#memailaddress").attr("readonly", false);
+			pass[5] = false;	
+			$("#emailcheck").html("");
 		}else {
 			$("#memailaddress").val(emailselect);
 			$("#memailaddress").attr("readonly", true);	// attr ->> 애트리뷰트 속성. 
+			$("#emailcheck").html("");
 		}
 	});
 	
@@ -294,7 +332,10 @@ function signup(){
 }
 
 
-
+function passwordchange(){
+	$("#passwordbox").css("display","block");	// display=none으로 숨겨놨던거 풀어주는 명령어
+	
+}
 
 
 

@@ -10,8 +10,12 @@
 	<!--  해더 영역 -->
 	<%@include file="header.jsp" %>
 	<!--  메인 영역 -->
-	<div class = "container" style="width=100px; height=200px; background-color: red;">
-		메인 영역 컨테이너
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-md-6"> <img src = "img/testcat.jpg" width="100%"></div>
+			<div class = "col-md-3 offset-9"> test
+			</div>
+		</div>	
 	</div>	
 
 

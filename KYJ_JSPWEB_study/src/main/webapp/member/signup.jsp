@@ -10,7 +10,7 @@
 	<!--  해더 영역 -->
 	<%@include file="../header.jsp" %>
 	
-	<div class="container">
+	<div class="container mt-5">
 		<h3> 회원 가입 페이지</h3>
 		<form id = "signupform" action="../Signup" method="post">
 			아이디 : <input type="text" id = "mid" placeholder="아이디를 입력하세요"><br>
@@ -23,7 +23,7 @@
 			전화번호 : <input type = "text" id = "mphone" name = "mphone" placeholder = "전화번호를 입력하세요"><br>
 			<span id = "phonecheck"> </span><br>
 			E-mail : <input type = "text" id = "memail" name = "memail" placeholder = "이메일주소를 입력하세요">
-			@<input type = "text" id = "memailaddress" name = "memailaddress" value = "kpu.ac.kr">
+			@<input type = "text" id = "memailaddress" name = "memailaddress" value = "mail.go.kr">
 			<select id = "emailselect">
 				<option value = "">직접 입력</option>
 				<option value = "hanmir.com">hanmir.com</option>
@@ -34,10 +34,10 @@
 			<span id = "emailcheck"> </span><br>
 			주소 : 
 			<!--  다음 우편번호 HTML -->
-			<input type="text" id="sample4_postcode" name="maddress1" placeholder="우편번호">
+			<input type="text" id="sample4_postcode" name="maddress1" placeholder="우편번호"readonly>
 			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="sample4_roadAddress" name="maddress2" placeholder="도로명주소">
-			<input type="text" id="sample4_jibunAddress" name="maddress3" placeholder="지번주소">
+			<input type="text" id="sample4_roadAddress" name="maddress2" placeholder="도로명주소" readonly>
+			<input type="text" id="sample4_jibunAddress" name="maddress3" placeholder="지번주소"readonly>
 			<span id="guide" style="color:#999;display:none"></span>
 			<input type="text" id="sample4_detailAddress" name="maddress4" placeholder="상세주소">
 			<!--  다음 우편번호 HTML 끝-->

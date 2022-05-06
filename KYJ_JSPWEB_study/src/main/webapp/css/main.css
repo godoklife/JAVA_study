@@ -17,8 +17,9 @@ a:hover {
 	font-family: "CookieRun-Regular";
 	margin : 0 0 0 0;
 	padding : 0 0 0 0;
-	border: solid 1px red;
+	/* border : solid 1px red; */
 }
+
 #logout{
 	color : red;
 	font-weight: bold;

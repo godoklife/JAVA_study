@@ -28,8 +28,11 @@
 					<a href="/KYJ_JSPWEB_study/member/signup.jsp"> 회원가입 </a>
 				<% } else if (loginid!=null) {%>
 					<a href="/KYJ_JSPWEB_study/Logout" id="logout"> 로그아웃 </a>
-					<a href="/KYJ_JSPWEB_study/member/memberinfo.jsp"> 회원정보</a>
+					<a href="/KYJ_JSPWEB_study/member/info.jsp"> 회원정보</a>
+					<a href="/KYJ_JSPWEB_study/board/boardlist.jsp">자유게시판</a>
 				<% } %>
+				
+				
 				</div>
 			</div>
 		</div>
