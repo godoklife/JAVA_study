@@ -28,10 +28,21 @@
 			<%
 				for(Board tmp : boardlist){
 			%>
-			<tr>
-				<td><%=tmp.getBno()%></td><td><%=tmp.getBtitle()%></td><td><%=tmp.getMid()%></td>
-				<td><%=tmp.getBview()%></td><td><%=tmp.getBdate()%></td>
-			</tr>
+				<!--  행을 클릭했을때의 JS
+					<tr onclick="location.href='boardview.jsp'">
+					하위 페이지로 이동시 [ 식별 번호 같이 이동 ] 
+						// 1. HTML : 파일명( 경로 ).jsp?변수명=값
+						// 2. JS : "location.href='파일명(경로).jsp?변수병=값'"
+						// 3. JAVA(JSP) : response.sendRedirect("파일명(경로).jsp");
+				-->
+				<tr>
+					<td><%=tmp.getBno()%></td>
+					<!-- <td onclick="location.href='boardview.jsp?bno=<%=tmp.getBno()%>'" style="cursor: pointer;"><%=tmp.getBtitle()%></td> -->
+					<td onclick="location.href='boardview.jsp?bno=<%=tmp.getBno()%>'" style="cursor: pointer;"><%=tmp.getBtitle()%></td>
+					<td><%=tmp.getMid()%></td>
+					<td><%=tmp.getBview()%></td>
+					<td><%=tmp.getBdate()%></td>
+				</tr>
 			<%} %>
 		</table>
 	</div>

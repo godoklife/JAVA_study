@@ -37,7 +37,7 @@ public class Write extends HttpServlet {
 		
 		// 첨부파일 업로드
 		MultipartRequest multi = new MultipartRequest(request, uploadpath, 1024*1024*20, "UTF-8", new DefaultFileRenamePolicy());
-													// 요청방식	파일 저장 경로	파일 최대 크기		파일명 인코딩 타입	동일한 파일명이 있을 경우 자동 이름 변환
+													// 요청방식,	파일 저장 경로,	파일 최대 크기,		파일명 인코딩 타입,	동일한 파일명이 있을 경우 자동 이름 변환
 			// cos 라이브러리를 쓰면 multipartrequest 객체를 만든 뒤 request 대신 해당 객체를 사용하면 됨.
 		
 		// 데이터 요청

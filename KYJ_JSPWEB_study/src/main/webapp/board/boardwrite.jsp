@@ -28,6 +28,7 @@
 				제목 : <input type = "text" name = "btitle"><br>
 				<textarea name = "bcontent" id = "summernote"></textarea>
 				첨부파일 : <input type = "file" name = "bfile"><br>
+				첨부파일 여러개 : <input type = "file" multiple="multiple">
 				<input type ="submit" value="등록">
 				<input type = "reset" value="취소">
 			</form>
