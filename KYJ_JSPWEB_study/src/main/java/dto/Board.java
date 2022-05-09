@@ -28,6 +28,14 @@ public class Board {
 		this.bfile = bfile;
 		this.mid = mid;
 	}
+	
+	public Board(int bno, String btitle, int bview, String bdate) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bview = bview;
+		this.bdate = bdate;
+	}
 
 	public int getBno() {
 		return bno;

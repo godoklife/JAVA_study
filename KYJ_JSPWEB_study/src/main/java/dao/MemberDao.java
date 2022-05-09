@@ -147,4 +147,17 @@ public class MemberDao extends Dao{
 		} catch (Exception e) {System.out.println("Memberdao_getmno_exception : "+e);}
 		return 0;
 	}
+	
+	// 10. 강사님식 회원 ID 출력 메서드
+	public String getmid(int mno) {
+		String sql = "select mid from member where mno="+mno;
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (Exception e) {System.out.println("Memberdao_getmid_exception : "+e);}
+		return null;
+	}
 }

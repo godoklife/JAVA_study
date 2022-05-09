@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,7 +40,7 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	// 3. 글수정 메서드
-	public boolean update(Board board) {
+	public boolean modify(Board board) {
 		String sql = "update board set btitle=?, bcontent=?, bfile=? where bno=?";
 		try {
 			ps = con.prepareStatement(sql);
@@ -81,20 +82,43 @@ public class BoardDao extends Dao{
 //			return null;
 //		}
 	// 5. 개별 게시물 출력 메서드
-	public Board getboard(int bno) {
-		String sql = "select * from board where bno="+bno;
-		try {
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), null);
-				return board;
-			}else return null;
-		} catch (Exception e) {System.out.println("BoardDao_getboard_exception : "+e);}
-		return null;
-	}
+//	public Board getboard(int bno) {
+//		String sql = "select * from board where bno="+bno;
+//		try {
+//			ps = con.prepareStatement(sql);
+//			rs = ps.executeQuery();
+//			if(rs.next()) {
+//				Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), null);
+//				return board;
+//			}else return null;
+//		} catch (Exception e) {System.out.println("BoardDao_getboard_exception : "+e);}
+//		return null;
+//	}
+	
+	// 5. 개별 게시물 출력 메서드_이너조인으로 아이디 따오기
+		public Board getboard2(int bno) {
+			String sql = "select board.*, member.mid from board inner join member on board.mno where board.mno=member.mno and board.bno="+bno;
+			try {
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8));
+					return board;
+				}else return null;
+			} catch (Exception e) {System.out.println("BoardDao_getboard_exception : "+e);}
+			return null;
+		}
+	
+	
+	
 	// 6. 게시물 조회수 증가 메서드
 	public boolean increaseview(int bno) {
+		String sql = "update board set bview=bview+1 where bno="+bno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("BoardDao_increaseview_exception : "+e);}
 		return false;
 	}
 
@@ -115,22 +139,33 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	// 11. 모든 게시글 출력 메서드에 mid를 이너조인으로 곁들인
-	public ArrayList<Board> getboardlist2(){
+	public ArrayList<Board> getboardlist2(int mno){
 		ArrayList<Board> boardlist = new ArrayList<>();
-		String sql = "select board.*, member.mid from board inner join member on board.mno where board.mno=member.mno order by bno desc";
+		String sql;
+		boolean flag=false;
+		if(mno==-1) {
+			sql = "select board.*, member.mid from board inner join member on board.mno where board.mno=member.mno order by bno desc";
+		}else if(mno>0){
+			sql = "select * from board where mno="+mno+" order by bdate desc";
+			flag=true;
+		}else {
+			return null;
+		}
 			// bno가 작은순으로 정렬, board.mno = member.mno 기준으로 검색, member테이블에서 board.mno의 FK를 이너조인, board.*과 member.mid를 반환
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String sdfToday = sdf.format(today);
-		
-		System.out.println(sdfToday);
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				String tmpday1 = rs.getString(6).split(" ")[0];
 				String tmpday2 = rs.getString(6).split(" ")[1];
-				if(tmpday1 != null && tmpday1.equals(sdfToday)) {
+				if(flag) {
+					Board mywrite=new Board(rs.getInt(1), rs.getString(2), rs.getInt(5), rs.getString(6));
+					boardlist.add(mywrite);
+				}
+				else if(tmpday1 != null && tmpday1.equals(sdfToday)) {
 					Board tmp = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), tmpday2, rs.getString(7), rs.getString(8));
 					boardlist.add(tmp);
 				}else if(tmpday1 != null && !(tmpday1.equals(tmpday2))){
@@ -143,8 +178,19 @@ public class BoardDao extends Dao{
 		return null;
 	}
 	
+	// 12. 게시물 내 첨부파일 (SQL 내 파일명만 null로 변경) 삭제 메서드
+	public boolean deletefile(int bno) {
+		String sql = "update board set bfile=null where bno="+bno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("BoardDao_deletefile_exception : "+e);}
+				
+		return false;
+	}
 	
-	
+	// 13.
 	
 	
 	

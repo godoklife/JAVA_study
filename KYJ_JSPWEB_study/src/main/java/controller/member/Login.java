@@ -40,6 +40,7 @@ public class Login extends HttpServlet {
 		if(result==1) {
 			HttpSession session = request.getSession();	// 1. Http 내장 세션 호출
 			session.setAttribute("login", mid);	// 2. 세션에 값 저장
+			session.setMaxInactiveInterval(60*60);	// 세션을 1시간 동안 유지시킴.
 			response.sendRedirect("/KYJ_JSPWEB_study/main.jsp");
 		}else if(result==2){	// ID 혹은 PW 오류
 			response.sendRedirect("/KYJ_JSPWEB_study/member/login.jsp?result=2");

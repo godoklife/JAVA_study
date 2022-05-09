@@ -5,6 +5,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +32,12 @@ public class Filedown extends HttpServlet {
 		// 파일의 객체화
 		File file = new File(uploadpath);
 		// 다운로드 형식
+		response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(bfile,"UTF-8")+";");
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			// 아래 코드는 실행되지 않음 : response.setHeader 때문에.
+			// 아래 코드들은 이미지 파일 읽어서 웹페이지에 출력하는 내용임.
 		
+							// 다운로드 형식 HTML		// 다운로드 화면에서 표시할 파일명
 		// 바이트 형식으로 내보내기 : 통신 준비
 			// 서버(탐켓)가 PC에 있는 파일을 스트림으로 가져오는 단계
 		BufferedInputStream instream = new BufferedInputStream(new FileInputStream(file));

@@ -10,11 +10,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% ArrayList<Board> boardlist = BoardDao.instance.getboardlist2(); %>
+	<% ArrayList<Board> boardlist = BoardDao.instance.getboardlist2(-1); %>
 	<!--  해더 영역 -->
 	<%@include file="../header.jsp" %>
 	<div class = "container mt-5">
 		<h1>자유게시판</h1>
+		<h3>조회수 세션 10초로 설정되어있습니다</h3>
 		<%
 			String mid = (String)session.getAttribute("login");
 			if(mid!=null){
@@ -38,7 +39,8 @@
 				<tr>
 					<td><%=tmp.getBno()%></td>
 					<!-- <td onclick="location.href='boardview.jsp?bno=<%=tmp.getBno()%>'" style="cursor: pointer;"><%=tmp.getBtitle()%></td> -->
-					<td onclick="location.href='boardview.jsp?bno=<%=tmp.getBno()%>'" style="cursor: pointer;"><%=tmp.getBtitle()%></td>
+					<td onclick="location.href='boardview.jsp?bno=<%=tmp.getBno()%>'" style="cursor:pointer;"><%=tmp.getBtitle()%></td>
+					
 					<td><%=tmp.getMid()%></td>
 					<td><%=tmp.getBview()%></td>
 					<td><%=tmp.getBdate()%></td>
