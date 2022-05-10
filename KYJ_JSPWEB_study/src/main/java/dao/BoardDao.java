@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import dto.Board;
+import dto.Reply;
 
 public class BoardDao extends Dao{
 	
@@ -123,13 +124,50 @@ public class BoardDao extends Dao{
 	}
 
 	// 7. 덧글 작성 메서드
-	public boolean replywrite() {
+	public boolean replywrite(Reply reply) {
+		String sql = "insert into reply(rcontent, rindex, bno, mno) values(?, ?, ?, ?)";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, reply.getRcontent());
+			ps.setInt(2, reply.getRindex());
+			ps.setInt(3, reply.getBno());
+			ps.setInt(4, reply.getMno());
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("BoardDao_replywrite_exception : "+e);}
 		return false;
 	}
-	// 8. 덧글 출력 메서드	[ 인수 : 없음 ]
-	public boolean replylist() {
-		return false;
+	// 8. 덧글 출력 메서드	[ 인수 : 현재 게시물 번호 ]
+	public ArrayList<Reply> replylist(int bno) {
+		String sql =  "select * from reply where bno="+bno+" and rindex=0";
+			// rindex=0 : 대댓글 말고 걍 덧글만 출력하겠단 뜻
+		ArrayList<Reply> result = new ArrayList<Reply>();
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Reply reply = new Reply(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), null);
+				result.add(reply);
+			}return result;
+		} catch (Exception e) {System.out.println("BoardDao_replylist_exception : "+e);}
+		return null;
 	}
+	
+	// 8-2 대댓글 출력 메서드
+	public ArrayList<Reply> rereplylist(int bno, int rno) {
+		String sql =  "select * from reply where bno="+bno+" and rindex="+rno;
+		ArrayList<Reply> result = new ArrayList<Reply>();
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Reply reply = new Reply(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), null);
+				result.add(reply);
+			}return result;
+		} catch (Exception e) {System.out.println("BoardDao_replylist_exception : "+e);}
+		return null;
+	}
+	
 	// 9. 덧글 수정 메서드	[ 인수 : 수정할 덧글 번호 ]
 	public boolean replyupdate() {
 		return false;
@@ -190,7 +228,7 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	
-	// 13.
+	// 13. 
 	
 	
 	

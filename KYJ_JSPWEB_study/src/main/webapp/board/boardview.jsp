@@ -1,3 +1,5 @@
+<%@page import="dto.Reply"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="dao.MemberDao"%>
 <%@page import="dto.Board"%>
@@ -16,7 +18,7 @@
 	<%@include file="../header.jsp" %>
 	
 	<div class="container mt-5">
-		<h1> 게시물 상세보기 </h1>
+		<h1> 자유게시판 </h1>
 		<%	
 			int bno = Integer.parseInt(request.getParameter("bno"));
 			String boardnumber =String.valueOf(bno);
@@ -43,9 +45,10 @@
 		<%
 			if(result!=null){
 		%>
+			<h4 class="boardview_title"><span class="boardview_title_text"><%=result.getBtitle()%></span></h4>
 			<table class="table">
 				<tr>
-					<th>번호</th><th>제목</th><th>내용</th><th>작성자</th><th>작성일</th><th>첨부파일</th><th>조회수</th>
+					<td>번호</td><td>제목</th><th>내용</th><th>작성자</th><th>작성일</th><th>첨부파일</th><th>조회수</th>
 				</tr>
 				<tr>
 					<td><%=result.getBno()%></td>
@@ -62,13 +65,48 @@
 				</tr>
 			</table>
 			
+			<h3>덧글</h3>
+			<input type="text" id="rcontent">
+			<button onclick="replywrite(<%=bno%>)">등록</button>
 			
+			<table id="replytable" class="table">
+				<%
+					ArrayList<Reply> replylist = BoardDao.instance.replylist(bno);
+					for(Reply tmp : replylist){
+				%>
+				<tr>
+					<td> 작성자 : <%=tmp.getMid()%><br> 작성일 : <%=tmp.getRdate()%></td>
+					<td> 내용 : <%=tmp.getRcontent()%></td>
+					<td><button>수정</button><button>삭제</button><button onclick="rereplyview(<%=tmp.getRno()%>,<%=tmp.getBno()%>)">대댓글 달기</button></td>
+				</tr>
+				<tr>	<!--  대댓글 입력창 -->
+					<td> </td>
+					<td id=<%=tmp.getRno()%>></td>
+				</tr>
+				<!--  대댓글 출력창 -->
+					<%ArrayList<Reply> rereplylist = BoardDao.instance.rereplylist(bno, tmp.getRno());
+						for(Reply rereply : rereplylist ){
+					%>
+						<tr>
+							<td></td>
+							<td> 작성자 : <%=rereply.getMid()%><br> 작성일 : <%=rereply.getRdate()%></td>
+							<td> 내용 : <%=rereply.getRcontent()%></td>
+							<td><button>수정</button><button>삭제</button></td>
+						</tr>
+					<%} %>
+				<%} %>
+			</table>
+			
+				
+				
 		<%}else if(result==null){ %>
-			<H1> NULL페이지 들어오지 말라 했제?? 캣제??? 그랫제???? </H1>
+			<H1> 이상하게 들어오지 말라 했제?? 캣제??? 그랫제???? </H1>
 		<%} %>
 	</div>
 	
 	<!--  푸터 영역 -->
 	<%@include file="../footer.jsp" %>
+	
+	<script src="/KYJ_JSPWEB_study/js/board.js" type="text/javascript"></script>
 </body>
 </html>

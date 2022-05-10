@@ -61,7 +61,6 @@ public class Delete2 extends HttpServlet {
 			out.println("alert('삭제 실패 : 관리자에게 문의하세요...')");
 			out.println("history.back();");	// history.back() : 이전페이지로 되돌려 보내기.
 			out.println("</script>");
-			response.sendRedirect("/error.jsp");
 		}
 		
 	}

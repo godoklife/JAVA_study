@@ -7,11 +7,11 @@
     font-style: normal;
 }
 a{
-	text-decoration : none !important;
-	color: "white";
+	text-decoration : none;
+	color: black;
 }
 a:hover {
-	color : "white";
+	color : "skyblue";
 }
 *{
 	font-family: "CookieRun-Regular";
@@ -24,3 +24,8 @@ a:hover {
 	color : red;
 	font-weight: bold;
 }
+
+.boardview_title{
+	border-bottom: solid 2px #eeeeee;
+}
+
