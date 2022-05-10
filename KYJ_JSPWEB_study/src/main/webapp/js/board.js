@@ -46,32 +46,80 @@ function replywrite(bno){
 	});
 }
 
-function rereplyview(rno, bno){
+function rereplyview(rno, bno, mid){
+	if(mid==null){
+		alert("로그인을 해 주세요.");
+		return;
+	}
 	$("#"+rno).html(
-		'<input type="text" id="rrcontent">'+
-		'<button onclick="rereplywrite('+rno+','+bno+')">대댓글 등록</button>'
-	);
+		'<div class="row">'+
+			'<div class="col-md-10">'+
+				'<textarea id="rrcontent" class="form-control" rows=3></textarea>'+
+			'</div>'+
+			'<div class="col-md-2">'+
+				'<button class="form-control py-4 my-1" onclick="rereplywrite('+rno+','+bno+')">대댓글 등록</button>'+
+			'</div>'+
+		'</div>'
+	);	
 }
-function rereplywrite(rno, bno){
-	alert("대댓글쓰기 rno : "+rno+" bno : "+bno);
+function rereplywrite( rno , bno ){ // 대댓글 쓰기 메소드 
 	let rrcontent = $("#rrcontent").val();
 	$.ajax({
-		url:"../board/Rereplywrite",
-		data:{"rno":rno, "bno":bno, "rrcontent":rrcontent},
-		success:function(args){
-			if(args==1){
-				alert("대댓글을 저장했습니다.");
-				
+		url : "../board/Rereplywrite" , 
+		data : { "rno" : rno , "bno" : bno  , "rrcontent" : rrcontent} ,
+		success : function( result ){
+			if( result == 1 ){
+				 alert("대댓글 작성 되었습니다."); // 성공 메시지 알림 
+				 $("#rrcontent").val(""); // 작성 input 공백으로 초기화 
+				 $("#replytable").load( location.href+" #replytable"); // 특정 태그 새로고침
 			}
+			else{ alert("대댓글작성이 실패했습니다."); }
 		}
-	})
+	});
+}
+
+
+function replydelete(rno){
+	$.ajax({
+		url:"../board/Replydelete",
+		data:{"rno":rno},
+		success : function(args){
+			if(args==1){
+				alert("덧글을 삭제하였습니다.");
+				$("#replytable").load(location.href+" #replytable");
+			}else alert("삭제 실패.");
+		}
+	});
 }
 
 
 
-
-
-
-
+function replymodifyview(rno, bno){
+	$("#"+rno).html(
+		'<div class="row">'+
+			'<div class="col-md-10">'+
+				'<textarea id="rmodcontent" class="form-control" rows=3></textarea>'+
+			'</div>'+
+			'<div class="col-md-2">'+
+				'<button class="form-control py-4 my-1" onclick="replymodifywrite('+rno+')">덧글 수정</button>'+
+			'</div>'+
+		'</div>'
+	);	
+}
+function replymodifywrite( rno , bno ){ // 덧글 수정 메서드
+	let rmodcontent = $("#rmodcontent").val();
+	$.ajax({
+		url : "../board/Replymodify" , 
+		data : { "rno" : rno ,"rmodcontent" : rmodcontent} ,
+		success : function( result ){
+			if( result == 1 ){
+				 alert("덧글을 수정하였습니다."); // 성공 메시지 알림 
+				 $("#rmodcontent").val(""); // 작성 input 공백으로 초기화 
+				 $("#replytable").load( location.href+" #replytable"); // 특정 태그 새로고침
+			}
+			else{ alert("덧글 수정을 실패했습니다."); }
+		}
+	});
+}
 
 

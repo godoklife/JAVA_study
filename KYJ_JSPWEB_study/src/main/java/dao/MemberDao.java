@@ -79,7 +79,8 @@ public class MemberDao extends Dao{
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			if(rs.next()) {	// 회원가입할때 중복값 검사 하기 때문에 중복값 나올 일 없음.
-				Member tmp = new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9));
+				Member tmp = new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(4), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9));
+				System.out.println(tmp.toString());
 				return tmp;		
 			}
 		} catch (Exception e) {System.out.println("Memberdao_getmember_exception : "+e);}

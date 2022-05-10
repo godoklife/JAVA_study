@@ -1,3 +1,5 @@
+<%@page import="dto.Member"%>
+<%@page import="java.io.File"%>
 <%@page import="dto.Reply"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.time.LocalDate"%>
@@ -27,64 +29,84 @@
 			if(session.getAttribute(boardnumber)==null){
 				BoardDao.instance.increaseview(bno);	
 				session.setAttribute(boardnumber, bno);
-				session.setMaxInactiveInterval(10);	// 테스트용으로 30초 셋팅
+				session.setMaxInactiveInterval(600);	
 			}
-			Board result = BoardDao.instance.getboard2(bno);
+			Board board = BoardDao.instance.getboard2(bno);
 			
 			// 조회수 증가
 			
 			
-			if(result != null && result.getMno()==MemberDao.instance.getmno(mid)){
+			if(board != null && board.getMno()==MemberDao.instance.getmno(mid)){
 		%>
-				<a href="Delete2?bno=<%=result.getBno()%>"><button>삭제</button></a>
-				<a href="boardmodify.jsp?bno=<%=result.getBno()%>"><button>수정</button></a>
+				<a href="Delete2?bno=<%=board.getBno()%>"><button>삭제</button></a>
+				<a href="boardmodify.jsp?bno=<%=board.getBno()%>"><button>수정</button></a>
 		<%} %>	
 				<a href="/KYJ_JSPWEB_study/board/boardlist.jsp"><button>목록</button></a>
 	
 		
 		<%
-			if(result!=null){
+			if(board!=null){
 		%>
-			<h4 class="boardview_title"><span class="boardview_title_text"><%=result.getBtitle()%></span></h4>
+			<h4 class="boardview_title"><span class="boardview_title_text"><%=board.getBtitle()%></span></h4>
 			<table class="table">
 				<tr>
-					<td>번호</td><td>제목</th><th>내용</th><th>작성자</th><th>작성일</th><th>첨부파일</th><th>조회수</th>
+					<td width="25%">번호 : <%=board.getBno()%></td>
+					<td width="25%">작성자 : <%=board.getMid()%></td>
+					<td width="25%">작성일 : <%=board.getBdate()%></td>
+					<td width="25%">조회수 : <%=board.getBview()%></td>
+				</tr>	
+				<tr>
+					<td colspan="4">	<!--  colspan : 열 병합 // rowspan : 행 병합 -->
+						<div class="boardview_content">
+							<%
+								String imgpath = request.getSession().getServletContext().getRealPath("/board/upload/"+board.getBfile());
+							%>
+							<img src="<%=imgpath%>" width=100%><br>
+							<%=board.getBcontent()%>	
+						</div>
+					</td>
 				</tr>
 				<tr>
-					<td><%=result.getBno()%></td>
-					<td><%=result.getBtitle()%></td>
-					<td><%=result.getBcontent()%></td>
-					<td><%=result.getMid()%></td>
-					<td><%=result.getBdate()%></td>
-					<%if(result.getBfile()==null){ %>
-						<td style="color:red;">첨부파일이 없습니다.</td>
+					<%if(board.getBfile()==null){ %>
+						<td colspan="4" style="color:red;">첨부파일이 없습니다.</td>
 					<%}else{ %>
-						<td><a href="Filedown?bfile=<%=result.getBfile()%>"><%=result.getBfile()%></a></td>
+						<td colspan="4"><a href="Filedown?bfile=<%=board.getBfile()%>"><%=board.getBfile()%></a></td>
 					<%} %>
-					<td><%=result.getBview()%></td>
 				</tr>
 			</table>
 			
-			<h3>덧글</h3>
+			<div class="row">
+			
+			</div>
 			<input type="text" id="rcontent">
 			<button onclick="replywrite(<%=bno%>)">등록</button>
 			
 			<table id="replytable" class="table">
 				<%
 					ArrayList<Reply> replylist = BoardDao.instance.replylist(bno);
-					for(Reply tmp : replylist){
+					for(Reply reply : replylist){
 				%>
 				<tr>
-					<td> 작성자 : <%=tmp.getMid()%><br> 작성일 : <%=tmp.getRdate()%></td>
-					<td> 내용 : <%=tmp.getRcontent()%></td>
-					<td><button>수정</button><button>삭제</button><button onclick="rereplyview(<%=tmp.getRno()%>,<%=tmp.getBno()%>)">대댓글 달기</button></td>
+					<td> 작성자 : <%=reply.getMid()%><br> 작성일 : <%=reply.getRdate()%></td>
+					<td> 내용 : <%=reply.getRcontent()%></td>
+					<td>
+						<%
+							if(MemberDao.instance.getmno(mid)==reply.getMno()){
+						%>
+							<button onclick="replymodifyview(<%=reply.getRno()%>,<%=reply.getBno()%>)">수정</button>
+							<button onclick="replydelete(<%=reply.getRno()%>)">삭제</button>
+						<%}else{%>
+							<button disabled="disabled">수정</button><button disabled="disabled">삭제</button>
+						<%} %>
+						<button onclick="rereplyview(<%=reply.getRno()%>,<%=reply.getBno()%>,'<%=mid%>')">덧덧글 달기</button>
+					</td>
 				</tr>
 				<tr>	<!--  대댓글 입력창 -->
 					<td> </td>
-					<td id=<%=tmp.getRno()%>></td>
+					<td id=<%=reply.getRno()%>></td>
 				</tr>
 				<!--  대댓글 출력창 -->
-					<%ArrayList<Reply> rereplylist = BoardDao.instance.rereplylist(bno, tmp.getRno());
+					<%ArrayList<Reply> rereplylist = BoardDao.instance.rereplylist(bno, reply.getRno());
 						for(Reply rereply : rereplylist ){
 					%>
 						<tr>
@@ -99,8 +121,8 @@
 			
 				
 				
-		<%}else if(result==null){ %>
-			<H1> 이상하게 들어오지 말라 했제?? 캣제??? 그랫제???? </H1>
+		<%}else if(board==null){ %>
+			<H1> 이상하게 들어오지 말라 했제?? </H1>
 		<%} %>
 	</div>
 	

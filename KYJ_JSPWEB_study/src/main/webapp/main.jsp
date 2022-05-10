@@ -18,8 +18,6 @@
 		</div>	
 	</div>	
 
-
-
 	<!--  푸터 영역 -->
 	<%@include file="footer.jsp" %>
 </body>

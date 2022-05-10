@@ -14,8 +14,6 @@
 	<!--  해더 영역 -->
 	<%@include file="../header.jsp" %>
 	<div class = "container mt-5">
-		<h1>자유게시판</h1>
-		<h3>조회수 세션 10초로 설정되어있습니다</h3>
 		<%
 			String mid = (String)session.getAttribute("login");
 			if(mid!=null){

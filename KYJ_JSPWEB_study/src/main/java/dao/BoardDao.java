@@ -169,11 +169,23 @@ public class BoardDao extends Dao{
 	}
 	
 	// 9. 덧글 수정 메서드	[ 인수 : 수정할 덧글 번호 ]
-	public boolean replyupdate() {
+	public boolean replymodify(String rcontent, int rno) {
+		String sql = "update reply set rcontent='"+rcontent+"' where rno="+rno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("BoardDao_replymodify_exception : "+e);}
 		return false;
 	}
 	// 10. 덧글 삭제 메서드	[ 인수 : 삭제할 덧글 번호 ] 
-	public boolean replydelete() {
+	public boolean replydelete(int rno) {
+		String sql = "delete from reply where rno="+rno+" or rindex="+rno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("BoardDao_replydelete_exception : "+e);}
 		return false;
 	}
 	// 11. 모든 게시글 출력 메서드에 mid를 이너조인으로 곁들인
