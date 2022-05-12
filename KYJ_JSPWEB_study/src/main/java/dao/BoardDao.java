@@ -55,46 +55,8 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	
-	// 4. 모든 게시물 출력 메서드	[ 추후 추가 기능 ->> 검색 : 조건 ]		->> 하단의 11번 메서드 사용중.
-//		public ArrayList<Board> getboardlist() {
-//			ArrayList<Board> boardlist = new ArrayList<>();
-//			String sql = "select * from board order by bno desc";
-//			Date today = new Date();
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//			String sdfToday = sdf.format(today);
-//			
-//			System.out.println(sdfToday);
-//			try {
-//				ps = con.prepareStatement(sql);
-//				rs = ps.executeQuery();
-//				while(rs.next()) {
-//					String tmpday1 = rs.getString(6).split(" ")[0];
-//					String tmpday2 = rs.getString(6).split(" ")[1];
-//					if(tmpday1 != null && tmpday1.equals(sdfToday)) {
-//						Board tmp = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), tmpday2, rs.getString(7), null);
-//						boardlist.add(tmp);
-//					}else if(tmpday1 != null && !(tmpday1.equals(tmpday2))){
-//						Board tmp = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), tmpday1, rs.getString(7), null);
-//						boardlist.add(tmp);
-//					}
-//				}
-//				return boardlist;
-//			} catch (Exception e) {System.out.println("BoardDao_getboardlist_exception : "+e);}
-//			return null;
-//		}
-	// 5. 개별 게시물 출력 메서드
-//	public Board getboard(int bno) {
-//		String sql = "select * from board where bno="+bno;
-//		try {
-//			ps = con.prepareStatement(sql);
-//			rs = ps.executeQuery();
-//			if(rs.next()) {
-//				Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), null);
-//				return board;
-//			}else return null;
-//		} catch (Exception e) {System.out.println("BoardDao_getboard_exception : "+e);}
-//		return null;
-//	}
+	// 4. 모든 게시물 출력 메서드		->> 하단의 11번 메서드 사용중.
+
 	
 	// 5. 개별 게시물 출력 메서드_이너조인으로 아이디 따오기
 		public Board getboard2(int bno) {
@@ -188,14 +150,40 @@ public class BoardDao extends Dao{
 		} catch (Exception e) {System.out.println("BoardDao_replydelete_exception : "+e);}
 		return false;
 	}
+	
+	// 11-1 게시물 총 개수 출력 메서드
+	public int gettotalrow(String key, String keyword) {
+		String sql;
+		if((key==null||key.equals("")) && (keyword==null||keyword.equals(""))) {	// 검색이 없을 경우
+			sql = "select count(*) from board";
+		}else {	// 검색이 있을 경우
+			sql = "select count(*) from board where "+key+" like '%"+keyword+"%'";
+		}
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return  rs.getInt(1);
+			}else return 0;
+		} catch (Exception e) {System.out.println("BoardDao_gettotalrow_exception : "+e);}
+		return 0;
+	}
+	
 	// 11. 모든 게시글 출력 메서드에 mid를 이너조인으로 곁들인
-	public ArrayList<Board> getboardlist2(int mno){
+	public ArrayList<Board> getboardlist2(int mno, int startrow, int listsize, String key, String keyword){
 		ArrayList<Board> boardlist = new ArrayList<>();
 		String sql;
-		boolean flag=false;
+		boolean flag=false;	// mywrite.jsp의 내 게시물만 꺼내오는 쿼리문을 셋팅했을 경우 true 전환
 		if(mno==-1) {
-			sql = "select board.*, member.mid from board inner join member on board.mno where board.mno=member.mno order by bno desc";
-		}else if(mno>0){
+			if(keyword==null || keyword.equals("")) {	// 모든 게시물 꺼내오는 경우
+				sql = "select board.*, member.mid from board inner join member on board.mno "
+						+ "where board.mno=member.mno order by bno desc limit "+startrow+"," +listsize;
+			}else{			// 검색한 조건에 따라 게시물을 꺼내오는 경우
+				sql = "select board.*, member.mid from board inner join member on board.mno "
+						+ "where board.mno=member.mno and board."+key+" like '%"+keyword+"%'"
+								+ "order by bno desc limit "+startrow+"," +listsize;
+			}
+		}else if(mno>0){	// mywrite.jsp의 내 게시물만 꺼내오는 쿼리문
 			sql = "select * from board where mno="+mno+" order by bdate desc";
 			flag=true;
 		}else {
@@ -228,7 +216,9 @@ public class BoardDao extends Dao{
 		return null;
 	}
 	
-	// 12. 게시물 내 첨부파일 (SQL 내 파일명만 null로 변경) 삭제 메서드
+
+	
+	// 14. 게시물 내 첨부파일 (SQL 내 파일명만 null로 변경) 삭제 메서드
 	public boolean deletefile(int bno) {
 		String sql = "update board set bfile=null where bno="+bno;
 		try {
@@ -240,7 +230,6 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	
-	// 13. 
 	
 	
 	

@@ -23,24 +23,27 @@
 				<%
 					String mid = (String)session.getAttribute("login");
 					int mno = MemberDao.instance.getmno(mid);
-					ArrayList<Board> mywrite = BoardDao.instance.getboardlist2(mno);
-					if(mywrite!=null){
-						for(Board tmp : mywrite){
+					ArrayList<Board> mywrite = BoardDao.instance.getboardlist2(mno,0,0,null,null);
 				%>
 				<table class="table">
 					<tr>
-						<th>번호</th><th>제목</th><th>작성일</th><th>조회수</th>
+						<th width="10%">번호</th><th width="55%">제목</th><th width="25%">작성일</th><th width="10%">조회수</th>
 					</tr>
+					<%
+						if(mywrite!=null){
+						for(Board tmp : mywrite){
+					%>	
 					<tr>
 						<td><%=tmp.getBno()%></td>
 						<td><a href="../board/boardview.jsp?bno=<%=tmp.getBno()%>"><%=tmp.getBtitle()%></a></td>
 						<td><%=tmp.getBdate()%></td>
 						<td><%=tmp.getBview()%></td>
 					</tr>
+					<%} %>
 				</table>
 				<%} %>
-		<%}else if(mywrite==null){ %>
-			<H1> NULL페이지 들어오지 말라 했제?? 캣제??? 그랫제???? </H1>
+		<%if(mywrite==null){ %>
+			<H1> NULL페이지 들어오지 말라 했제?? </H1>
 		<%} %>
 			</div>
 		</div>

@@ -24,8 +24,9 @@
 				<div class="col-md-4">
 					<img src=""><span id="logo">LOGO</span>
 				</div>
-				<div class="col-md-5 offset-3 d-flex justfi-content-end">
+				<div class="col-md-5 offset-3 d-flex justify-content-end">
 				<ul class="nav">	<!--  nav : li 를 가로배치하는 부트스트랩 -->
+					<li><a href="/KYJ_JSPWEB_study/teamchatting.jsp" style="color:red;">채팅방</a> | </li>
 					<li><a href="/KYJ_JSPWEB_study/main.jsp">HOME</a> | </li>
 					<!--  로그인이 되지 않은 상태 -->
 				<% if(loginid==null) { %>
@@ -34,8 +35,8 @@
 				<% } else if (loginid!=null) {%>
 					<li><a href="/KYJ_JSPWEB_study/Logout" id="logout"> 로그아웃 </a> | </li>
 					<li><a href="/KYJ_JSPWEB_study/member/info.jsp"> 회원정보</a> | </li>
-					<li><a href="/KYJ_JSPWEB_study/board/boardlist.jsp">자유게시판</a></li>
 				<% } %>
+				<li><a href="/KYJ_JSPWEB_study/board/boardlist.jsp?key=&keyword=">자유게시판</a></li>
 				</ul>
 				
 				</div>
@@ -94,7 +95,7 @@
 						</div>
 					</li>
 					<li class="nav-item"> <input type="text" class="header_input" size="15"><a href="#"><i class="fas fa-search"></i></a></li>
-					<li class="nav-item"> <a href="#">장바구니<span class="shoppingbox"></span></a></li>
+					<li class="nav-item"> <a href="#">장바구니<span class="shoppingbox">5</span></a></li>
 				</ul>
 			</div>
 		</div>

@@ -59,7 +59,7 @@ textarea{
 }
 .shoppingbox{
 	font-size: 10px;
-	background-color: blue;
+	background-color:skyblue;
 	color: white;
 	padding: 2px 5px 2px 5px;
 	border-radius: 10px;	
@@ -69,7 +69,13 @@ textarea{
 }
 
 
+.boardlist_title{
+	border-bottom: solid 1px black;
+	padding : 5%;
+	margin : 3% 0 3% 0;
+}
 
-
-
-
+.pagenum{
+	color:black;
+	font-size:12px;
+}
