@@ -1,0 +1,13 @@
+
+
+.admin_title{
+	margin:70px;
+	text-align:center;
+	border-bottom: solid 2px green;
+}
+#categorybox input{
+	margin : 5px 20px;
+}
+#preview{
+	max-height:600px;
+}

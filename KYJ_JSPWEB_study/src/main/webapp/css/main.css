@@ -19,12 +19,11 @@ a:hover {
 	padding : 0 0 0 0;
 	/* border : solid 1px red; */
 }
-
-#logout{
-	color : red;
+.topmarquee{
 	font-weight: bold;
+	color:red;
+	font-size: 20px;
 }
-
 .boardview_title{
 	border-bottom: solid 2px #eeeeee;
 	padding : 10px;

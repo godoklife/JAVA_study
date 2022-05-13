@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>KYJ's 쇼핑몰</title>
+<title>PHONETAKU_SHOP</title>
 	<!--  부트스트랩 CSS CDN -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- 사용자 정의 CSS -->
@@ -19,7 +19,11 @@
 		String loginid = (String)session.getAttribute("login");	// 세션 호출, 기본타입 : Object
 	%>
 	<div style="background-color:#abd0bc;">
+		<%if(loginid!=null && loginid.equals("admin")) {%>
+			<marquee scrollamount="5" class="topmarquee"> 관리자 계정으로 로그인 하셨습니다!!!</marquee>
+		<%} %>
 		<div class="container">
+		
 			<div class = "row py-4">
 				<div class="col-md-4">
 					<img src=""><span id="logo">LOGO</span>
@@ -29,16 +33,19 @@
 					<li><a href="/KYJ_JSPWEB_study/teamchatting.jsp" style="color:red;">채팅방</a> | </li>
 					<li><a href="/KYJ_JSPWEB_study/main.jsp">HOME</a> | </li>
 					<!--  로그인이 되지 않은 상태 -->
-				<% if(loginid==null) { %>
-					<li> <a href="/KYJ_JSPWEB_study/member/login.jsp"> 로그인 </a> | </li>
-					<li><a href="/KYJ_JSPWEB_study/member/signup.jsp"> 회원가입 </a> | </li>
-				<% } else if (loginid!=null) {%>
-					<li><a href="/KYJ_JSPWEB_study/Logout" id="logout"> 로그아웃 </a> | </li>
-					<li><a href="/KYJ_JSPWEB_study/member/info.jsp"> 회원정보</a> | </li>
-				<% } %>
-				<li><a href="/KYJ_JSPWEB_study/board/boardlist.jsp?key=&keyword=">자유게시판</a></li>
-				</ul>
-				
+					<% if(loginid==null) { %>
+						<li> <a href="/KYJ_JSPWEB_study/member/login.jsp"> 로그인 </a> | </li>
+						<li><a href="/KYJ_JSPWEB_study/member/signup.jsp"> 회원가입 </a> | </li>
+					<% } else if (loginid!=null) {%>
+					<!--  만약 로그인 아이다가 admin이면 관리자 페이지로 이동 -->
+						<%if(loginid.equals("admin")) {%>
+							<li> <a href = "/KYJ_JSPWEB_study/admin/dashboard.jsp" style="color:#ff2b80;">관리페이지</a> | </li>
+						<%} %>
+						<li><a href="/KYJ_JSPWEB_study/Logout" id="logout"> 로그아웃 </a> | </li>
+						<li><a href="/KYJ_JSPWEB_study/member/info.jsp"> 회원정보</a> | </li>
+					<% } %>
+					<li><a href="/KYJ_JSPWEB_study/board/boardlist.jsp?key=&keyword=">자유게시판</a></li>
+					</ul>
 				</div>
 			</div>
 			<!--  본 매뉴 -->
@@ -55,10 +62,9 @@
 					</li>
 					<li class="nav-item dropdown"> <a href="#">구글<i class="fab fa-google"></i></a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">Mi</a>
-							<a class="dropdown-item" href="#">RedMi</a>
-							<a class="dropdown-item" href="#">BlackShark</a>
-							<a class="dropdown-item" href="#">POCO</a>
+							<a class="dropdown-item" href="#">PRO</a>
+							<a class="dropdown-item" href="#">GENERAL</a>
+							<a class="dropdown-item" href="#">A</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown"> <a href="#" data-bs-toggle="dropdown">삼성</a>

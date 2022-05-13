@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.net.InetAddress"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,6 +25,18 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+		<%	String ipAddress=request.getRemoteAddr();
+			if(ipAddress.equalsIgnoreCase("0:0:0:0:0:0:0:1")){
+			    InetAddress inetAddress=InetAddress.getLocalHost();
+			    ipAddress=inetAddress.getHostAddress();
+			}
+			session.setAttribute("ip", ipAddress);
+			System.out.println("main.jsp 클라이언트IP 주소: "+ipAddress); 
+			LocalDateTime ldt = LocalDateTime.now();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일 hh시mm분 ss초");
+//			String nowtime = sdf.format(ldt);
+			
+		%>
 
 <!-- 
 	<div class="container">
@@ -36,8 +51,9 @@
 	</div>
  -->
 	<div id="error">
-		고장나쓰요
-		<% // 아이피 가져오는거 한번 넣어보기 %>
+		고장나쓰요<br>
+		접속 아이피 : <%=ipAddress%><br>
+		실행시간 : <%=ldt%><br>
 	</div>
 
 </body>
