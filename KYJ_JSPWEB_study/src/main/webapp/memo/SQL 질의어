@@ -11,3 +11,11 @@ SQL 함수
 	max(필드명)	: 최대값
 	min(필드명)	: 최소값
 		
+		
+	
+	
+	조인 : 두개 이상의 테이블 합치기 [ 필수조건 : 동일한 데이터 존재해야함. ] 
+		select * from 테이블명1 join 테이블명2;
+		select * from 테이블명1 join 테이블명2 on 테이블명1.PK = 테이블명2.FK;
+		// 테이블명이 길 경우 하기와 같이 작성 가능.
+		select * from 테이블명1 a join 테이블명2 b on a.pno = b.pno

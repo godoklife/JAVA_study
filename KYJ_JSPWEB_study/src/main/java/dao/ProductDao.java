@@ -68,8 +68,9 @@ public class ProductDao extends Dao{
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Product product = new Product(rs.getInt(1), sql, 0, 0, 0, sql, 0);
-			}
+				Product product = new Product(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getInt(5), rs.getString(6), rs.getInt(7));
+				result.add(product);
+			}return result;
 		} catch (Exception e) {System.out.println("ProductDao_getproductlist_exception : "+e);}
 		return null;
 	}
@@ -79,6 +80,16 @@ public class ProductDao extends Dao{
 	}
 	// 4. 제품 수정
 	
+	// 4-2 제품 상태 변경
+	public byte activechange (int pno, int active) {
+		String sql = "update product set active="+active+" where pno="+pno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return 1;
+		} catch (Exception e) {System.out.println("ProductDao_activechange_exception : "+e);}
+		return 0;
+	}
 	// 5. 제품 삭제
 	
 //////////////////////////////////////////////////////   재고   //////////////////////////////////////////////////////
