@@ -35,7 +35,8 @@ public class productadd extends HttpServlet {
 				new DefaultFileRenamePolicy());	// 파일명 중복시 리네이밍 규칙
 		
 		request.setCharacterEncoding("utf-8");
-		String pname = request.getParameter("pname");
+		String pname = multi.getParameter("pname");
+
 		int pprice = Integer.parseInt(multi.getParameter("pprice"));
 		float pdiscount = Float.parseFloat(multi.getParameter("pdiscount"));
 		String pimg = multi.getFilesystemName("pimg");	// 첨부파일은 요청시 multi.getFilesystemName("인수명")

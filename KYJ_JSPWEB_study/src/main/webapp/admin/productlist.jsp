@@ -1,3 +1,4 @@
+<%@page import="dto.Stock"%>
 <%@page import="dto.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.ProductDao"%>
@@ -11,32 +12,74 @@
 	<link href="/KYJ_JSPWEB_study/css/productlist.css" rel="stylesheet">
 </head>
 <body>
-	<h3>제품 목록 페이지</h3>
-	<table class="table table-hover">
+	<h3> 제품 목록 페이지 </h3>
+	<table id="producttable" class="table table-hover">
 		<tr>
-			<th>제품번호</th><th>대표이미지</th><th>제품명</th><th>가격</th><th>할인율</th><th>할인판매가</th>
-			<th>제품판매상태</th><th>카테고리</th><th>색상</th><th>사이즈(용량)</th><th>재고량</th>
-			<th>수정일</th><th>비고(버튼)</th>
+			<th width="5%">제품번호</th>	<th width="5%">대표이미지</th> 		<th width="5%">제품명</th> 		<th width="5%">가격</th>
+			<th width="5%">할인율</th>	<th width="5%">판매금액</th>		<th width="5%" >제품상태</th> 		<th width="5%">카테고리</th>
+			<th width="5%"> 색상 </th>	<th width="5%"> 사이즈 </th>		<th width="5%" >재고수량 </th> 	<th width="5%">수정일</th>
+			<th width="5%"> 비고 </th>
 		</tr>
-		
 		<%
 			ArrayList<Product> products = ProductDao.instance.getproductlist();
-			for(Product tmp : products){
+			for( Product p : products  ){ // 모든 제품 반복문
 		%>
 			<tr>
-			<th><%=tmp.getPno()%></th><th><div class="img"><div class="scale"><img src="/KYJ_JSPWEB_study/admin/img/<%=tmp.getPimg()%>"></div></div></th><th><%=tmp.getPname()%></th><th><%=tmp.getPprice()%></th><th><%=tmp.getPdiscount()%></th><th><%=(tmp.getPprice()*tmp.getPdiscount())%></th>
-			<th><%=tmp.getPactive()%></th><th><%=tmp.getCno()%></th><th>X</th><th><%=tmp.getPno()%></th><th><%=tmp.getPno()%></th>
-			<th><%=tmp.getPno()%></th>
-			<th>
-				<div class="row">
-					<a href="#"><button data-bs-toggle="modal" data-bs-target="#activemodal">제품 삭제</button></a>
-					<a href="#"><button>제품 수정</button></a>
-					<a href="#"><button onclick="pnomove(<%=tmp.getPno()%>)"data-bs-toggle="modal" data-bs-target="#activemodal">상태 변경</button></a>
-					<a href="#"><button>재고 변경</button></a>
-				</div>
-			</th>
+				<th><%=p.getPno() %></th>		<th><img width="100%" src="/KYJ_JSPWEB_study/admin/img/<%=p.getPimg()%>"></th> 	
+				<th><%=p.getPname() %></th> 	<th><%=p.getPprice()%></th>
+				<th><%=p.getPdiscount() %></th>	<th><%=p.getPprice()*p.getPdiscount() %></th>		
+				<th><%=p.getPactive() %></th> 	<th><%=p.getCno() %></th>
+				
+				<th> <!-- 색상 선택 [  id값을 제품별 select 식별id = '문자'+제품번호	// select 변경되면 이벤트 발생 -->
+					<select id="colorbox<%=p.getPno()%>" onchange="getamount( <%=p.getPno()%> )"> 
+					<%  ArrayList<Stock> stocks = ProductDao.instance.getStock( p.getPno() ); 
+						//
+						for( Stock s : stocks ){	
+					%>
+						<option><%=s.getScolor()%></option>
+					<% } %>
+					</select> 
+				</th>				
+				
+				<th> 	<!--  사이즈 선택 -->
+					<select id="sizebox<%=p.getPno()%>" onchange="getamount( <%=p.getPno()%> )"> 
+					<% for( Stock s : stocks ){ 
+						if(s.getSsize()!=null){
+					%>
+					
+						<option><%=s.getSsize()%></option>
+					<% }} %>
+					</select> 
+				 </th>	
+				 
+				<th> <!-- 색상과 사이즈에 따른 재고량 표시  -->
+					<% if( !stocks.isEmpty() ){ %>
+						<% if(stocks.get(0).getSamount() == 0 ){ %>
+						<span id='amountbox<%=p.getPno()%>'> 해당 사이즈색상에 재고없음 </span> 
+						<% }else{ %>
+						<span id='amountbox<%=p.getPno()%>'> <%=stocks.get(0).getSamount() %></span> 
+					<% }%>
+					<%}else{ %>
+						<span id='amountbox<%=p.getPno()%>'> 재고없음 </span> 
+					<%} %>
+				</th> 			
+				
+				<th>  <!-- 색상과 사이즈에 따른 재고 수정일 표시  -->
+					<span id="datebox<%=p.getPno()%>"></span> 
+				</th>
+				
+				<th> 
+					<button class="">제품 삭제</button> 
+					<button class="">제품 수정</button> 
+					<button onclick="pnomove(<%=p.getPno()%>)" data-bs-toggle="modal" data-bs-target="#activemodal">상태 변경</button> 
+					<button class=""onclick="getstock(<%=p.getPno()%>)" data-bs-toggle="modal" data-bs-target="#stockmodal">재고 변경</button> 
+				</th>
 			</tr>
-		<%} %>
+		<%
+		
+			}
+		%>
+		
 	</table>
 	
 	<button data-bs-toggle="modal" data-bs-target="#activemodal">모달버튼</button>
@@ -50,34 +93,43 @@
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5><!-- 모달 제목 -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body"><!--  모달 내용 -->
         스무-스 한 모달
         <input type="hidden" id="modalinput">
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer"><!--  모달 버튼 -->
      	<button type="button" class="btn btn-primary" onclick="activechange(0)">준비</button>
      	<button type="button" class="btn btn-primary" onclick="activechange(1)">판매</button>
      	<button type="button" class="btn btn-primary" onclick="activechange(2)">품절</button>
      	<button type="button" class="btn btn-primary" onclick="activechange(3)">중단</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button id="modalclosebtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
       </div>
     </div>
   </div>
 </div>
 
-<!--  이미지 출력 모달 -->
-<div class="modal fade" id="imgmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--  재고 변경 모달 구역 -->
+<div class="modal fade" id="stockmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">이미지 확대</h5><!-- 모달 제목 -->
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5><!-- 모달 제목 -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        이미지 위치
+        <table id="stocklistbox">
+        
+        </table>
+        <div id="updatebox" style="display: none;">
+        	재고번호:<input type="hidden" id="sno">
+        	재고수량:<input type="text" id="samount">
+ 	        	
+        </div>
+        <input type="hidden" id="modalinput">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+     	<button type="button" class="btn btn-primary" onclick="stockupdate()">수정하기</button>
+        <button id="modalclosebtn2" type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
       </div>
     </div>
   </div>

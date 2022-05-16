@@ -11,46 +11,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProductDao;
-import dto.Category;
+import dto.Product;
 
-@WebServlet("/admin/getcategory")
-public class getcategory extends HttpServlet {
+@WebServlet("/admin/getproduct")
+public class getproduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public getcategory() {
+    public getproduct() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("utf-8");
 		String type = request.getParameter("type");
-		
-		
-		ArrayList<Category> tmp = ProductDao.instance.getcategorylist();
-		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();	// servlet->html 전송 객체 생성
-		String html = "";	// html로 던질 문자열
-		
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		ArrayList<Product> tmp = ProductDao.instance.getproductlist();
+		String html="";
+		PrintWriter out = response.getWriter();
 		if(type!=null && type.equals("option")) {
-			for(Category tmp2 : tmp) {
-				html += "<option value=\""+tmp2.getCno()+"\">"+tmp2.getCname()+"</option>";
-			}
-		}else {
-			// 6개마다 줄바꿈 처리
-			byte index=1;
-			for(Category tmp2 : tmp) {
-				html += "<input type=\"radio\" name=\"cno\" value=\""+tmp2.getCno()+"\">"+tmp2.getCname();
-				index++;
-				if(index==6) {
-					html+="<br>";
-					index=1;
+			for(Product tmp2 : tmp) {
+				if(tmp2.getCno()==cno) {
+					html += "<option value=\""+tmp2.getPno()+"\">"+tmp2.getPname()+"</option>";
 				}
 			}
 		}
-		
-		
-		out.print(html);	// html로 문자열 던지기
-		
+		out.print(html);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

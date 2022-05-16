@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 
+import controller.admin.stockadd;
 import dto.Category;
 import dto.Product;
 import dto.Stock;
@@ -81,8 +82,8 @@ public class ProductDao extends Dao{
 	// 4. 제품 수정
 	
 	// 4-2 제품 상태 변경
-	public byte activechange (int pno, int active) {
-		String sql = "update product set active="+active+" where pno="+pno;
+	public byte activechange (int pno, int pactive) {
+		String sql = "update product set pactive="+pactive+" where pno="+pno;
 		try {
 			ps = con.prepareStatement(sql);
 			ps.executeUpdate();
@@ -94,14 +95,43 @@ public class ProductDao extends Dao{
 	
 //////////////////////////////////////////////////////   재고   //////////////////////////////////////////////////////
 	// 1. 제품의 재고 등록
-	public boolean ssave() {
+	public boolean ssave(Stock stock) {
+		String sql = "insert into stock(scolor, ssize, samount, pno) values(?, ?, ?, ?)";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, stock.getScolor());
+			ps.setString(2, stock.getSsize());
+			ps.setInt(3, stock.getSamount());
+			ps.setInt(4, stock.getPno());
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("ProductDao_ssave_exception : "+e);}
 		return false;
 	}
-	// 2. 제품의 재고 호출
-	public Stock getStock() {
+	// 2. 제품의 재고 호출	// int pno 인수 임시 제거 22.05.16 12:18
+	public ArrayList<Stock> getStock(int pno) {
+		ArrayList<Stock> tmp = new ArrayList<Stock>();
+		String sql = "select * from stock where pno="+pno+" order by scolor asc";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Stock stock = new Stock(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+				tmp.add(stock);
+			}return tmp;
+		} catch (Exception e) {System.out.println("ProductDao_getStock_exception : "+e);}
 		return null;
 	}
-	
+	// 3. 재고량 수정
+	public boolean stockupdate(int sno, int samount) {
+		String sql = "update stock set samount="+samount+" where sno="+sno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("ProductDao_stockupdate_exception : "+e);}
+		return false;
+	}
 	
 //////////////////////////////////////////////////////   reserved   //////////////////////////////////////////////////////
 	

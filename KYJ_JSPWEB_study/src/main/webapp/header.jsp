@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PHONETAKU_SHOP</title>
+<title>P H O N E T A K U</title>
 	<!--  부트스트랩 CSS CDN -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- 사용자 정의 CSS -->
