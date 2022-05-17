@@ -1,0 +1,82 @@
+@charset "UTF-8";
+*{
+	margin:0;
+	padding:0;
+}
+hr{
+	margin:2px !important;
+}
+.viewbox{
+	margin: 50px 0;
+}
+img {
+	width: 100%;
+}
+.infobox{
+	border-top: solid 1px black;
+	padding:20px;
+	margin :20px;
+}
+.view_title{
+	margin-top: 20px;
+}
+.discount_ratio{
+	color:red;
+	font-size:20px;
+	padding-right:10px
+}
+.price_dis{
+	padding-right: 15px;
+}
+.price{
+	text-decoration: line-through;
+	padding-right: 15px;
+	color:#999999;
+}
+.size_box{
+	margin: 20px 0;
+}
+.info_t{
+	font-size: 13px;
+}
+.amount_input{
+	padding:10px;
+	width:100%;
+	max-height:34px;
+}
+.amount_btn{
+	display:block;
+	background-color: white;
+	font-size: 10px;
+	border: solid 1px #eeeeee;
+	width:50%;
+}
+.cancel_btn{
+	background-color: white;
+	font-size: 10px;
+	border: none;
+	text-align: center;
+}
+.total_price{
+	text-align: right;
+	margin-bottom: 10px;
+}
+
+.info_buy_btn{
+	background-color: #abd0bc;
+	border: solid 1px #999999;
+	border-radius: 3px;
+	padding:15px 8px;
+	width: 100%;
+}
+.info_btn{
+	background-color: white;
+	border: solid 1px #999999;
+	border-radius: 3px;
+	padding:15px 8px;
+	width: 100%;
+	
+}
+.jsprice{
+	font-size:13px;
+}

@@ -76,7 +76,16 @@ public class ProductDao extends Dao{
 		return null;
 	}
 	// 3. 제품 개별 호출
-	public Product getproduct() {
+	public Product getproduct(int pno) {
+		String sql = "select * from product where pno="+pno;
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				Product product = new Product(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getInt(5), rs.getString(6), rs.getInt(7));
+				return product;
+			}else return null;
+		} catch (Exception e) {System.out.println("ProductDao_getproduct_exception : "+e);}
 		return null;
 	}
 	// 4. 제품 수정
@@ -111,7 +120,7 @@ public class ProductDao extends Dao{
 	// 2. 제품의 재고 호출	// int pno 인수 임시 제거 22.05.16 12:18
 	public ArrayList<Stock> getStock(int pno) {
 		ArrayList<Stock> tmp = new ArrayList<Stock>();
-		String sql = "select * from stock where pno="+pno+" order by scolor asc";
+		String sql = "select * from stock where pno="+pno+" order by scolor asc, ssize desc";
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
