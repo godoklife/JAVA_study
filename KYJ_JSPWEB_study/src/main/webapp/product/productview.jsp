@@ -96,11 +96,7 @@
 							</tr>
 						</table>
 						<table id="select_table"class="table my-5">
-							<tr>
-								<th width="60%">상품명</th>
-								<th width="25%">상품수</th>
-								<th width="15%">가격</th>
-							</tr>
+				<!-- 			<tr><th width="60%">상품명</th><th width="25%">상품수</th><th width="15%">가격</th></tr>	 -->
 							
 						</table>
 						<div class="row">
