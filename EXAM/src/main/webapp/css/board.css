@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.table{
+	font-size: 15px;
+}
+
+/* boardwrite.jsp */
+.button_box input{
+	width: 33% !important;
+}
+.button_box button{
+	width: 33%;
+}
+/* boardview.jsp */
+#top_buttonbox{
+	text-align: right;
+}

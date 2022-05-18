@@ -1,3 +1,4 @@
+<%@page import="dao.MemberDao"%>
 <%@page import="java.util.TreeSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="dto.Stock"%>
@@ -17,6 +18,8 @@
 <body>
 	<%@include file="../header.jsp"%>
 	<%
+		String mid = (String)session.getAttribute("login");
+		
 		int pno=Integer.parseInt(request.getParameter("pno"));
 		Product product = ProductDao.instance.getproduct(pno);
 		boolean nodiscount=false;
@@ -101,12 +104,20 @@
 						</table>
 						<div class="row">
 							<div class="col-md-6"> 총 상품금액 </div>
-							<div class="col-md-6 total_price"> 29,800 원</div>
+							<div class="col-md-6 total_price" id="total_price"> 0원</div>
 						</div>
-						<div class="row g-1">
-							<div class="col-md-4"><button class="info_buy_btn">바로 구매하기</button></div>
-							<div class="col-md-4"><button class="info_btn">장바구니 담기</button></div>
-							<div class="col-md-4"><button class="info_btn">찜 하기</button></div>
+						<div id="btnbox" class="col g-1">
+							<button class="info_buy_btn">바로 구매하기</button>
+							<button class="info_btn" onclick="savecart('<%=MemberDao.instance.getmno(mid)%>')">장바구니 담기</button>
+							<%
+								// 만약 로그인 되어있고, 찜 등록이 된 상품이라면
+								if(mid!=null && ProductDao.instance.getplike(pno, MemberDao.instance.getmno(mid))){
+							%>
+							<button class="info_btn" id="likebtn" onclick="saveplike('<%=mid%>')">찜 삭제</button>
+							
+							<%}else{ %>
+							<button class="info_btn" id="likebtn" onclick="saveplike('<%=mid%>')"style="background-color: #f9b9f5;">찜 하기</button>
+							<%} %>
 						</div>
 					</div>
 				</div>

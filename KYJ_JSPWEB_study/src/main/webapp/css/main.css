@@ -19,6 +19,9 @@ a:hover {
 	padding : 0 0 0 0;
 	/* border : solid 1px red; */
 }
+body{
+	background-color: #fafbfc;
+}
 .topmarquee{
 	font-weight: bold;
 	color:red;
@@ -90,6 +93,10 @@ textarea{
 	text-align:center;
 	font-size: 20px;
 	font-weight: bold;
+}
+.carousel-item img{		/* 캐러셀 내 이미지 중앙정렬 */
+	display: block;
+	margin : 0 auto;
 }
 
 .best_box img{

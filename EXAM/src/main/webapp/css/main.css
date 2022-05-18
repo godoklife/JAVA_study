@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+*{
+	margin:0;
+	padding:0;
+}
+.header_search li {
+	list-style: none;
+}
+
+/* 이하 main.jsp 정의*/
+.main_item_img img{
+	width: 100%;
+}
+carousel-item img{
+	max-height: 500px ;
+}
+
+.logo_box{	/* 해더와 푸터에 존재 */
+	text-align: center;
+}
+.text_logo{
+	font-size: 50px;
+}
