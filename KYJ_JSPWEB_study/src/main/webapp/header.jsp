@@ -101,7 +101,7 @@
 						</div>
 					</li>
 					<li class="nav-item"> <input type="text" class="header_input" size="15"><a href="#"><i class="fas fa-search"></i></a></li>
-					<li class="nav-item"> <a href="#">장바구니<span class="shoppingbox">5</span></a></li>
+					<li class="nav-item"> <a href="/KYJ_JSPWEB_study/product/productcart.jsp">장바구니<span class="shoppingbox">5</span></a></li>
 				</ul>
 			</div>
 		</div>

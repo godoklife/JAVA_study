@@ -2,7 +2,11 @@ package dao;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import controller.admin.stockadd;
+import dto.Cart;
 import dto.Category;
 import dto.Product;
 import dto.Stock;
@@ -177,11 +181,66 @@ public class ProductDao extends Dao{
 		return false;
 	}
 	
-//////////////////////////////////////////////////////   reserved   //////////////////////////////////////////////////////
+//////////////////////////////////////////////////////   장바구니   //////////////////////////////////////////////////////
+	
+	// 1. 카트 저장
+	public boolean savecart(Cart cart) {
+		String sql = "select * from cart where sno = "+cart.getSno()+" and mno="+cart.getMno();
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {	// 1. 만약 장바구니 내 동일한 제품이 존재하면 수량 업데이트 처리
+				sql = "update cart set samount = samount + ? and totalprice = totalprice + ? where cartno = ?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, cart.getSamount());
+				ps.setInt(2, cart.getTotalprice());
+				ps.setInt(3, rs.getInt(1));	// 
+				ps.executeUpdate();
+				return true;
+			}else {	// 2. 동일한 제품이 없으면 등록 처리
+				sql = "insert into cart (samount, totalprice, sno, mno) values(?,?,?,?)";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, cart.getSamount());
+				ps.setInt(2, cart.getTotalprice());
+				ps.setInt(3, cart.getSno());
+				ps.setInt(4, cart.getMno());
+				ps.executeUpdate();
+				return true;
+			}
+		} catch (Exception e) {System.out.println("ProductDao_savecart_exception : "+e);}
+		return false;
+	}
+	// 2. 장바구니 출력 메서드
+	public JSONArray getcart(int mno) {
+		JSONArray jsonArray = new JSONArray();
+		String sql = "select asd.cartno 장바구니번호,"
+				+ "	asd.samount as 구매수량,"
+				+ "    asd.totalprice as 총가격,"
+				+ "    B.scolor as 색상,"
+				+ "    B.ssize as 용량,"
+				+ "    B.pno as 제품번호 from cart as asd join stock as B on asd.sno = B.sno where mno="+mno;
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				JSONObject object = new JSONObject();
+				object.put("cartno", rs.getInt(1));
+				object.put("samount", rs.getInt(2));
+				object.put("totalprice", rs.getInt(3));
+				object.put("scolor", rs.getString(4));
+				object.put("ssize", rs.getString(5));
+				object.put("pno", rs.getInt(6));
+				// 하니씩 json객체를 json 배열에 담기
+				jsonArray.put(object);
+			}
+			System.out.println(jsonArray.toString());
+			return jsonArray;
+		} catch (Exception e) {System.out.println("ProductDao_getcart_exception"+e);}
+		return null;
+		
+	}
 	
 	
-	
-	
-	
-	
+//////////////////////////////////////////////////////	reserved   //////////////////////////////////////////////////////
+
 }
