@@ -8,8 +8,12 @@
 </head>
 <body>
 <%@include file="../header.jsp" %>
+
+
 	<div class="container">
-		
+		<table class="table" id="carttable">
+			
+		</table>
 	</div>
 	
 

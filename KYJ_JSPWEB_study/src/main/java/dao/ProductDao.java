@@ -213,12 +213,17 @@ public class ProductDao extends Dao{
 	// 2. 장바구니 출력 메서드
 	public JSONArray getcart(int mno) {
 		JSONArray jsonArray = new JSONArray();
-		String sql = "select asd.cartno 장바구니번호,"
-				+ "	asd.samount as 구매수량,"
-				+ "    asd.totalprice as 총가격,"
+		String sql = "select \r\n"
+				+ "	A.cartno as 장바구니번호,"
+				+ "    A.samount as 구매수량,"
+				+ "    A.totalprice as 총가격,"
 				+ "    B.scolor as 색상,"
 				+ "    B.ssize as 용량,"
-				+ "    B.pno as 제품번호 from cart as asd join stock as B on asd.sno = B.sno where mno="+mno;
+				+ "    B.pno as 제품번호,"
+				+ "    C.pname as 제품명,"
+				+ "    C.pimg as 제품이미지"
+				+ "    from cart A join stock B on A.sno = B.sno join product C on B.pno = C.pno where a.mno = "+mno;
+			// A : cart테이블, B : stock 테이블, C : product 테이블
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -230,10 +235,11 @@ public class ProductDao extends Dao{
 				object.put("scolor", rs.getString(4));
 				object.put("ssize", rs.getString(5));
 				object.put("pno", rs.getInt(6));
+				object.put("pname", rs.getString(7));
+				object.put("pimg", rs.getString(8));
 				// 하니씩 json객체를 json 배열에 담기
 				jsonArray.put(object);
 			}
-			System.out.println(jsonArray.toString());
 			return jsonArray;
 		} catch (Exception e) {System.out.println("ProductDao_getcart_exception"+e);}
 		return null;

@@ -24,8 +24,13 @@ public class getcart extends HttpServlet {
 		String mid = (String)request.getSession().getAttribute("login");
 		int mno = MemberDao.instance.getmno(mid);
 		JSONArray jsonArray = ProductDao.instance.getcart(mno);
+		
+		// request, response의 전송 인코딩 타입 : 문자열!!! 제이슨이 아님!!
 		response.setCharacterEncoding("utf-8");
-		response.getWriter().write(jsonArray.toString());
+			// 1. 응갑 객체 내 한글 인코딩 타입 설정
+		response.setContentType("application/json");
+			// 2. 응답객체의 전송 형태를 제이슨 형식으로 설정
+		response.getWriter().print(jsonArray);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
