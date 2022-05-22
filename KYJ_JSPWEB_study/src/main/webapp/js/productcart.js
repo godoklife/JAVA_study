@@ -5,20 +5,47 @@ let deliverypay = 0;	// 배송비
 let totalpay = 0;		// 둘을 합한 금액
 
 
+// js가 호출되면 장바구니 페이지에 <table> 뿌려주는 함수
+$(function(){
+	getcart();
+});
+
+// 장바구니 삭제 처리 메서드
+function deletecart(j){
+	
+	$.ajax({
+		url:"deletecart",
+		data:{"cartno":jsonarray[j]["cartno"]},
+		success:function(args){
+		}
+	});
+};
+
+// 장바구니 데이터(json) 호출 메서드
+function getcart(){
+	$.ajax({
+		url:'getcart',
+		success:function(resultjson){
+			jsonarray = resultjson;
+			tableview();
+		}
+	});
+}
+
 
 function tableview(){
 	let tr =  '<tr>'+
-'				<th width="60%">상품정보</th>'+
-'				<th width="20%">수량</th>'+
-'				<th width="20%">가격</th>'+
-'			</tr>';
+				'<th width="60%">상품정보</th>'+
+				'<th width="20%">수량</th>'+
+				'<th width="20%">가격</th>'+
+				'</tr>';
 	sumprice = 0;
 	deliverypay = 0;
 	totalpay = 0;
 
 			for(let i=0; i<jsonarray.length; i++){
 				sumprice += jsonarray[i]["totalprice"];
-				tr =  
+				tr +=  
 			'<tr>'+
 '				<td>'+
 '					<div class="row">	<!--  row : 하위 태그를 가로 배치 -->'+
@@ -72,6 +99,9 @@ function tableview(){
 function cancel(i){
 	if(i==-1){	// 만약 i가 -1이면 전체 삭제
 		if(confirm('전체 삭제하시겠습니까?')){		// 질문창 확인버튼: true, 취소버튼: false
+			for(let j=0; j<jsonarray.length; j++){
+				deletecart(j);
+			}
 			jsonarray.splice(0,jsonarray.length);	// 0번 인텍스부터 끝 인덱스까지 삭제
 			tableview();
 		}
@@ -81,6 +111,19 @@ function cancel(i){
 	jsonarray.splice(i,1);
 	tableview();
 }
+
+// json상태 업데이트 처리 메서드
+function updatecart(){
+	$.ajax({
+		url:"updatecart",
+		data:{"json":JSON.stringify(jsonarray)},
+		success:function(result){
+			if(result==0)return;
+		}
+		
+	})
+}
+
 function amountincrease(i){
 	
 	// 재고의 최대값 가져오기
@@ -95,6 +138,7 @@ function amountincrease(i){
 			let price = parseInt(jsonarray[i]["totalprice"] / jsonarray[i]["samount"])	// 제품 한개의 금액 구하기
 			jsonarray[i]["samount"]++;	// 수량증가처리
 			jsonarray[i]["totalprice"] = price * jsonarray[i]["samount"];	// 증가된 수량의 총금액 업데이트
+			updatecart();
 			tableview();
 		}
 	})
@@ -108,15 +152,8 @@ function amountdecrease(i){
 	let price = parseInt(jsonarray[i]["totalprice"] / jsonarray[i]["samount"])	// 제품 한개의 금액 구하기
 	jsonarray[i]["samount"]--;	// 수량증가처리
 	jsonarray[i]["totalprice"] = price * jsonarray[i]["samount"];	// 증가된 수량의 총금액 업데이트
+	updatecart();
 	tableview();
 	
 }
-$(function(){
-	$.ajax({
-		url:'getcart',
-		success:function(resultjson){
-			jsonarray = resultjson;
-			tableview();
-		}
-	});
-});
+

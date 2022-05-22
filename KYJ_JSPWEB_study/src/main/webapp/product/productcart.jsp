@@ -36,18 +36,18 @@
 				<span>주문시 적립 예정 포인트 : </span> <span id="point">1233 점</span>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-3 offset-3">
-				<a href="/KYJ_JSPWEB_study/main.jsp">
-					<button class="form-control">계속 쇼핑하기</button>
-				</a>
-			</div>
-			<div class="col-sm-3">
-				<a href="orderpay.jsp">
+		<div class="row my-5"> <!-- 부트스트랩만 사용되는 구역  -->
+				<div class="col-sm-3 offset-3">
+					<a href="/KYJ_JSPWEB_study/main.jsp">
+						<button class="form-control py-4"> 계속 쇼핑하기 </button>
+					</a> 
+				</div>
+				<div class="col-sm-3">
+					<a href="/KYJ_JSPWEB_study/product/orderpay.jsp">
 					<button style="background-color:#d9f5ff;" class="form-control">결제하기</button>
-				</a>
+					</a>
+				</div>
 			</div>
-		</div>
 		
 	</div>
 	

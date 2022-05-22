@@ -160,7 +160,7 @@ function amount_increase(i){
 // 해당 인덱스의 상품수 감소 함수
 function amount_decrease(i){
 	if(dupcheck[i].amount==1){
-		alert("수량을 더이상 줄일수 없습니다.");
+		alert("수량이 최소 1개는 있어야 합니다.");
 		return;
 	}
 	dupcheck[i].amount --;	// 말 안해도 알제??

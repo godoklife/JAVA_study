@@ -246,6 +246,30 @@ public class ProductDao extends Dao{
 		
 	}
 	
+	// 3. 장바구니 수량, 금액 업데이트 
+	public boolean updatecart(int cartno, int samount, int totalprice) {
+		String sql = "update cart set samount=?, totalprice=? where cartno=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, samount);
+			ps.setInt(2, totalprice);
+			ps.setInt(3, cartno);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("ProductDao_updatecart_exception"+e);}
+		return false;
+	}
+	
+	// 4. 장바구니 삭제
+	public boolean deletecart(int cartno) {
+		String sql = "delete from cart where cartno="+cartno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("deletecart"+e);}
+		return false;
+	}
 	
 //////////////////////////////////////////////////////	reserved   //////////////////////////////////////////////////////
 
