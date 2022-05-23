@@ -23,6 +23,7 @@ public class getcart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mid = (String)request.getSession().getAttribute("login");
 		int mno = MemberDao.instance.getmno(mid);
+		
 		JSONArray jsonArray = ProductDao.instance.getcart(mno);
 		
 		// request, response의 전송 인코딩 타입 : 문자열!!! 제이슨이 아님!!

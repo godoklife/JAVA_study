@@ -24,7 +24,7 @@ public class getmember extends HttpServlet {
 		String mid = (String)request.getSession().getAttribute("login");
 		int mno = MemberDao.instance.getmno(mid);
 		Member member = MemberDao.instance.getmember(mid);
-		
+		System.out.println(member.toString());
 		// dto -> json 변환하기
 		JSONObject jsonObject = new JSONObject();	// 1. JSON객체 선언
 		try {

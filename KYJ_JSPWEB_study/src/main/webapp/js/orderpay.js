@@ -1,30 +1,33 @@
 let jsonarray;			// json형식의 변수를 선언
+
 let sumprice = 0;		// 상품 총 가격	
 let deliverypay = 0;	// 배송비
 let totalpay=0;			// 둘을 합한 금액
+let point=0;			// 포인트 변수 선언
 
+let member;				// 서블릿에서 전달받은 맴버의 json객체를 저장할 변수
+let mpoint = 0;			// 회원이 사용할 예정인 포인트
+
+let pay_method;			// 결제 방식
 $(function(){
-	getcart();
-	
-	// 받는 사람 정보가 기존 회원과 동일하다는 버튼을 누른 경우 배송정보 불러오는 메서드
-	$("#checkbox").change(function(){
 		// 체크박스가 변경되었을때 실행되는 이벤트
+	$.ajax({
+		url:"getmember",
+		success:function(args){
+			member=args;
+			getcart();
+		}
+	});
+	
+	// 받는 사람 정보가 기존 회원과 동일하다는 버튼을 누른 경우 배송정보 불러오는 메서드	
+	$("#checkbox").change(function(){	
 		if($("#checkbox").is(":checked")){	// 체크박스가 체크되었을 떄
-		
-			$.ajax({
-				url:"getmember",
-				success:function(args){
-					$("#ordername").val(args['mname']);
-					$("#orderphone").val(args['mphone']);
-					$("#sample4_postcode").val(args['maddres'].split('_')[0]);
-					$("#sample4_roadAddress").val(args['maddres'].split('_')[1]);
-					$("#sample4_jibunAddress").val(args['maddres'].split('_')[2]);
-					$("#sample4_detailAddress").val(args['maddres'].split('_')[3]);
-				}
-			});
-		
-			
-			
+			$("#ordername").val(member['mname']);
+			$("#orderphone").val(member['mphone']);
+			$("#sample4_postcode").val(member['maddres'].split('_')[0]);
+			$("#sample4_roadAddress").val(member['maddres'].split('_')[1]);
+			$("#sample4_jibunAddress").val(member['maddres'].split('_')[2]);
+			$("#sample4_detailAddress").val(member['maddres'].split('_')[3]);
 		}else{	// 체크박스가 체크되어있지 않을때 실행되는 이벤트
 			$("#ordername").val("");
 			$("#orderphone").val("");
@@ -32,7 +35,6 @@ $(function(){
 			$("#address2").val("");
 			$("#address3").val("");
 			$("#address4").val("");
-			
 		}
 	});
 });
@@ -43,75 +45,98 @@ function getcart(){
 		url:'getcart',
 		success:function(resultjson){
 			jsonarray = resultjson;
-			for(let i = 0; i<jsonarray.length; i++){
-				totalpay+=jsonarray[i]["totalprice"];
-			}
+			cartview();
 		}
 	});
 }
 
 function cartview(){
-	let html=	'<tr>'+
-					'<th width="60%">제품명</th><th width="20%">수량</th><th width="20%">가격</th>'+
-				'</tr>';
-	sumprice = 0;
-	deliverypay = 0;
-	totalpay = 0;
-
-			for(let i=0; i<jsonarray.length; i++){
-				sumprice += jsonarray[i]["totalprice"];
-				tr +=  
-			'<tr>'+
-'				<td>'+
-'					<div class="row">	<!--  row : 하위 태그를 가로 배치 -->'+
-'						<div class="col-sm-2">'+
-'							<img src="/KYJ_JSPWEB_stydy/img/'+jsonarray[i]["pimg"]+'" width="100%">'+
+			sumprice = 0; /*상품 총가격 */
+			deliverypay = 0; // 배송비 
+			totalpay = 0; // 총주문액 
+			
+			let tr = '<tr> <!-- 헤더 -->'+
+'					<th width="60%">상품정보</th>'+
+'					<th width="20%">수량</th> 		'+
+'					<th width="20%">가격</th> '+
+'				</tr>'
+			
+			for( let i = 0 ; i<jsonarray.length; i++ ){
+				
+				sumprice += jsonarray[i]["totalprice"]; // 누적합계
+				
+				tr += 
+				'<tr>'+
+'					<td> <!--  상품정보 열 -->'+
+'						<div class="row"> <!-- row(b) : 하위 태그를 가로배치   -->'+
+'							<div class="col-sm-2"> <!-- col-sm-2(b) : 12그리드 중 2그리드 사용 -->'+
+'								<img alt="" src="/jspweb/admin/productimg/'+jsonarray[i]["pimg"]+'" width="70%"> '+
+'							</div>'+
+'							<div class="col-sm-10">'+
+'								<div class="pnamebox"> '+jsonarray[i]["pname"]+' </div>'+
+'								<div class="optionbox">'+jsonarray[i]["scolor"]+' / '+jsonarray[i]["ssize"]+'</div>'+
+'							</div>'+
+'						</div>   '+
+'						<br>'+
+'					</td> '+
+'					<td class="align-middle">'+
+'						<div class="row g-0"> '+
+'							<div class="col-sm-5 offset-3">'+ jsonarray[i]["samount"] +' 개 </div>'+
 '						</div>'+
-'						<div class="col-sm-10">'+
-'							<div class="pnamebox">'+jsonarray[i]["pname"]+'</div>'+
-'							<div class="optionbox">'+jsonarray[i]["scolor"]+' / '+jsonarray[i]["ssize"]+'</div>'+
+'					</td>'+
+'					<td class="align-middle">'+
+'						<div class="row g-0">'+
+'							<div class="col-md-8 pricebox">'+jsonarray[i]["totalprice"].toLocaleString()+'원</div>'+
 '						</div>'+
-'					</div>'+
-'				</td>'+
-'				<td class="align-middle">	<!-- 수량 출력  / align-middle : 수직 중앙 배치 ->> 부트스트랩 -->'+
-'					<div class="row g-0">	<!--  g-0 : 그리드 간 여백 제거 ->> 부트스트랩 -->'+
-'						<div class="col-sm-5 offset-3">'+
-'							<!--  form-control : 입력상자 형식 꾸미기 -->'+
-'							<input readonly id="" class="form-control" type="text" value="'+jsonarray[i]["samount"]+'" style="background-color:white;">'+
-'						</div>'+
-'						<div class="col-sm-2">'+
-'							<button class="amount_btn" onclick="amountincrease('+i+')">▲</button>'+
-'							<button class="amount_btn" onclick="amountdecrease('+i+')">▼</button>'+
-'						</div>'+
-'					</div>'+
-'				</td>'+
-'				<td class="align-middle">'+
-'					<div class="row g-0">'+
-'						<div class="col-sm-8 pricebox">'+jsonarray[i]["totalprice"].toLocaleString()+'원</div>'+
-'						<div class="col-sm-4 deletebox"><button onclick="cancel('+i+')">X</button></div>'+
-'					</div>'+
-'				</td>'+
-'			</tr>';
-			}			
+'					</td>'+
+'				</tr>';
+			}
+			// 만약에 총가격이 7만원 이상이면 배송비 무료
+			if( sumprice >= 70000 ){ deliverypay = 0;}
+			else{ deliverypay = 2500; }
+			
+			// 만약에 장바구니에 상품이 없으면 
+			if( jsonarray.length == 0 ){
+				tr += '<td style="text-align: center" colspan="3">'+ 
+						'상품이 없습니다. '+
+						'</td>';
+				deliverypay = 0; 
+			}
+			// 총주문금액 = 총가격 + 배송비 - 사용포인트 
+			totalpay = sumprice + deliverypay - mpoint;
+			// 포인트 
+			point = parseInt( sumprice * 0.01 ); /* js : parseInt( 데이터 ) : -> 정수형 변환 */
+			// 출력 
+			$("#carttable").html( tr );
+			$("#mpoint").html( member["mpoint"] );
+			$("#pointbox").html( mpoint );
+			$("#totalpay").html( totalpay );
 }
 
-function pay(){
-	alert('돈"줘"');
+function paymethod(method){
+	$("#paymethod").val(method);
+	pay_method=method;	// 변수에 넣기
+	
+	if(pay_method==null){	// 결제 수단을 선택하지 않았을 경우
+		alert("결제 방법을 선택해 주세요.")
+		return;
+	}
+	
 	var IMP = window.IMP;
     IMP.init("imp62383723"); // 예: imp00000000
     	// https://admin.iamport.kr/settings 에 식별코드 있음.
      // IMP.request_pay(param, callback) 결제창 호출
       IMP.request_pay({ // param
           pg: "html5_inicis",
-          pay_method: "card",
+          pay_method: pay_method,
           merchant_uid: "1000000001",	// 주문번호 ( 내가 만들어서 넣어야함. )
-          name: "시진핑핑이샵",						// 상품명
-          amount: 5999,						// 결제 금액, 프로젝트 만들떄는 totalpay 변수 넣어.
-          buyer_email: "godoklife1@gmail.com",		
-          buyer_name: "김용준",
-          buyer_tel: "010-5353-5228",
-          buyer_addr: "경기도 안산시 상록구 반석로 44, 103동 1003호",
-          buyer_postcode: "15541"
+          name: "PHONETAKU",						// 상품명
+          amount: totalpay,						// 결제 금액, 프로젝트 만들떄는 totalpay 변수 넣어.
+          buyer_email: member["mid"],		
+          buyer_name: member["mname"],
+          buyer_tel: member["mphone"],
+          buyer_addr: member["maddress"],
+          buyer_postcode: member["maddress"].split('_')[0],	// 우편번호만
       }, function (rsp) { // callback
           if (rsp.success) {
               // 결제 성공 시 로직,
@@ -124,6 +149,7 @@ function pay(){
       });
 }
 
+// 주문처리 메서드
 function saveorder(){
 	alert("DB처리");
 	$.ajax({
@@ -137,7 +163,22 @@ function saveorder(){
 
 
 
-
+function pointbtn(){
+	
+	// 만약 포인트가 5000점 이상이 아니라면
+	mpoint = $("#mpointinput").val();
+	if(mpoint==0){
+		mpoint=0;
+	}else if(mpoint<5000){
+		alert("포인트는 최소 5,000점부터 사용 가능합니다.");
+		mpoint = 0;
+		return;
+	}else{
+		cartview();	// 포인트가 바뀔때마다 새로고침
+		
+	}
+	
+}
 
 
 
