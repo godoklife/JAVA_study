@@ -19,7 +19,39 @@
 				<span> 04 주문완료 </span>
 			</div>		
 		
-			
+			<div>	<!--  제품 목록  -->
+				<table class="carttable">
+				</table>
+			</div>
+			<div>	<!--  받는사람 정보 -->
+				<input id="checkbox" type="checkbox">	<!--  체크시 회원 정보 가져오기 -->
+				<h5>받는 사람</h5>
+				<form>
+					받는사람 <input id="ordername">
+					연락처 <input id="orderphone">
+					주소 <input id="orderaddress">
+					배송 요청사항 <input id="orderrequest">
+				</form>
+			</div>
+			<div class="col-sm-4">
+				<div class="paybox">
+					<div>	<!--  포인트 사용 -->
+						포인트 : <input><button>사용하기</button>
+					</div>
+					<div>	<!--  결제 정보  -->
+						총 상품금액 : <span> 29,000 원</span>
+						배송비 : <span> 3,000 원</span>
+						포인트 사용 : <span> 0 포인트</span>
+						총 결제액 : <span>32,000 원</span>
+					</div>
+					<div>
+						<button>카드</button>
+						<button>계좌이체</button>
+						<button>무통장입금</button>
+						<button>핸드폰결제</button>
+					</div>
+				</div>
+			</div>
 			<div class="row my-5"> <!-- 부트스트랩만 사용되는 구역  -->
 				<div class="col-sm-3 offset-3 paybox">
 					<a href="/KYJ_JSPWEB_study/main.jsp">
