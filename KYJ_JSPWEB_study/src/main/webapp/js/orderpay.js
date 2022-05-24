@@ -158,8 +158,7 @@ function saveorder(){
 		$("#sample4_roadAddress").val()+"_"+
 		$("#sample4_jibunAddress").val()+"_"+
 		$("#sample4_detailAddress").val()+"_";
-	
-	let ordertotalpay = $("#totalpay").val();
+	let ordertotalpay = totalpay;
 	let orderrequest = $("#orderrequest").val();
 	
 	let orderjson={
@@ -169,7 +168,6 @@ function saveorder(){
 		ordertotalpay : ordertotalpay,
 		orderrequest : orderrequest
 	}
-	alert(ordertotalpay);
 	
 	$.ajax({
 		url:"saveorder",

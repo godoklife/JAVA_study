@@ -1,7 +1,10 @@
 package crawling;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,18 +27,23 @@ public class App {
 	
 	public static void main(String[] args) {
 		
-		coupangaccount();
-			System.out.println("읽어온 이메일 : "+id);
-			System.out.println("읽어온 비밀번호 : "+pw);
+//		coupangaccount();
+//			System.out.println("읽어온 이메일 : "+id);
+//			System.out.println("읽어온 비밀번호 : "+pw);
+//		
+//		coupang();	// 로그인쿠팡 메서드 내에서 서치구글 메서드 호출
+			
 		
-		coupang();	// 로그인쿠팡 메서드 내에서 서치구글 메서드 호출
-			
-			
+		
+		
+		
+		// 서치구글 테스트용
+		searchgoogle();
 
 	}	// m e
 	
 	
-	// 내 쿠팡 계정 담긴 txt파일 읽어오기
+	// 내 쿠팡 계정 담긴 txt파일 읽어오기0
 	public static void coupangaccount() {
 		try {
 			FileInputStream fis = new FileInputStream("C:/JAVAlibrary/coupang/account.txt");
@@ -119,9 +127,38 @@ public class App {
 		try {Thread.sleep(1231);} catch (Exception e) {}
 		List<WebElement> search_result_url = driver_google.findElements(By.className("yuRUbf"));	// 각 검색 결과들의 주소가 담긴 div의 클래스 이름
 		List<WebElement> search_result_content = driver_google.findElements(By.className("VwiC3b"));// 각 검색 결과들의 간략한 내용이 담긴 div의 클래스 이름
+		
+		List<String> span_contents = new ArrayList<String>();
 		for(int i=0; i<search_result_content.size();i++) {
-			if(search_result_content.get(i).getTagName("span"))	// gettagname은 맞는데, if문이 아니라 list 써서 저장해야 하지 않을까???
+			WebElement span = search_result_content.get(i).findElement(By.tagName("span"));
+			if(span.getText().contains("라이젠") ||
+				span.getText().contains("인텔") ||
+				span.getText().contains("코어") ||
+				span.getText().contains("i5") ||
+				span.getText().contains("i7") ||
+				span.getText().contains("i9") || 
+				span.getText().contains("Apple") ||
+				span.getText().contains("RAM용량") ) {
+				
+				System.out.println(span.getText());
+				span_contents.add(span.getText().toString());
+			}
 		}
+		
+		
+		
+		
+		// 내용물 일단 텍스트파일로 내보내기 ( 테스트용)
+		try {
+			FileOutputStream fos = new FileOutputStream("C:\\JAVAlibrary\\googlesearchcontent.txt");
+			for(int i=0;i<span_contents.size();i++) {
+				byte[] tmp = span_contents.;
+				fos.write(span_contents.);
+			}
+		} catch (Exception e) {System.out.println("fileoutputstream_exception : "+e);}
+		
+		
+
 	}	// searchgoogle end
 	
 	

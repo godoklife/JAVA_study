@@ -27,23 +27,23 @@ public class saveorder extends HttpServlet {
 		int mno = MemberDao.instance.getmno(mid);
 		
 		String json = request.getParameter("orderjson");
-		
 		try {
-			System.out.println(1);
+			System.out.println("saveorder_servlet_1");
 			JSONObject jsonObject = new JSONObject(json);
-			System.out.println(2);
+			System.out.println("saveorder_servlet_2");
 			String ordername = jsonObject.getString("ordername");
-			System.out.println(3);
+			System.out.println("saveorder_servlet_3");
 			String orderphone = jsonObject.getString("orderphone");		
-			System.out.println(4);
+			System.out.println("saveorder_servlet_4");
 			String orderaddress = jsonObject.getString("orderaddress");
-			System.out.println(5);
+			System.out.println("saveorder_servlet_5");
+			System.out.println(jsonObject.getInt("ordertotalpay"));
 			int ordertotalpay = jsonObject.getInt("ordertotalpay");
 			String orderrequest = jsonObject.getString("orderrequest");
-			System.out.println(6);
+			System.out.println("saveorder_servlet_6");
 			Order order = new Order(0, null, ordername, orderphone, orderaddress,
 					ordertotalpay, 0, orderrequest, 0, mno);
-			System.out.println(7);
+			System.out.println("saveorder_servlet_7");
 			System.out.println(order.toString());
 			
 			// 1. 주문의 DB 처리

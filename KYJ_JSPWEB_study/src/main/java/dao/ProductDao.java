@@ -294,7 +294,7 @@ public class ProductDao extends Dao{
 			ps.executeUpdate();
 			rs = ps.getGeneratedKeys();	// 자동 생성된 pk값
 			if(rs.next()) {
-				sql = "insert into pordersetail(samount, totalprice, orderno, sno)"
+				sql = "insert into porderdetail(samount, totalprice, orderno, sno)"
 						+ "select samount, totalprice, "+rs.getInt(1)+" , sno from cart where mno = "+order.getMno();
 				ps = con.prepareStatement(sql);
 				ps.executeUpdate();
@@ -308,6 +308,65 @@ public class ProductDao extends Dao{
 			
 		} catch (Exception e) {System.out.println("ProductDao_saveorder_exception : "+e);}
 		return false;
+	}
+	
+	public JSONArray getorder(int mno) {
+		String sql = "SELECT "
+				+ "A.orderno as 주문번호, "
+				+ "	A.orderdate as 주문일, "
+				+ "    B.orderdetailno as 주문상세번호, "
+				+ "    B.orderdetailactive as 주문상세상태, "
+				+ "    B.samount as 주문상세수량, "
+				+ "    C.sno as 재고번호, "
+				+ "    C.scolor as 색상, "
+				+ "    C.ssize as 사이즈, "
+				+ "    D.pno as 제품번호, "
+				+ "    D.pname as 제품명, "
+				+ "    D.pimg as 제품사진 "
+				+ "from "
+				+ "porder A JOIN porderdetail B on A.orderno = B.orderno "
+				+ "JOIN STOCK C on B.sno = C.sno "
+				+ "JOIN product D ON C.pno = D.pno where A.mno = "+mno+" order by A.orderno desc";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			JSONArray parentlist = new JSONArray();	// 상위 리스트 [ 여러개의 하위 리스트를 갖는다 ] 
+			JSONArray childrenlist = new JSONArray();	// 하위 리스트
+			int oldorderno = -1;	// 이전 데이터의 주문번호 임시저장 변수
+			
+			while(rs.next()) {
+				
+				// 동일한 주문번호 끼리 묶음 처리
+				// { 키 : 값 }
+				// { "orderno"  :[ 키 : 값 , 키 : 값 ] , "orderno" :  [ 키 : 값, 키 : 값 ] }
+				
+				
+				JSONObject object = new JSONObject();
+				object.put("orderno", rs.getInt(1));
+				object.put("orderdate", rs.getString(2));
+				object.put("orderdetailno", rs.getInt(3));
+				object.put("orderdetailactive", rs.getInt(4));
+				object.put("samount", rs.getInt(5));
+				object.put("sno", rs.getInt(6));
+				object.put("scolor", rs.getString(7));
+				object.put("ssize", rs.getString(8));
+				object.put("pno", rs.getInt(9));
+				object.put("pname", rs.getString(10));
+				object.put("pimg", rs.getString(11));
+				
+				if(oldorderno == rs.getInt(1)) {	// 이전 주문번호와 현재 주문번호가 동일하면
+					childrenlist.put(object);			// 하위리스트 초기화 없이 데이터 담기
+				}else {
+					childrenlist = new JSONArray();	// 하위리스트 초기화
+					childrenlist.put(object);			// 하위 리스트에 데이터 담기
+					parentlist.put(childrenlist);			// 상위 리스트에 하위 리스트 추가
+				}
+				oldorderno = rs.getInt(1);	// 이전 주문번호 변수에 현재 주문번호 대입
+			}
+			return parentlist;
+		} catch (Exception e) {System.out.println("ProductDao_getorder_exception : "+e);}
+		return null;
 	}
 	
 	
