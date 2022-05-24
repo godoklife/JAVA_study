@@ -88,6 +88,8 @@ function tableview(){
 			}else{
 				deliverypay=2500;
 			}
+			
+			totalpay = deliverypay+sumprice;
 			point = sumprice*0.01;	// 적립금 = 상품구매금의 1%
 			$("#pricesum").html(sumprice.toLocaleString()+' 원');
 			$("#shippingfee").html(deliverypay.toLocaleString()+' 원');

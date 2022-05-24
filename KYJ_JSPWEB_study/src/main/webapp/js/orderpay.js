@@ -24,10 +24,10 @@ $(function(){
 		if($("#checkbox").is(":checked")){	// 체크박스가 체크되었을 떄
 			$("#ordername").val(member['mname']);
 			$("#orderphone").val(member['mphone']);
-			$("#sample4_postcode").val(member['maddres'].split('_')[0]);
-			$("#sample4_roadAddress").val(member['maddres'].split('_')[1]);
-			$("#sample4_jibunAddress").val(member['maddres'].split('_')[2]);
-			$("#sample4_detailAddress").val(member['maddres'].split('_')[3]);
+			$("#sample4_postcode").val(member['maddress'].split('_')[0]);
+			$("#sample4_roadAddress").val(member['maddress'].split('_')[1]);
+			$("#sample4_jibunAddress").val(member['maddress'].split('_')[2]);
+			$("#sample4_detailAddress").val(member['maddress'].split('_')[3]);
 		}else{	// 체크박스가 체크되어있지 않을때 실행되는 이벤트
 			$("#ordername").val("");
 			$("#orderphone").val("");
@@ -121,7 +121,6 @@ function paymethod(method){
 		alert("결제 방법을 선택해 주세요.")
 		return;
 	}
-	
 	var IMP = window.IMP;
     IMP.init("imp62383723"); // 예: imp00000000
     	// https://admin.iamport.kr/settings 에 식별코드 있음.
@@ -132,7 +131,7 @@ function paymethod(method){
           merchant_uid: "1000000001",	// 주문번호 ( 내가 만들어서 넣어야함. )
           name: "PHONETAKU",						// 상품명
           amount: totalpay,						// 결제 금액, 프로젝트 만들떄는 totalpay 변수 넣어.
-          buyer_email: member["mid"],		
+          buyer_email: member["memail"],		
           buyer_name: member["mname"],
           buyer_tel: member["mphone"],
           buyer_addr: member["maddress"],
@@ -151,12 +150,36 @@ function paymethod(method){
 
 // 주문처리 메서드
 function saveorder(){
-	alert("DB처리");
+	
+	let ordername = $("#ordername").val();
+	let orderphone = $("#orderphone").val();
+	let orderaddress = 
+		$("#sample4_postcode").val()+"_"+
+		$("#sample4_roadAddress").val()+"_"+
+		$("#sample4_jibunAddress").val()+"_"+
+		$("#sample4_detailAddress").val()+"_";
+	
+	let ordertotalpay = $("#totalpay").val();
+	let orderrequest = $("#orderrequest").val();
+	
+	let orderjson={
+		ordername : ordername,
+		orderphone : orderphone,
+		orderaddress : orderaddress,
+		ordertotalpay : ordertotalpay,
+		orderrequest : orderrequest
+	}
+	alert(ordertotalpay);
+	
 	$.ajax({
 		url:"saveorder",
-		data:{},
+		data:{"orderjson":JSON.stringify(orderjson)},
 		function:function(args){
-			alert("DB처리 완료");
+			if(args==1){
+				location.href = "/KYJ_JSPWEB_study/product/ordersuccess.jsp" ;
+			}else{
+				location.href = "/KYJ_JSPWEB_study/error.jsp" ;
+			}
 		}
 	});
 };

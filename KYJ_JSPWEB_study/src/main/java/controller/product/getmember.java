@@ -22,6 +22,7 @@ public class getmember extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mid = (String)request.getSession().getAttribute("login");
+		System.out.println(mid);
 		int mno = MemberDao.instance.getmno(mid);
 		Member member = MemberDao.instance.getmember(mid);
 		System.out.println(member.toString());
@@ -39,7 +40,7 @@ public class getmember extends HttpServlet {
 			jsonObject.put("mdate", member.getMdate());
 			// json -> js 통신 [ ] 
 			response.setCharacterEncoding("utf-8");
-			response.setCharacterEncoding("application/json");	
+			response.setContentType("application/json");	
 				// 설정하지 않으면 json이 아닌 바이트열로 통신하게 됨. 설정 필수
 			response.getWriter().print(jsonObject);	// json객체 전송
 		} catch (Exception e) {System.out.println(e);}

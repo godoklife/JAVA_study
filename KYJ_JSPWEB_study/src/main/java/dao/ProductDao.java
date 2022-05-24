@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -8,6 +9,7 @@ import org.json.JSONObject;
 import controller.admin.stockadd;
 import dto.Cart;
 import dto.Category;
+import dto.Order;
 import dto.Product;
 import dto.Stock;
 
@@ -271,6 +273,48 @@ public class ProductDao extends Dao{
 		return false;
 	}
 	
-//////////////////////////////////////////////////////	reserved   //////////////////////////////////////////////////////
+//////////////////////////////////////////////////////	주문   //////////////////////////////////////////////////////
+
+	public boolean saveorder(Order order) {
+		String sql = "insert into porder (ordername, orderphone, orderaddress, ordertotalpay, orderrequest, mno) "
+				+ "values (?, ?, ?, ?, ?, ?)";
+		// insert 후에 자동 생성된 pk값 가져오기 ->> orderdetail에 써먹어야 하기 떄문에
+		
+		try {
+			
+			ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				// 중요함!!!! Statement.RETURN_GENERATED_KEYS 이게 pk값 리턴해줌.
+			
+			ps.setString(1, order.getOrdername());
+			ps.setString(2, order.getOrderphone());
+			ps.setString(3, order.getOrderaddress());
+			ps.setInt(4, order.getOrdertotalpay());
+			ps.setString(5, order.getOrderrequest());
+			ps.setInt(6, order.getMno());
+			ps.executeUpdate();
+			rs = ps.getGeneratedKeys();	// 자동 생성된 pk값
+			if(rs.next()) {
+				sql = "insert into pordersetail(samount, totalprice, orderno, sno)"
+						+ "select samount, totalprice, "+rs.getInt(1)+" , sno from cart where mno = "+order.getMno();
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate();
+				// 저장 했으면 cart 비우기
+				sql = "delete from cart where mno = "+order.getMno();
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate();
+				return true;
+			}
+			
+			
+		} catch (Exception e) {System.out.println("ProductDao_saveorder_exception : "+e);}
+		return false;
+	}
+	
+	
+	
+	
+//////////////////////////////////////////////////////reserved   //////////////////////////////////////////////////////
+	
+	
 
 }

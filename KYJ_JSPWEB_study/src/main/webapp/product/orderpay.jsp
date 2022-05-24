@@ -73,7 +73,7 @@
 						</a> 
 					</div>
 					<div class="col-sm-3 paybox">
-						<button style="background-color:#d9f5ff;" class="form-control" onclick="pay()">결제하기</button>
+						<button style="background-color:#d9f5ff;" class="form-control py-4" onclick="paymethod()">결제하기</button>
 					</div>
 				</div>
 			</div>

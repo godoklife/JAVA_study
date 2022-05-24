@@ -27,13 +27,13 @@
 			<button class="form-control" onclick="cancel(-1)">상품 전체 삭제</button>
 		</div>
 		<div class="paybox">
-			<span> 총 상품금액 </span><span id="pricesum"> 39,800 원</span>
+			<span> 총 상품금액 </span><span id="pricesum"></span>
 			<span> + </span>
-			<span>배송비</span> <span id="shippingfee"> 0 원</span>
+			<span>배송비</span> <span id="shippingfee"></span>
 			<span> = </span>
-			<span>총 결제금액</span> <span id="totalpay"> 123 원</span>
+			<span>총 결제금액</span> <span id="totalpay"></span>
 			<div class="pointbox">
-				<span>주문시 적립 예정 포인트 : </span> <span id="point">1233 점</span>
+				<span>주문시 적립 예정 포인트 : </span> <span id="point"></span>
 			</div>
 		</div>
 		<div class="row my-5"> <!-- 부트스트랩만 사용되는 구역  -->
@@ -44,7 +44,7 @@
 				</div>
 				<div class="col-sm-3">
 					<a href="/KYJ_JSPWEB_study/product/orderpay.jsp">
-					<button style="background-color:#d9f5ff;" class="form-control">결제하기</button>
+					<button style="background-color:#d9f5ff;" class="form-control py-4">결제하기</button>
 					</a>
 				</div>
 			</div>
