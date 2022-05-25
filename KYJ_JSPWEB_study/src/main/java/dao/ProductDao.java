@@ -369,7 +369,50 @@ public class ProductDao extends Dao{
 		return null;
 	}
 	
+	public boolean cancelorder(int orderdetailno, int active) {
+		String sql = "update porderdetail set orderdetailactive = "+active+" where orderdetailno = "+orderdetailno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {System.out.println("ProductDao_cancelorder_exception : "+e);}
+		return false;
+	}
 	
+	// admin의 getchart에서 쓰는 메서드
+	public JSONArray getchart(int type) {
+		String sql="";
+		if(type==1) {
+			sql = "select substring_index(orderdate, ' ', 1) 날짜"
+					+ " , sum(ordertotalpay) 총금액 from porder group by 날짜 order by 날짜 desc";
+		}else if(type==2) {
+			sql= "select D.cname 카테고리명, sum(A.samount) 수량  "
+					+ "from porderdetail A, stock B, product C, category D "
+					+ "where A.sno = B.sno and B.pno = C.pno and C.cno = D.cno "
+					+ "group by D.cname "
+					+ "order by orderdetailno desc";
+		}
+		
+		
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			JSONArray ja = new JSONArray();
+			while(rs.next()) {
+				JSONObject jo = new JSONObject();
+				if(type==1) {
+					jo.put("date", rs.getString(1));
+					jo.put("value", rs.getString(2));
+					ja.put(jo);
+				}else if(type==2){
+					jo.put("category", rs.getString(1));
+					jo.put("value", rs.getInt(2));
+					ja.put(jo);
+				}
+			}return ja;
+		} catch (Exception e) {System.out.println("ProductDao_getchart_exception : "+e);}
+		return null;
+	}
 	
 	
 //////////////////////////////////////////////////////reserved   //////////////////////////////////////////////////////

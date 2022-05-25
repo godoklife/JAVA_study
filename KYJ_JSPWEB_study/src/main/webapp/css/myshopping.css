@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+.orderbox{
+	margin:50px 10px;
+}
+
+.orderinfo{
+	padding:20px;
+}
+.orderinfo span{
+	font-size:13px;
+	color:#999999;
+}
+.orderdetailbox{
+	padding: 20px;
+	border:solid 1px gray;
+	border-radius: 5px;
+}
+.product{
+	margin : 20px 5px;
+}
+.pname{
+	padding:5px;
+	border-bottom: solid 1px #999999;
+}
+.pcolor {
+	color:#888888;
+}
+.psize{
+	color:#888888;
+}
+
+.poption{
+	padding:5px;
+	font-size: 13px;
+	color:#999999;
+}
+.activeinfo{
+	border-bottom: solid 5px #ffbdd2;
+	color:black !important;
+}
+.orderbuttonbox button{
+	background-color: white;
+	border: solid 1px #999999;
+	display: block;
+	padding:5px 30px;
+	border-radius: 20px;
+	font-size: 1vw;
+	font-weight: bold;
+}

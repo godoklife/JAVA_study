@@ -32,7 +32,7 @@
 			<li><button onclick="pagechange('productstock')">제품 재고</button></li>
 			<li><button onclick="#">주문 현황</button></li>
 			<li><button onclick="#">주문 배송</button></li>
-			<li><button onclick="#">매출 관리</button></li>
+			<li><button onclick="pagechange('productsales')">매출 관리</button></li>
 			<li><a href="/KYJ_JSPWEB_study/main.jsp">홈으로 이동</a></li>
 			<li><a href="/KYJ_JSPWEB_study/Logout">로그아웃</a></li>
 		</ul>
@@ -52,6 +52,16 @@
 	<script src="/KYJ_JSPWEB_study/js/admin/dashboard.js" type="text/javascript"></script>
 	<!-- 부트스트랩 스크립트 -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<!--  amChart5 CDN -->
+	<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/locales/de_DE.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/geodata/germanyLow.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/fonts/notosans-sc.js"></script>
+
+	<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
 
 </body>
 </html>
