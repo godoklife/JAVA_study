@@ -50,7 +50,7 @@ function tableview(){
 '				<td>'+
 '					<div class="row">	<!--  row : 하위 태그를 가로 배치 -->'+
 '						<div class="col-sm-2">'+
-'							<img src="/KYJ_JSPWEB_stydy/img/'+jsonarray[i]["pimg"]+'" width="100%">'+
+'							<img src="/KYJ_JSPWEB_study/admin/img/'+jsonarray[i]["pimg"]+'" width="100%">'+
 '						</div>'+
 '						<div class="col-sm-10">'+
 '							<div class="pnamebox">'+jsonarray[i]["pname"]+'</div>'+
@@ -85,7 +85,7 @@ function tableview(){
 			}
 			if(sumprice>=70000){	// 구매금액 7만원 이상이면 무료배송
 				deliverypay=0;
-			}else{
+			}else if (sumprice>=1){
 				deliverypay=2500;
 			}
 			
@@ -109,7 +109,7 @@ function cancel(i){
 		}
 		return;
 	}
-	
+	deletecart(i);
 	jsonarray.splice(i,1);
 	tableview();
 }

@@ -44,7 +44,7 @@
 				</div>
 				<div class="col-sm-3">
 					<a href="/KYJ_JSPWEB_study/product/orderpay.jsp">
-					<button style="background-color:#d9f5ff;" class="form-control py-4">결제하기</button>
+					<button id="pay" style="background-color:#d9f5ff;" class="form-control py-4">결제하기</button>
 					</a>
 				</div>
 			</div>

@@ -100,7 +100,7 @@
 						<!--  제품 이미지 클릭시 pno를 가지고 상세페이지로 이동. -->
 						<div class="imgbox">
 							<a href="product/productview.jsp?pno=<%=tmplist.getPno()%>">
-								<img src="img/<%=tmplist.getPimg()%>">
+								<img src="admin/img/<%=tmplist.getPimg()%>">
 							</a>
 						</div>
 						<div class="p_item">

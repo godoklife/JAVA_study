@@ -51,7 +51,13 @@
 	</div>
  -->
 	<div id="error">
+	<%
+		if(Integer.parseInt(request.getParameter("err"))==1){
+	%>		
+		<span style="color:red;font-size:20px;">정상적인 방법으로 관리자 페이지에 접속하세요.</span><br>
+	<%}else{ %>
 		고장나쓰요<br>
+	<%} %>
 		접속 아이피 : <%=ipAddress%><br>
 		실행시간 : <%=ldt%><br>
 	</div>

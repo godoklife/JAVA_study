@@ -10,6 +10,7 @@ import controller.admin.stockadd;
 import dto.Cart;
 import dto.Category;
 import dto.Order;
+import dto.Orderdetail;
 import dto.Product;
 import dto.Stock;
 
@@ -127,6 +128,7 @@ public class ProductDao extends Dao{
 	public ArrayList<Stock> getStock(int pno) {
 		ArrayList<Stock> tmp = new ArrayList<Stock>();
 		String sql = "select * from stock where pno="+pno+" order by scolor asc, ssize desc";
+		
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -380,43 +382,126 @@ public class ProductDao extends Dao{
 	}
 	
 	// admin의 getchart에서 쓰는 메서드
-	public JSONArray getchart(int type) {
-		String sql="";
-		if(type==1) {
-			sql = "select substring_index(orderdate, ' ', 1) 날짜"
-					+ " , sum(ordertotalpay) 총금액 from porder group by 날짜 order by 날짜 desc";
-		}else if(type==2) {
-			sql= "select D.cname 카테고리명, sum(A.samount) 수량  "
-					+ "from porderdetail A, stock B, product C, category D "
-					+ "where A.sno = B.sno and B.pno = C.pno and C.cno = D.cno "
+	public JSONArray getchart( int type , int value  ) {
+		String sql ="";
+		JSONArray ja = new JSONArray();
+		
+		if( type == 1 ) { // 일별 매출 
+			sql ="SELECT "
+				+ "	substring_index( orderdate , ' ' , 1 ) AS 날짜 , "
+				+ "	sum( ordertotalpay ) "
+				+ "FROM porder "
+				+ "GROUP BY 날짜 ORDER BY 날짜 DESC";
+		}else if( type == 2 ) { // 카테고리별 전체 판매량 
+			sql = "select  "
+					+ "	sum( A.samount )  ,  "
+					+ "    D.cname "
+					+ "from porderdetail A, stock B , product C , category D  "
+					+ "where A.sno = B.sno and B.pno = C.pno and C.cno = D.cno  "
 					+ "group by D.cname "
 					+ "order by orderdetailno desc";
+		}else if( type == 3 ) { // 재고번호 -> 제품별 판매량 추이
+			sql = "select "
+					+ "	substring_index(  A.orderdate , ' ' , 1 ) as 날짜, "
+					+ "	sum( B.samount ) as 총판매수량 "
+					+ "from porder A , porderdetail B , stock C "
+					+ "where A.orderno = B.orderno and B.sno = C.sno and C.pno =  ( select pno from stock where sno = "+value+" ) "
+					+ "group by 날짜 order by 날짜 desc";
 		}
-		
-		
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
-			JSONArray ja = new JSONArray();
-			while(rs.next()) {
+			while( rs.next() ) {
 				JSONObject jo = new JSONObject();
-				if(type==1) {
-					jo.put("date", rs.getString(1));
-					jo.put("value", rs.getString(2));
-					ja.put(jo);
-				}else if(type==2){
-					jo.put("category", rs.getString(1));
-					jo.put("value", rs.getInt(2));
+				if( type == 1 || type == 3  ) {
+					jo.put("date", rs.getString( 1 ) );
+					jo.put("value", rs.getInt(2) );
+					ja.put( jo );
+				}else if( type == 2 ) {
+					jo.put("value", rs.getInt( 1 ) );
+					jo.put("category", rs.getString(2) );
 					ja.put(jo);
 				}
-			}return ja;
-		} catch (Exception e) {System.out.println("ProductDao_getchart_exception : "+e);}
+			}
+			return ja;
+		}catch (Exception e) { System.out.println("ProductDao_getchart_exception : "+e);} return null;
+	}
+	
+	
+//////////////////////////////////////////////////////  admin 주문 조회부   //////////////////////////////////////////////////////
+	
+	// 1. 금일 주문 상세 호출
+	public ArrayList<Orderdetail> getorderdetail(){
+		
+		/*
+		 * 
+		 */
+		
+		String sql = "select A.*, substring_index(B.orderdate, ' ', 1) as 날짜 "
+				+ "from porderdetail A, porder B "
+				+ "where A.orderno = B.orderno "
+				+ "AND substring_index(B.orderdate, ' ', 1) = substring_index(now(), ' ', 1) "
+				+ "AND A.orderdetailactive = 3";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ArrayList<Orderdetail> list = new ArrayList<Orderdetail>();
+			while(rs.next()) {
+				Orderdetail orderdetail = new Orderdetail();
+				
+				orderdetail.setOrderdetailno(rs.getInt(1));
+				orderdetail.setOrderdetailactive(rs.getInt(2));
+				orderdetail.setSno(rs.getInt(3));
+				orderdetail.setSamount(rs.getInt(4));
+				orderdetail.setTotalprice(rs.getInt(5));
+				orderdetail.setOrderno(rs.getInt(6));
+				list.add(orderdetail);
+			}
+			return list;
+		}catch (Exception e) {System.out.println("ProductDao_getorderdetail_exception : "+e);}
 		return null;
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 //////////////////////////////////////////////////////reserved   //////////////////////////////////////////////////////
 	
 	
+	
+	
+	
+	
+	////////////////////// productlist.jsp에서 사용
+	public ArrayList<String> getScolor2(int pno){
+		String sql = "select distinct scolor from stock where pno="+pno;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}return list;
+		} catch (Exception e) {System.out.println("productdao_getstock2_exception : "+e);}
+		return null;
+	}
+	
+	public ArrayList<String> getSsize2(int pno){
+		String sql = "select distinct ssize from stock where pno="+pno;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}return list;
+		} catch (Exception e) {System.out.println("productdao_getColor2_exception : "+e);}
+		return null;
+	}
+
 
 }

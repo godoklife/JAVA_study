@@ -32,23 +32,25 @@
 				
 				<th> <!-- 색상 선택 [  id값을 제품별 select 식별id = '문자'+제품번호	// select 변경되면 이벤트 발생 -->
 					<select id="colorbox<%=p.getPno()%>" onchange="getamount( <%=p.getPno()%> )"> 
-					<%  ArrayList<Stock> stocks = ProductDao.instance.getStock( p.getPno() ); 
-						//
-						for( Stock s : stocks ){	
+					<%  ArrayList<Stock> stocks = ProductDao.instance.getStock( p.getPno() );%> 
+					
+					<%
+						ArrayList<String> scolor2 = ProductDao.instance.getScolor2(p.getPno());
+						for(String color : scolor2){
 					%>
-						<option><%=s.getScolor()%></option>
-					<% } %>
+					<option><%=color%></option>
+					<%} %>
 					</select> 
 				</th>				
 				
 				<th> 	<!--  사이즈 선택 -->
 					<select id="sizebox<%=p.getPno()%>" onchange="getamount( <%=p.getPno()%> )"> 
-					<% for( Stock s : stocks ){ 
-						if(s.getSsize()!=null){
+					<%
+						ArrayList<String> ssize2 = ProductDao.instance.getSsize2(p.getPno());
+						for(String size : ssize2){
 					%>
-					
-						<option><%=s.getSsize()%></option>
-					<% }} %>
+					<option><%=size%></option>
+					<%} %>
 					</select> 
 				 </th>	
 				 
@@ -90,11 +92,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5><!-- 모달 제목 -->
+        <h5 class="modal-title" id="exampleModalLabel">모달 제목</h5><!-- 모달 제목 -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body"><!--  모달 내용 -->
-        스무-스 한 모달
+        모달 내용
         <input type="hidden" id="modalinput">
       </div>
       <div class="modal-footer"><!--  모달 버튼 -->

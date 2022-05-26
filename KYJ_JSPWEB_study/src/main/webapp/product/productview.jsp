@@ -46,7 +46,7 @@
 		<div class="row viewbox">
 			<div class="row">
 				<div class="col-md-6"> <!--  이미지 구역 -->
-					<img src="../img/<%=product.getPimg()%>">
+					<img src="../admin/img/<%=product.getPimg()%>">
 				</div>
 				<div class="col-md-6">	<!--  상품의 정보 -->
 					<div class="infobox">

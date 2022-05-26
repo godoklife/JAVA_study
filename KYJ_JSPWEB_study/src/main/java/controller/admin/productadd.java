@@ -27,16 +27,16 @@ public class productadd extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String realpath = request.getSession().getServletContext().getRealPath("/admin/img");
-		
+		// 탐켓 서버 path
 		MultipartRequest multi = new MultipartRequest(
 				request,	// 요청 타입
 				realpath, 	// 저장 위치
 				1024*1024*20, 	// 파일 최대 용량 : 1024B*1024B*20 = 20메가바이트
+				"UTF-8" ,			/* 파일 인코딩타입 */
 				new DefaultFileRenamePolicy());	// 파일명 중복시 리네이밍 규칙
 		
-		request.setCharacterEncoding("utf-8");
+		
 		String pname = multi.getParameter("pname");
-
 		int pprice = Integer.parseInt(multi.getParameter("pprice"));
 		float pdiscount = Float.parseFloat(multi.getParameter("pdiscount"));
 		String pimg = multi.getFilesystemName("pimg");	// 첨부파일은 요청시 multi.getFilesystemName("인수명")

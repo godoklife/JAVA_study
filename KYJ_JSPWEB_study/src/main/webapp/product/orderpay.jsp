@@ -58,11 +58,11 @@
 							총 결제액 : <span id="totalpay"></span>
 						</div>
 						<div> 결제수단 : <span id="paymethod"></span>
-							<button onclick="paymethod('samsung')">삼성페이</button>
-							<button onclick="paymethod('card')">카드</button>
-							<button onclick="paymethod('trans')">계좌이체</button>
-							<button onclick="paymethod('vbank')">무통장입금</button>
-							<button onclick="paymethod('phone')">핸드폰결제</button>
+							<button id="samsung" onclick="paymethod('samsung')">삼성페이</button>
+							<button id="card" onclick="paymethod('card')">카드</button>
+							<button id="trans" onclick="paymethod('trans')">계좌이체</button>
+							<button id="vbank" onclick="paymethod('vbank')">무통장입금</button>
+							<button id="phone" onclick="paymethod('phone')">핸드폰결제</button>
 						</div>
 					</div>
 				</div>
@@ -73,7 +73,7 @@
 						</a> 
 					</div>
 					<div class="col-sm-3 paybox">
-						<button style="background-color:#d9f5ff;" class="form-control py-4" onclick="paymethod()">결제하기</button>
+						<button style="background-color:#d9f5ff;" class="form-control py-4" onclick="payment()">결제하기</button>
 					</div>
 				</div>
 			</div>

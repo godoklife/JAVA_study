@@ -10,6 +10,8 @@ let mpoint = 0;			// 회원이 사용할 예정인 포인트
 
 let pay_method;			// 결제 방식
 $(function(){
+	
+	
 		// 체크박스가 변경되었을때 실행되는 이벤트
 	$.ajax({
 		url:"getmember",
@@ -112,13 +114,20 @@ function cartview(){
 			$("#pointbox").html( mpoint );
 			$("#totalpay").html( totalpay );
 }
-
 function paymethod(method){
 	$("#paymethod").val(method);
 	pay_method=method;	// 변수에 넣기
 	
+}
+
+
+function payment(){
 	if(pay_method==null){	// 결제 수단을 선택하지 않았을 경우
 		alert("결제 방법을 선택해 주세요.")
+		return;
+	}
+	else if(totalpay<=0){
+		alert("결제할 금액이 없습니다.");
 		return;
 	}
 	var IMP = window.IMP;
@@ -138,11 +147,10 @@ function paymethod(method){
           buyer_postcode: member["maddress"].split('_')[0],	// 우편번호만
       }, function (rsp) { // callback
           if (rsp.success) {
-              // 결제 성공 시 로직,
               alert("현질완료 버튼");
           } else {
               // 결제 실패 시 로직,
-              alert("주문취소 버튼");
+              alert("saveorder() 실행.");
               saveorder();
           }
       });

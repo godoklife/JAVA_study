@@ -17,8 +17,10 @@
 <body>
 	<%
 		if(session.getAttribute("login")==null || !(session.getAttribute("login").equals("admin"))){
-			response.sendRedirect("/KYJ_JSPWEB_study/error.jsp");
+			response.sendRedirect("/KYJ_JSPWEB_study/error.jsp?err=1");
 		}
+	String realpath = request.getSession().getServletContext().getRealPath("/admin/img");
+	System.out.println("dashboard.jsp + "+realpath);
 	%>
 	<marquee scrollamount="5" class="topmarquee"> 관리자 페이지 입니다!!! 조작시 주의요망. </marquee>
 	<!--  사이드바 영역 -->
