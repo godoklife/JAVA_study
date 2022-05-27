@@ -29,7 +29,7 @@ public class Write extends HttpServlet {
 		
 		// 파일 저장 경로	->> 백슬레시를 슬래시로 바꿔줘야 함.
 			// 1. 이클립스 프로젝트 경로
-//		String uploadpath = "C:/Users/XPS15/git/JAVA_study/KYJ_JSPWEB_study/src/main/webapp/board/upload";
+//		String uploadpath = "C:/Users/XPS-15/git/JAVA_study/KYJ_JSPWEB_study/src/main/webapp/board/upload";
 			// 2. 탐켓 폴더
 				// 서버 경로 찾기 : request.getSession().getServletContext().getRealPath("찾을 폴더의 프로젝트명을 제외한 최상단부터의 경로");
 		System.out.println("현 서버의 경로 : "+request.getSession().getServletContext().getRealPath("/board/upload"));

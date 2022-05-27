@@ -67,7 +67,9 @@ function stockupdate(){
 		data:{"sno":$("#sno").val(), "samount":$("#samount").val()},
 		success:function(args){
 			alert("재고 수량 변경 완료!");
-			$("#modalcolsebtn2").click();
+			$("#modalclosebtn2").click();
+			$("#updatebox").css("display","none");
+			$("#samount").val(""); 
 			$("#mainbox").load('productlist.jsp');
 		}
 	})

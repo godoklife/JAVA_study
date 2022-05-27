@@ -30,7 +30,8 @@
 				</div>
 				<div class="col-md-5 offset-3 d-flex justify-content-end">
 				<ul class="nav">	<!--  nav : li 를 가로배치하는 부트스트랩 -->
-					<li><a href="/KYJ_JSPWEB_study/teamchatting.jsp" style="color:red;">채팅방</a> | </li>
+					<li><a href="/KYJ_JSPWEB_study/teamchatting.jsp" style="color:red;">DB형 채팅방</a> | </li>
+					<li><a href="/KYJ_JSPWEB_study/board/chatting.jsp" style="color:red;">소켓형 채팅방</a> | </li>
 					<li><a href="/KYJ_JSPWEB_study/main.jsp">HOME</a> | </li>
 					<!--  로그인이 되지 않은 상태 -->
 					<% if(loginid==null) { %>

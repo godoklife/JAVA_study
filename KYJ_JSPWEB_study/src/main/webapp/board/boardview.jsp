@@ -59,7 +59,8 @@
 					<td colspan="4">	<!--  colspan : 열 병합 // rowspan : 행 병합 -->
 						<div class="boardview_content">
 							<%
-								String imgpath = request.getSession().getServletContext().getRealPath("/board/upload/"+board.getBfile());
+								//String imgpath = request.getSession().getServletContext().getRealPath("/board/upload/")+board.getBfile();
+								String imgpath = "/KYJ_JSPWEB_study/board/upload/"+board.getBfile();
 							%>
 							<img src="<%=imgpath%>" width=100%><br>
 							<%=board.getBcontent()%>	
