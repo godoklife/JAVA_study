@@ -17,6 +17,7 @@
 	height:600px;
 	background-color: #b2c7d9;
 	padding: 2%;
+	overflow-y:scroll;	/* div 내 내용이 세로 길이를 초과하면 스크롤바가 생성됨. */
 }
 
 .secontent{	/* 메시지 보낼때 */
