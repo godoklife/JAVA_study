@@ -33,7 +33,7 @@
 						</div>
 						<div class="col-sm-2">	<!--  전송 버튼 -->
 							<button class="form-control sendbtn" onclick="sendbtn('<%=mid%>')">전송</button>
-							<button class="form-control sendbtn" onclick="export()">저장</button>
+							<button class="form-control sendbtn" onclick="exportbtn()">저장</button>
 						</div>
 					</div>
 					

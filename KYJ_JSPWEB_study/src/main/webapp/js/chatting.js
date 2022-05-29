@@ -13,6 +13,11 @@ function enterkey(mid){
 		return;
 	}
 	if(window.event.keyCode==13){
+		if($("#incontent").val()==""){	// 이 방식이 아니라 문자열검사로 바꿔야할듯??
+			alert("내용을 입력해주세요.");
+			$("#incontent").val("");	// 엔터키 입력으로 인한 출바꿈 없애주기.
+			return;
+		}
 		send(mid);
 	}
 }
@@ -21,7 +26,10 @@ function enterkey(mid){
 function sendbtn(mid){
 	if(mid=='null'){
 		alert("로그인 후 채팅 입력이 가능합니다. null 문자열 받음.");
-		$("#incontent").val("");
+		return;
+	}
+	if($("#incontent").html()==""){
+		alert("내용을 입력해주세요.");
 		return;
 	}
 	send(mid)
@@ -146,6 +154,6 @@ function send(mid){
 	$("#incontent").focus();	// 전송 후 커서 유지
 }
 
-function export(){
-	
+function exportbtn(){
+	alert("test");
 }
