@@ -91,7 +91,7 @@
 							<a class="dropdown-item" href="#">POCO</a>
 						</div>
 					</li>
-					<li class="nav-item"> <a href="#">원플러스</a></li>
+					<li class="nav-item"> <a href="/KYJ_JSPWEB_study/board/pharmarcy.jsp">YG</a></li>
 					<li class="nav-item"> <a href="#">아수스</a></li>
 					<li class="nav-item dropdown"> <a href="#" data-bs-toggle="dropdown">소니</a>
 						<div class="dropdown-menu">

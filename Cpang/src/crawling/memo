@@ -1,0 +1,14 @@
+	class = yuRUbf
+		// 각 검색된 결과들의 주소가 담긴 div의 클래스명
+		
+	class = VwiC3b
+		// 각 검색 결과들의 간략한 내용이 담긴 div의 클래스 이름
+	
+	class = YyVfkd
+		// Goooooooooooooooogle 중에서 현재 페이지의 td 클래스명
+	
+	id = pnnext
+		// Goooooooooooooogle 오른쪽에 있는 다음 버튼의 id명
+	
+	to do
+	웹드라이버 선언부를 제외한 기능부는 링크값만 인수로 전달하면 반복 사용이 가능하도록 메서드화 해야 할듯.

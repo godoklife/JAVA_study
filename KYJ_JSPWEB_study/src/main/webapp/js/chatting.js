@@ -13,7 +13,7 @@ function enterkey(mid){
 		return;
 	}
 	if(window.event.keyCode==13){
-		if($("#incontent").val()==""){	// 이 방식이 아니라 문자열검사로 바꿔야할듯??
+		if($("#incontent").val()=="\n"){
 			alert("내용을 입력해주세요.");
 			$("#incontent").val("");	// 엔터키 입력으로 인한 출바꿈 없애주기.
 			return;
@@ -28,7 +28,7 @@ function sendbtn(mid){
 		alert("로그인 후 채팅 입력이 가능합니다. null 문자열 받음.");
 		return;
 	}
-	if($("#incontent").html()==""){
+	if($("#incontent").val()==""){
 		alert("내용을 입력해주세요.");
 		return;
 	}

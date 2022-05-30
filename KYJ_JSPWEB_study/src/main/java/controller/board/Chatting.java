@@ -41,6 +41,7 @@ public class Chatting {
 		// 클라이언트 ->> 서버소켓으로 들어왔을 때
 	@OnOpen
 	public void OnOpen(Session session, @PathParam("mid") String mid) throws IOException{
+		if(mid.equals("null")) return;	// 비 로그인 사용자는 표시 X
 		clients.put(session, mid);	// 해당 세션(키)과 접속된 아이디(값)을 저장							// @ServerEndpoint("/chatting/{mid}")의 mid 가져온거
 		// 1. 모든 세션의 접속된 아이디를 json형태로 변환
 		JSONArray array = new JSONArray();
