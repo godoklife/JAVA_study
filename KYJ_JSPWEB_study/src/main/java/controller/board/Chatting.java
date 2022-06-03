@@ -35,8 +35,6 @@ public class Chatting {
 	
 	
 	
-	
-	
 	// 1. 소켓 오픈
 		// 클라이언트 ->> 서버소켓으로 들어왔을 때
 	@OnOpen
@@ -59,9 +57,9 @@ public class Chatting {
 		for(Session s : clients.keySet()) {
 			s.getBasicRemote().sendText(array.toString());
 		}
-		
-		
 	}
+	
+	
 	// 2. 소켓 닫기
 		// 클라이언트가 나갔을 때 
 	@OnClose
@@ -81,14 +79,13 @@ public class Chatting {
 		for(Session s : clients.keySet()) {
 			s.getBasicRemote().sendText(array.toString());
 		}
-		
 	}
+	
 	
 	// 3. 소켓 메시지 보내기
 		// 서버소켓 ->> 모든 클라이언트에게 소켓 메시지 전송
 	@OnMessage
 	public void OnMessage(String msg, Session session) throws IOException{
-		
 		for(Session s : clients.keySet()) {	
 			// 리스트에 존재하는 세션들에게 반복문을 통해 메시지 보내기
 			// map객체.keyset() : 모든 키를 호출

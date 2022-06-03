@@ -49,6 +49,7 @@ start();	// 테스트 목적으로 웹소켓 1회 무조건 실행
 function start(){
 	// js에서 사용되는 웹소캣 클래스(ws://IP번호:port/프로젝트명/서버소켓이름)
 	let mid = $("#mid").val();
+	alert(mid);
 	websocket = new WebSocket("ws://localhost:8080/KYJ_JSPWEB_study/chatting/"+mid);
 		// Cha
 	websocket.onopen  = function(e){onOpen(e)};
