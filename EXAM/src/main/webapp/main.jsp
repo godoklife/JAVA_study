@@ -10,7 +10,7 @@
 <body>
 	<%@include file="header.jsp" %>
 	<%
-		session.setAttribute("id", request.getParameter("id"));
+		//session.setAttribute("id", request.getParameter("id"));
 	%>
 	<div class="container">
 		<div class="row">
